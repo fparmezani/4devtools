@@ -1,0 +1,21 @@
+<div class="card">
+    <div class="card-header">
+        Gerar CPF
+    </div>
+    <div class="card-body">
+        <h5 class="card-title">Gerar CPF</h5>
+        <div class="mb-4">
+            <div class="input_copy_wrapper">
+                <div class="input_copy" (click)="copyTo()">
+                    <span class="txt">{{cpf}}</span>
+                    <span class="icon right">
+                        <img src="http://clipground.com/images/copy-4.png" title="Click para Copiar">
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="mb-12">
+            <button type="submit" class="btn btn-info" (click)="gerarCPF()">Gerar CPF</button>
+        </div>
+    </div>
+</div>
