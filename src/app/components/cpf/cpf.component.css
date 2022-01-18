@@ -1,19 +1,20 @@
 .input_copy_wrapper {
-    width: 450px;
+    width: 500px;
     padding: 50px;
     margin: 0 auto;
 }
 .input_copy {
     padding: 15px 25px;
     background: #eee;
-    border: 2px solid #aaa;
-    color: #aaa;
-    font-size: .8em;
+    border: 2px solid #8b52ff;
+    color: #8b52ff;
+    font-size: 1em;
+    overflow: hidden;
 }
 
 .input_copy .icon {
     display: block;
-    max-width: 25px;
+    max-width: 20px;
     cursor: pointer;
     float: right;
 }
