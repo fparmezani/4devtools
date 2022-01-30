@@ -1,0 +1,120 @@
+.text-muted {
+    color: #6d7a81 !important;
+}
+
+.nv-textarea-copy-container {
+    position: relative;
+    outline: 0;
+    box-sizing: border-box;
+}
+
+.nv-textarea-copy-container i {
+    position: absolute;
+    cursor: pointer;
+    font-size: 20px;
+    top: 12px;
+    right: 12px;
+}
+
+.form-control {
+    background-color: #e9ecef;
+    opacity: 1;
+    border-radius: 0;
+    box-shadow: none;
+    border-color: #e7e7e7;
+}
+textarea {
+    resize: none;
+}
+.input-lg {
+    font-size: 22px;
+    height: 46px;
+    line-height: 1.333333;
+}
+
+.m-l-5 {
+    margin-left: 5px !important;
+}
+
+.m-b-10 {
+    margin-bottom: 10px !important;
+}
+.m-b-15 {
+    margin-bottom: 20px !important;
+}
+.m-b-20 {
+    margin-bottom: 20px !important;
+}
+
+.btn-info,
+.btn-info:active,
+.btn-info:active:focus,
+.btn-info:active:hover,
+.btn-info:focus,
+.btn-info.disabled,
+.btn-info.disabled:hover,
+.btn-info.disabled:active,
+.btn-info.disabled:focus,
+.btn-info.active,
+.btn-info.active:focus,
+.btn-info.active:hover,
+.btn-info.disabled.active {
+    background: #1976d2 !important;
+    background: -webkit-linear-gradient(to right, #1976d2, #5e9fdf) !important;
+    background: linear-gradient(to right, #1976d2, #5e9fdf) !important;
+    border: none !important;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+}
+
+.btn-success,
+.btn-success:active,
+.btn-success:active:focus,
+.btn-success:active:hover,
+.btn-success:focus,
+.btn-success.disabled,
+.btn-success.disabled:hover,
+.btn-success.disabled:active,
+.btn-success.disabled:focus,
+.btn-success.active,
+.btn-success.active:focus,
+.btn-success.active:hover,
+.btn-success.disabled.active {
+    background: #399945 !important;
+    background: -webkit-linear-gradient(to right, #399945, #74b77c) !important;
+    background: linear-gradient(to right, #399945, #74b77c) !important;
+    border: none !important;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+}
+
+.btn-primary,
+.btn-primary:hover,
+.btn-primary:active,
+.btn-primary:active:focus,
+.btn-primary:active:hover,
+.btn-primary:focus,
+.btn-primary.disabled,
+.btn-primary.disabled:hover,
+.btn-primary.disabled:active,
+.btn-primary.disabled:focus,
+.btn-primary.active,
+.btn-primary.active:focus,
+.btn-primary.active:hover,
+.btn-primary.disabled.active {
+    background: #e56d2d !important;
+    background: -webkit-linear-gradient(to right, #e56d2d, #ea8a56) !important;
+    background: linear-gradient(to right, #e56d2d, #ea8a56) !important;
+    border: none !important;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+}
+
+.btn {
+    color: #fff !important;
+}
+
+.btn-rounded.btn-md {
+    padding: 12px 35px;
+    font-size: 16px;
+}

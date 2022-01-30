@@ -4,38 +4,38 @@ import * as copy from 'copy-to-clipboard';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
-    selector: 'app-cpf',
-    templateUrl: './cpf.component.html',
+    selector: 'app-cnpj',
+    templateUrl: './cnpj.component.html',
 })
-export class CpfComponent implements OnInit {
-    cpf: string = '';
-    cpfState: string = 'XX';
-    formataCPF: boolean = true;
+export class CnpjComponent implements OnInit {
+    cnpj: string = '';
+    cnpjState: string = 'XX';
+    formataCNPJ: boolean = true;
 
     constructor(private geradorService: GeradorService, private toastr: ToastrService) {}
 
     ngOnInit(): void {}
 
-    gerarCpf() {
-        this.cpf = this.geradorService.gerarCpf(this.cpfState, this.formataCPF);
+    gerarCNPJ() {
+        this.cnpj = this.geradorService.gerarCNPJ(this.formataCNPJ);
     }
 
     toggleFormat() {
-        if (this.formataCPF) {
-            this.cpf = this.cpf.replace(/[^0-9]/g, '');
+        if (this.formataCNPJ) {
+            this.cnpj = this.cnpj.replace(/[^0-9]/g, '');
         } else {
-            this.cpf = this.cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
+            this.cnpj = this.cnpj.replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/, '$1.$2.$3/$4-$5');
         }
     }
 
     gerarCopiar() {
-        this.gerarCpf();
+        this.gerarCNPJ();
         this.copiar();
         this.toastr.success('Copiado!');
     }
 
     copiar() {
-        copy(this.cpf);
         this.toastr.success('Copiado!');
+        copy(this.cnpj);
     }
 }
