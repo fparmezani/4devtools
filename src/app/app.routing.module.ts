@@ -4,6 +4,7 @@ import { CpfComponent } from './components/cpf/cpf.component';
 import { CnpjComponent } from './components/cnpj/cnpj.component';
 
 const routes: Routes = [
+    { path: '', component: CpfComponent },
     { path: 'gerador-cpf', component: CpfComponent },
     { path: 'gerador-cnpj', component: CnpjComponent },
 ];
