@@ -7,11 +7,11 @@ import { AppRoutingModule } from './app.routing.module';
 
 import { ToastrModule } from 'ngx-toastr';
 
-import { CpfComponent } from './components/cpf/cpf.component';
-import { CnpjComponent } from './components/cnpj/cnpj.component';
+import { GerarCpfComponent } from './components/gerar-cpf/gerar-cpf.component';
+import { GerarCnpjComponent } from './components/gerar-cnpj/gerar-cnpj.component';
 
 @NgModule({
-    declarations: [ AppComponent, CpfComponent, CnpjComponent ],
+    declarations: [ AppComponent, GerarCpfComponent, GerarCnpjComponent ],
     imports: [ BrowserModule, AppRoutingModule, FormsModule, ToastrModule.forRoot() ],
     providers: [],
     bootstrap: [ AppComponent ],

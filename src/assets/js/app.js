@@ -1,3 +1,5 @@
+const { formatDiagnosticsWithColorAndContext } = require('typescript');
+
 $.noConflict();
 jQuery(document).ready(function($) {
     'use strict';

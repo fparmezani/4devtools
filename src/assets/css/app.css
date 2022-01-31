@@ -2,13 +2,13 @@
     color: #6d7a81 !important;
 }
 
-.nv-textarea-copy-container {
+.textarea-copy-container {
     position: relative;
     outline: 0;
     box-sizing: border-box;
 }
 
-.nv-textarea-copy-container i {
+.textarea-copy-container i {
     position: absolute;
     cursor: pointer;
     font-size: 20px;

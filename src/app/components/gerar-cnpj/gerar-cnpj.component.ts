@@ -4,17 +4,19 @@ import * as copy from 'copy-to-clipboard';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
-    selector: 'app-cnpj',
-    templateUrl: './cnpj.component.html',
+    selector: 'app-gerar-cnpj',
+    templateUrl: './gerar-cnpj.component.html',
 })
-export class CnpjComponent implements OnInit {
+export class GerarCnpjComponent implements OnInit {
     cnpj: string = '';
     cnpjState: string = 'XX';
     formataCNPJ: boolean = true;
 
     constructor(private geradorService: GeradorService, private toastr: ToastrService) {}
 
-    ngOnInit(): void {}
+    ngOnInit(): void {
+        this.gerarCNPJ();
+    }
 
     gerarCNPJ() {
         this.cnpj = this.geradorService.gerarCNPJ(this.formataCNPJ);

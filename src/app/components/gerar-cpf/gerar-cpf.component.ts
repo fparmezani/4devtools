@@ -4,17 +4,19 @@ import * as copy from 'copy-to-clipboard';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
-    selector: 'app-cpf',
-    templateUrl: './cpf.component.html',
+    selector: 'app-gerar-cpf',
+    templateUrl: './gerar-cpf.component.html',
 })
-export class CpfComponent implements OnInit {
+export class GerarCpfComponent implements OnInit {
     cpf: string = '';
     cpfState: string = 'XX';
     formataCPF: boolean = true;
 
     constructor(private geradorService: GeradorService, private toastr: ToastrService) {}
 
-    ngOnInit(): void {}
+    ngOnInit(): void {
+        this.gerarCpf();
+    }
 
     gerarCpf() {
         this.cpf = this.geradorService.gerarCpf(this.cpfState, this.formataCPF);
