@@ -9,9 +9,10 @@ import { ToastrModule } from 'ngx-toastr';
 
 import { GerarCpfComponent } from './components/gerar-cpf/gerar-cpf.component';
 import { GerarCnpjComponent } from './components/gerar-cnpj/gerar-cnpj.component';
+import { GerarPessoaComponent } from './components/gerar-pessoa/gerar-pessoa.component';
 
 @NgModule({
-    declarations: [ AppComponent, GerarCpfComponent, GerarCnpjComponent ],
+    declarations: [ AppComponent, GerarCpfComponent, GerarCnpjComponent, GerarPessoaComponent ],
     imports: [ BrowserModule, AppRoutingModule, FormsModule, ToastrModule.forRoot() ],
     providers: [],
     bootstrap: [ AppComponent ],
