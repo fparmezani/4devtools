@@ -4,6 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app.routing.module';
+import { HttpClientModule } from '@angular/common/http';
 
 import { ToastrModule } from 'ngx-toastr';
 
@@ -13,7 +14,7 @@ import { GerarPessoaComponent } from './components/gerar-pessoa/gerar-pessoa.com
 
 @NgModule({
     declarations: [ AppComponent, GerarCpfComponent, GerarCnpjComponent, GerarPessoaComponent ],
-    imports: [ BrowserModule, AppRoutingModule, FormsModule, ToastrModule.forRoot() ],
+    imports: [ BrowserModule, AppRoutingModule, FormsModule, ToastrModule.forRoot(), HttpClientModule ],
     providers: [],
     bootstrap: [ AppComponent ],
 })

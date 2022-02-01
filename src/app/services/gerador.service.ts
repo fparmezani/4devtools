@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { Banner } from '../model/banner';
 import { DDD } from '../model/DDD';
 import { Operadora } from '../model/operadora';
+import { HttpClient } from '@angular/common/http';
+import { Pessoa } from '../model/pessoa';
 
 @Injectable({
     providedIn: 'root',
@@ -11,8 +13,9 @@ export class GeradorService {
     DDDs: DDD[] = [];
     operadoras: Operadora[] = [];
     dominios: string[] = [];
+    URLGERADORBRASILEIRO = 'https://geradorbrasileiro.com/api/faker/pessoa?limit=1';
 
-    constructor() {
+    constructor(private http: HttpClient) {
         this.banners = [
             { nome: 'Visa', value: [ 4 ] },
             { nome: 'MasterCard', value: [ 51, 52, 53, 54, 55 ] },
@@ -516,6 +519,12 @@ export class GeradorService {
         const n8 = Math.round(Math.random() * 9);
 
         return `(${ddd}) ${n1}${n2}${n3}${n4}-${n5}${n6}${n7}${n8}`;
+    }
+
+    gerarNomePessoa(): any {
+        this.http.get<Pessoa>(`${this.URLGERADORBRASILEIRO}`).subscribe((response: any) => {
+            return response.values[0].nome;
+        });
     }
 
     getCookie() {}
