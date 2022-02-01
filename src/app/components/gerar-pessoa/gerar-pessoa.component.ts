@@ -14,9 +14,11 @@ export class GerarPessoaComponent implements OnInit {
     nome: string = '';
     dataNascimento: string = '';
 
-    constructor(private geradorService: GeradorService, private toastr: ToastrService) {}
+    constructor(private service: GeradorService, private toastr: ToastrService) {}
 
-    gerarPessoa() {}
+    gerarPessoa() {
+        this.nome = this.service.ger;
+    }
 
     ngOnInit(): void {}
 }
