@@ -13,7 +13,7 @@ export class GerarPessoaComponent implements OnInit {
     sexo: string = '';
     estado: string = 'SP';
 
-    nome: string = '';
+    pessoa: Pessoa = new Pessoa();
     dataNascimento: string = '';
     URLGERADORBRASILEIRO = 'https://geradorbrasileiro.com/api/';
 
@@ -21,7 +21,14 @@ export class GerarPessoaComponent implements OnInit {
 
     gerarPessoa() {
         this.http.get<Pessoa>(`${this.URLGERADORBRASILEIRO}faker/pessoa?limit=1`).subscribe((response: any) => {
-            this.nome = response.values[0].nome;
+            this.pessoa = response.values[0];
+            
+            this.pessoa.cpf = this.service.gerarCpf(this.estado, true);
+            this.pessoa.cnh = this.service.gerarCnh();
+            this.pessoa.renavan = this.service.gerarRenavan();
+            this.pessoa.pispasep = this.service.gerarPisPasep();
+            this.pessoa.cartaodecredito = this.service.gerarCartaoCredito();
+
         });
     }
 

@@ -8,17 +8,18 @@ import { Operadora } from '../model/operadora';
 })
 export class GeradorService {
     banners: Banner[] = [];
+    numberBanners : Number[] = [];
     DDDs: DDD[] = [];
     operadoras: Operadora[] = [];
     dominios: string[] = [];
 
     constructor() {
         this.banners = [
-            { nome: 'Visa', value: [ 4 ] },
-            { nome: 'MasterCard', value: [ 51, 52, 53, 54, 55 ] },
-            { nome: 'Elo', value: [ 636368, 438935, 504175, 451416 ] },
-            { nome: 'Discover', value: [ 6011, 622, 65 ] },
-            { nome: 'JCB', value: [ 35 ] },
+            { nome: 'Visa', value: [4] },
+            { nome: 'MasterCard', value: [51,52,53,54,55] },
+            { nome: 'Elo', value: [636368,438935,504175,451416] },
+            { nome: 'Discover', value: [6011,622,65] },
+            { nome: 'JCB', value: [35] },
         ];
 
         this.operadoras = [
@@ -83,6 +84,10 @@ export class GeradorService {
             : `${n1}${n2}${n3}${n4}${n5}${n6}${n7}${n8}${n9}${d1}${d2}`;
 
         return cpf;
+    }
+
+    gerarRenavan(){
+        return "Renavam";
     }
 
     gerarEstadosCpf(stateCpf: string) {
@@ -358,7 +363,8 @@ export class GeradorService {
         return `${n1}${n2}${n3}${n4}${n5}${n6}${n7}${n8}${n9}${n10}${dv}`;
     }
 
-    gerarBanner(): [] {
+    gerarBanner(): Number[] {
+        
         const arrNumber: any = [];
 
         this.banners.forEach((banner) => {
@@ -366,17 +372,21 @@ export class GeradorService {
         });
 
         let number = arrNumber[Math.floor(Math.random() * arrNumber.length)];
-        number = number.toString().split('');
+        number = number.toString().split(',');
         number = number.map(Number);
 
         return number;
     }
 
-    gerarRandomCreditCard() {
+    gerarCartaoCredito() {
+        
         const arr = this.gerarBanner() as any[];
+        
         const length = 16 - arr.length;
+        
         for (var i = 1; i < length; i++) {
-            arr.push(Math.round(Math.random() * 9));
+            var digito = Math.round(Math.random() * 9);
+            arr.push(digito);
         }
 
         let sum = 0;
@@ -384,6 +394,7 @@ export class GeradorService {
         let ninesOut = 0;
 
         arr.forEach((value) => {
+            value = !isNaN(value) ? value:1; 
             ninesOut = parseInt(value) * (aux ? 2 : 1); // false = 1 vs true = 2
             ninesOut = ninesOut > 9 ? ninesOut - 9 : ninesOut;
             sum = sum + ninesOut;
@@ -398,10 +409,15 @@ export class GeradorService {
         }
 
         const creditCard = {
-            number: `${arr[0]}${arr[1]}${arr[2]}${arr[3]} ${arr[4]}${arr[5]}${arr[6]}${arr[7]} ${arr[8]}${arr[9]}${arr[10]}${arr[11]} ${arr[12]}${arr[13]}${arr[14]}${digit}`,
+            numero: `${arr[0]}${arr[1]}${arr[2]}${arr[3]} ${arr[4]}${arr[5]}${arr[6]}${arr[7]} ${arr[8]}${arr[9]}${arr[10]}${arr[11]} ${arr[12]}${arr[13]}${arr[14]}${digit}`,
             cvv: this.gerarCvv(),
-            expirationDate: this.gerarExpirationDate(),
+            dataExpiracao: this.gerarExpirationDate(),
         };
+
+        console.log(arr);
+
+        console.log(creditCard.numero);
+
 
         return creditCard;
     }
@@ -418,8 +434,14 @@ export class GeradorService {
 
         const arrMonth31Days = [ '01', '03', '05', '07', '08', '10', '12' ];
         const arrMonth30Days = [ '04', '06', '09', '11' ];
-        const randomDay =
-            $.inArray(month, arrMonth31Days) !== -1 ? 31 : $.inArray(month, arrMonth30Days) !== -1 ? 30 : 28;
+        
+        const randomDay = 
+                arrMonth31Days.includes(month)
+                    ? 31
+                    : arrMonth30Days.includes(month)
+                        ? 30
+                        : 28;
+
 
         let day = '0' + (Math.floor(Math.random() * randomDay) + 1).toString();
         day = day.substr(day.length - 2);
