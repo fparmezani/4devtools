@@ -1,4 +1,4 @@
 export class Banner {
     nome: string = '';
-    value: any = [];
+    value: Number[] = [];
 }
