@@ -1,0 +1,294 @@
+<div class="card">
+    <div class="card-body">
+        <h2 class="box-title">Gerar Pessoas</h2>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card-body">
+                <p class="text-muted m-b-15 font-12">
+                    Clique no botão abaixo para gerar dados completos de uma pessoa. Você pode utilizar o filtro para
+                    personalizar os dados gerados.
+                </p>
+                <div class="row m-b-20">
+                    <div class="col-md-3">
+                        <small class="text-muted">Sexo</small>
+                        <select id="type-sex" class="form-control input-lg-select m-b-15-max-768">
+                            <option value="x" selected="">Aleatório</option>
+                            <option value="f">Feminino</option>
+                            <option value="m">Masculino</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <small class="text-muted">Estado</small>
+                        <select id="state-cep" class="form-control input-lg-select">
+                            <option value="XX">Aleatório</option>
+                            <option value="AC">AC</option>
+                            <option value="AL">AL</option>
+                            <option value="AM">AM</option>
+                            <option value="AP">AP</option>
+                            <option value="BA">BA</option>
+                            <option value="CE">CE</option>
+                            <option value="DF">DF</option>
+                            <option value="ES">ES</option>
+                            <option value="GO">GO</option>
+                            <option value="MA">MA</option>
+                            <option value="MG">MG</option>
+                            <option value="MS">MS</option>
+                            <option value="MT">MT</option>
+                            <option value="PA">PA</option>
+                            <option value="PB">PB</option>
+                            <option value="PE">PE</option>
+                            <option value="PI">PI</option>
+                            <option value="PR">PR</option>
+                            <option value="RJ">RJ</option>
+                            <option value="RN">RN</option>
+                            <option value="RO">RO</option>
+                            <option value="RR">RR</option>
+                            <option value="RS">RS</option>
+                            <option value="SC">SC</option>
+                            <option value="SE">SE</option>
+                            <option value="SP" selected="">SP</option>
+                            <option value="TO">TO</option>
+                        </select>
+                    </div>
+                </div><button type="button" id="gerar-pessoa" (click)="gerarPessoa()"
+                    class="btn btn-md btn-info btn-rounded m-b-10 m-l-5">Gerar Pessoa</button>
+                <div class="row hide-768">
+                    <div class="col-md-12 font-italic"><small class="text-muted">Dica: pressione a tecla
+                            <strong>Enter</strong> para gerar e copiar automaticamente.</small></div>
+                </div>
+                <div class="separator-hr m-b-8">Dados pessoais</div>
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <p class="text-muted">Nome</p>
+                                <div class="textarea-copy-container">
+                                    <textarea id="nome" class="form-control input-lg m-b-20" type="text"
+                                        [(ngModel)]="pessoa.nome" readonly=""
+                                        style="overflow: hidden; overflow-wrap: break-word; height: 46px;">
+                                        Gerando nome...
+                                    </textarea>
+                                    <span title="Copiar" class="btn-textarea-copy-name"><i
+                                            class="fa fa-files-o"></i></span>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <p class="text-muted">Data de Nascimento</p>
+                                <div class="textarea-copy-container">
+                                    <textarea id="field-birthday" class="form-control input-lg m-b-20" type="text"
+                                        readonly="" [(ngModel)]="pessoa.dataNascimento"></textarea>
+                                    <span title="Copiar" class="btn-textarea-copy-birthday"><i
+                                            class="fa fa-files-o"></i></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <p class="text-muted">CPF</p>
+                                <div class="textarea-copy-container">
+                                    <textarea id="field-cpf" class="form-control input-lg m-b-20" type="text"
+                                        readonly="" [(ngModel)]="pessoa.cpf"></textarea>
+                                    <span title="Copiar" class="btn-textarea-copy-cpf"><i
+                                            class="fa fa-files-o"></i></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <p class="text-muted">RG SSP</p>
+                                <div class="textarea-copy-container">
+                                    <textarea id="field-rg" class="form-control input-lg m-b-20" type="text" readonly=""
+                                        [(ngModel)]="pessoa.rg"></textarea>
+                                    <span title="Copiar" class="btn-textarea-copy-rg"><i
+                                            class="fa fa-files-o"></i></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <p class="text-muted">CNS</p>
+                                <div class="textarea-copy-container">
+                                    <textarea id="field-cns" class="form-control input-lg m-b-20" type="text"
+                                        readonly=""
+                                        style="overflow: hidden; overflow-wrap: break-word; height: 46px;"></textarea>
+                                    <span title="Copiar" class="btn-textarea-copy-cns"><i
+                                            class="fa fa-files-o"></i></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <p class="text-muted">Título do Eleitor</p>
+                                <div class="textarea-copy-container">
+                                    <textarea id="field-voter-registration" class="form-control input-lg m-b-20"
+                                        type="text" readonly=""></textarea>
+                                    <span title="Copiar" class="btn-textarea-copy-voter-registration"><i
+                                            class="fa fa-files-o"></i></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <p class="text-muted">CNH</p>
+                                <div class="textarea-copy-container">
+                                    <textarea id="field-cnh" class="form-control input-lg m-b-20" type="text"
+                                        readonly="" [(ngModel)]="pessoa.cnh"></textarea>
+                                    <span title="Copiar" class="btn-textarea-copy-cnh"><i
+                                            class="fa fa-files-o"></i></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <p class="text-muted">Renavam</p>
+                                <div class="textarea-copy-container">
+                                    <textarea id="field-renavam" class="form-control input-lg m-b-20" type="text"
+                                        readonly="" [(ngModel)]="pessoa.renavan"></textarea>
+                                    <span title="Copiar" class="btn-textarea-copy-renavam"><i
+                                            class="fa fa-files-o"></i></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <p class="text-muted">Pis/Pasep</p>
+                                <div class="textarea-copy-container">
+                                    <textarea id="field-pis-pasep" class="form-control input-lg m-b-20" type="text"
+                                        readonly="" [(ngModel)]="pessoa.pispasep"></textarea>
+                                    <span title="Copiar" class="btn-textarea-copy-pis-pasep"><i
+                                            class="fa fa-files-o"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 text-center m-t-15 m-b-15">
+                        Adsense
+                    </div>
+                </div>
+                <div class="separator-hr m-b-8 m-t-8">Filiação</div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <p class="text-muted">Nome Mãe</p>
+                        <div class="textarea-copy-container">
+                            <textarea id="field-mom" class="form-control input-lg m-b-20" type="text" readonly=""
+                                style="overflow: hidden; overflow-wrap: break-word; height: 46px;"
+                                [(ngModel)]="pessoa.mae"></textarea>
+                            <span title="Copiar" class="btn-textarea-copy-mom"><i class="fa fa-files-o"></i></span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <p class="text-muted">Nome Pai</p>
+                        <div class="textarea-copy-container">
+                            <textarea id="field-dad" class="form-control input-lg m-b-20" type="text" readonly=""
+                                style="overflow: hidden; overflow-wrap: break-word; height: 46px;"
+                                [(ngModel)]="pessoa.pai"></textarea>
+                            <span title="Copiar" class="btn-textarea-copy-dad"><i class="fa fa-files-o"></i></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="separator-hr m-b-8 m-t-8">Financeiro</div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <p class="text-muted">Número do cartão</p>
+                        <div class="textarea-copy-container">
+                            <textarea id="field-credit-card" class="form-control input-lg m-b-20" type="text"
+                                readonly="" style="overflow: hidden; overflow-wrap: break-word; height: 46px;"
+                                [(ngModel)]="pessoa.cartaodecredito.numero"></textarea>
+                            <span title="Copiar" class="btn-textarea-copy-credit-card"><i
+                                    class="fa fa-files-o"></i></span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <p class="text-muted">Data de validade</p>
+                        <div class="textarea-copy-container">
+                            <textarea id="field-expiration-date" class="form-control input-lg m-b-20" type="text"
+                                readonly="" [(ngModel)]="pessoa.cartaodecredito.dataValidade"></textarea>
+                            <span title="Copiar" class="btn-textarea-copy-expiration-date"><i
+                                    class="fa fa-files-o"></i></span>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <p class="text-muted">CVV</p>
+                        <div class="textarea-copy-container">
+                            <textarea id="field-cvv" class="form-control input-lg m-b-20" type="text" readonly=""
+                                [(ngModel)]="pessoa.cartaodecredito.cvv"></textarea>
+                            <span title="Copiar" class="btn-textarea-copy-cvv"><i class="fa fa-files-o"></i></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="separator-hr m-b-8 m-t-8">Endereço</div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <p class="text-muted">Cep</p>
+                        <div class="textarea-copy-container">
+                            <textarea id="field-cep" class="form-control input-lg m-b-20" type="text" readonly=""
+                                [(ngModel)]="pessoa.endereco.cep"></textarea>
+                            <span title="Copiar" class="btn-textarea-copy-cep"><i class="fa fa-files-o"></i></span>
+                        </div>
+                    </div>
+                    <div class="col-md-9">
+                        <p class="text-muted">Endereço</p>
+                        <div class="textarea-copy-container">
+                            <textarea id="field-street" class="form-control input-lg m-b-20" type="text" readonly=""
+                                style="overflow: hidden; overflow-wrap: break-word; height: 46px;"
+                                [(ngModel)]="pessoa.endereco.logradouro"></textarea>
+                            <span title="Copiar" class="btn-textarea-copy-street"><i class="fa fa-files-o"></i></span>
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <p class="text-muted">Bairro</p>
+                        <div class="textarea-copy-container">
+                            <textarea id="field-neighborhood" class="form-control input-lg m-b-20" type="text"
+                                readonly="" style="overflow: hidden; overflow-wrap: break-word; height: 46px;"
+                                [(ngModel)]="pessoa.endereco.bairro"></textarea>
+                            <span title="Copiar" class="btn-textarea-copy-neighborhood"><i
+                                    class="fa fa-files-o"></i></span>
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <p class="text-muted">Cidade</p>
+                        <div class="textarea-copy-container">
+                            <textarea id="field-city" class="form-control input-lg m-b-20" type="text" readonly=""
+                                [(ngModel)]="pessoa.endereco.cidade"></textarea>
+                            <span title="Copiar" class="btn-textarea-copy-city"><i class="fa fa-files-o"></i></span>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <p class="text-muted">Estado</p>
+                        <div class="textarea-copy-container">
+                            <textarea id="field-state" class="form-control input-lg m-b-20" type="text" readonly=""
+                                [(ngModel)]="pessoa.endereco.estado"></textarea>
+                            <span title="Copiar" class="btn-textarea-copy-state"><i class="fa fa-files-o"></i></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="separator-hr m-b-8 m-t-8">Contato</div>
+                <div class="row">
+                    <div class="col-md-8">
+                        <p class="text-muted">Email</p>
+                        <div class="textarea-copy-container">
+                            <textarea id="field-email" class="form-control input-lg m-b-20" type="text" readonly=""
+                                style="overflow: hidden; overflow-wrap: break-word; height: 46px;"
+                                [(ngModel)]="pessoa.email"></textarea>
+                            <span title="Copiar" class="btn-textarea-copy-email"><i class="fa fa-files-o"></i></span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <p class="text-muted">Senha</p>
+                        <div class="textarea-copy-container">
+                            <textarea id="field-password" class="form-control input-lg m-b-20" type="text" readonly=""
+                                [(ngModel)]="pessoa.senha"></textarea>
+                            <span title="Copiar" class="btn-textarea-copy-password"><i class="fa fa-files-o"></i></span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <p class="text-muted">Celular/WhatsApp</p>
+                        <div class="textarea-copy-container">
+                            <textarea id="field-cellphone" class="form-control input-lg m-b-20" type="text" readonly=""
+                                [(ngModel)]="pessoa.celular"></textarea>
+                            <span title="Copiar" class="btn-textarea-copy-cellphone"><i
+                                    class="fa fa-files-o"></i></span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <p class="text-muted">Telefone</p>
+                        <div class="textarea-copy-container">
+                            <textarea id="field-telephone" class="form-control input-lg m-b-20" type="text" readonly=""
+                                [(ngModel)]="pessoa.telefone"></textarea>
+                            <span title="Copiar" class="btn-textarea-copy-telephone"><i
+                                    class="fa fa-files-o"></i></span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
