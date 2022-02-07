@@ -7,19 +7,18 @@ import { Operadora } from '../model/operadora';
     providedIn: 'root',
 })
 export class GeradorService {
-    banners: Banner[] = [];
-    numberBanners : Number[] = [];
     DDDs: DDD[] = [];
     operadoras: Operadora[] = [];
     dominios: string[] = [];
+    banners: any[] = [];
 
     constructor() {
         this.banners = [
-            { nome: 'Visa', value: [4] },
-            { nome: 'MasterCard', value: [51,52,53,54,55] },
-            { nome: 'Elo', value: [636368,438935,504175,451416] },
-            { nome: 'Discover', value: [6011,622,65] },
-            { nome: 'JCB', value: [35] },
+            { nome: 'Visa', value: [ 4 ] },
+            { nome: 'MasterCard', value: [ 51, 52, 53, 54, 55 ] },
+            { nome: 'Elo', value: [ 636368, 438935, 504175, 451416 ] },
+            { nome: 'Discover', value: [ 6011, 622, 65 ] },
+            { nome: 'JCB', value: [ 35 ] },
         ];
 
         this.operadoras = [
@@ -86,8 +85,8 @@ export class GeradorService {
         return cpf;
     }
 
-    gerarRenavan(){
-        return "Renavam";
+    gerarRenavan() {
+        return 'Renavam';
     }
 
     gerarEstadosCpf(stateCpf: string) {
@@ -363,92 +362,67 @@ export class GeradorService {
         return `${n1}${n2}${n3}${n4}${n5}${n6}${n7}${n8}${n9}${n10}${dv}`;
     }
 
-    gerarBanner(): Number[] {
-        
-        const arrNumber: any = [];
+    gerarBandeira(flag: string) {
+        const auxRandom = [];
 
-        this.banners.forEach((banner) => {
-            arrNumber.push(banner.value);
+        const bannerFlag = flag === '' ? Math.floor(Math.random() * this.banners.length) : parseInt(flag);
+
+        this.banners.map((banner) => {
+            auxRandom.push(banner.value);
         });
 
-        let number = arrNumber[Math.floor(Math.random() * arrNumber.length)];
-        number = number.toString().split(',');
+        const arrNumber = this.banners[bannerFlag];
+
+        let number = arrNumber.value[Math.floor(Math.random() * arrNumber.value.length)];
+        number = number.toString().split('');
         number = number.map(Number);
 
         return number;
     }
 
-    gerarCartaoCredito() {
-        
-        const arr = this.gerarBanner() as any[];
-        
+    gerarCartaoDeCredito(flag: string) {
+        const arr = this.gerarBandeira(flag);
         const length = 16 - arr.length;
-        
+
         for (var i = 1; i < length; i++) {
-            var digito = Math.round(Math.random() * 9);
-            arr.push(digito);
+            arr.push(Math.round(Math.random() * 9));
         }
 
         let sum = 0;
         let aux = true;
         let ninesOut = 0;
 
-        arr.forEach((value) => {
-            value = !isNaN(value) ? value:1; 
-            ninesOut = parseInt(value) * (aux ? 2 : 1); // false = 1 vs true = 2
+        for (i = 0; i < arr.length; i++) {
+            ninesOut = parseInt(arr[i]) * (aux ? 2 : 1); // false = 1 vs true = 2
             ninesOut = ninesOut > 9 ? ninesOut - 9 : ninesOut;
             sum = sum + ninesOut;
             aux = !aux;
             ninesOut = 0;
-        });
-
-        let digit = 10 - sum % 10;
-
-        if (digit == 10) {
-            digit = 0;
         }
 
-        const creditCard = {
-            numero: `${arr[0]}${arr[1]}${arr[2]}${arr[3]} ${arr[4]}${arr[5]}${arr[6]}${arr[7]} ${arr[8]}${arr[9]}${arr[10]}${arr[11]} ${arr[12]}${arr[13]}${arr[14]}${digit}`,
-            cvv: this.gerarCvv(),
-            dataExpiracao: this.gerarExpirationDate(),
-        };
+        let digit = 10 - sum % 10;
+        if (digit == 10) digit = 0;
 
-        console.log(arr);
+        var creditcard = `${arr[0]}${arr[1]}${arr[2]}${arr[3]} ${arr[4]}${arr[5]}${arr[6]}${arr[7]} ${arr[8]}${arr[9]}${arr[10]}${arr[11]} ${arr[12]}${arr[13]}${arr[14]}${digit}`;
 
-        console.log(creditCard.numero);
-
-
-        return creditCard;
+        return creditcard;
     }
-
-    gerarCvv() {
-        let random = Math.floor(Math.random() * 999) + 1;
-        let cvv = '00' + random.toString();
-        return cvv.substr(cvv.length - 3);
-    }
-
-    gerarExpirationDate() {
+    gerarDataValidade() {
         let month = '0' + (Math.floor(Math.random() * 12) + 1).toString();
         month = month.substr(month.length - 2);
 
         const arrMonth31Days = [ '01', '03', '05', '07', '08', '10', '12' ];
         const arrMonth30Days = [ '04', '06', '09', '11' ];
-        
-        const randomDay = 
-                arrMonth31Days.includes(month)
-                    ? 31
-                    : arrMonth30Days.includes(month)
-                        ? 30
-                        : 28;
-
-
+        const randomDay = arrMonth31Days.includes(month) ? 31 : arrMonth30Days.includes(month) ? 30 : 28;
         let day = '0' + (Math.floor(Math.random() * randomDay) + 1).toString();
         day = day.substr(day.length - 2);
-
         const year = new Date().getFullYear() + Math.floor(Math.random() * 10) + 1;
-
         return `${day}/${month}/${year}`;
+    }
+    gerarCvv() {
+        let random = Math.floor(Math.random() * 999) + 1;
+        let cvv = '00' + random.toString();
+        return cvv.substr(cvv.length - 3);
     }
 
     gerarEmail(people: string): string {

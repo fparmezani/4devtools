@@ -1,47 +1,44 @@
-export class Endereco
-{
-    bairro: string = ""
-    cep: string = ""
-    cidade: string = ""
-    complemento: string = ""
-    estado: string = ""
-    estadoSigla: string = ""
-    logradouro: string = ""
-    numero: string = ""
+export class Endereco {
+    bairro: string = '';
+    cep: string = '';
+    cidade: string = '';
+    complemento: string = '';
+    estado: string = '';
+    estadoSigla: string = '';
+    logradouro: string = '';
+    numero: string = '';
 }
 
-export class CartaoCredito{
-    numero : string= "";
-    cvv : string = "";
-    dataExpiracao : string = "";
+export class CartaoCredito {
+    numero: string = '';
+    cvv: string = '';
+    dataValidade: string = '';
 }
 
-export class Pessoa{
-    
-    altura: string = "";
-    celular: string = "";
-    
-    cpf:  string = "";
-    cnh: string = "";
-    renavan :string = "";
-    pispasep :string="";
-    cartaodecredito : CartaoCredito = new CartaoCredito();
+export class Pessoa {
+    altura: string = '';
+    celular: string = '';
 
-    dataNascimento: string = "";
-    email: string = "";
-    endereco : Endereco = new Endereco();
-    mae: string = "";
-    nome: string = "";
-    pai: string = "";
-    peso: string = "";
-    rg: string = "";
-    senha: string = "";
-    signo: string = "";
-    site: string = "";
-    telefone: string = "";
-    tipoSanguineo: string = "";
-    usuario: string = "";
+    cpf: string = '';
+    cnh: string = '';
+    renavan: string = '';
+    pispasep: string = '';
+    cartaodecredito: CartaoCredito = new CartaoCredito();
 
+    dataNascimento: string = '';
+    email: string = '';
+    endereco: Endereco = new Endereco();
+    mae: string = '';
+    nome: string = '';
+    pai: string = '';
+    peso: string = '';
+    rg: string = '';
+    senha: string = '';
+    signo: string = '';
+    site: string = '';
+    telefone: string = '';
+    tipoSanguineo: string = '';
+    usuario: string = '';
 }
 
 export class ObjetoPessoa {
@@ -49,7 +46,6 @@ export class ObjetoPessoa {
     type: string = '';
     values: Pessoa = new Pessoa();
 }
-
 
 // altura: "1.63"
 // celular: "(65) 94572-3530"
