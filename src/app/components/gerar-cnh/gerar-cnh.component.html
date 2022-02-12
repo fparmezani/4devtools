@@ -1,0 +1,34 @@
+<div class="card">
+    <div class="card-body">
+        <h2 class="box-title">Gerar CNH</h2>
+    </div>
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="card-body">
+                <p class="text-muted m-b-15 font-12">Clique no botão "Gerar CNH" para gerar quantos números válidos
+                    quiser de CNH.</p>
+                <div class="textarea-copy-container">
+                    <textarea id="cnh" class="form-control input-lg field-copy m-b-20" type="text" [(ngModel)]="cnh"
+                        readonly=""></textarea>
+                    <span title="Copiar" class="btn-textarea-copy" (click)="copiar()"><i
+                            class="fa fa-files-o"></i></span>
+                </div>
+                <hr>
+
+
+                <div class="botoes">
+                    <button type="submit" class="btn btn-info btn-md m-b-10 m-l-5" (click)="gerarCnh()">Gerar
+                        CNH</button>
+                    <button type="submit" class="btn btn-primary btn-md m-b-10 m-l-5" (click)="gerarCopiar()">Gerar e
+                        Copiar
+                        CNH</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+
+        </div>
+
+    </div>
+</div>
+<app-vejatambem></app-vejatambem>

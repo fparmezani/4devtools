@@ -3,7 +3,7 @@ import { GeradorService } from 'src/app/services/gerador.service';
 import * as copy from 'copy-to-clipboard';
 import { ToastrService } from 'ngx-toastr';
 import { HttpClient } from '@angular/common/http';
-import { Pessoa } from 'src/app/model/pessoa';
+import { CartaoCredito, Pessoa } from 'src/app/model/pessoa';
 
 @Component({
     selector: 'app-gerar-pessoa',
@@ -30,11 +30,18 @@ export class GerarPessoaComponent implements OnInit {
             this.pessoa.cnh = this.service.gerarCnh();
             this.pessoa.renavan = this.service.gerarRenavan();
             this.pessoa.pispasep = this.service.gerarPisPasep();
-
+            this.pessoa.cartaodecredito = new CartaoCredito();
             this.pessoa.cartaodecredito.numero = this.service.gerarCartaoDeCredito('');
             this.pessoa.cartaodecredito.cvv = this.service.gerarCvv();
             this.pessoa.cartaodecredito.dataValidade = this.service.gerarDataValidade();
+            this.pessoa.cns = this.service.gerarCns();
+            this.pessoa.tituloEleitor = this.service.gerarTituloEleitor(this.estado);
         });
+    }
+
+    copiarConteudo(value: string) {
+        copy(value);
+        this.toastr.success('Copiado!');
     }
 
     ngOnInit(): void {

@@ -12,6 +12,9 @@ import { GerarCpfComponent } from './components/gerar-cpf/gerar-cpf.component';
 import { GerarCnpjComponent } from './components/gerar-cnpj/gerar-cnpj.component';
 import { GerarPessoaComponent } from './components/gerar-pessoa/gerar-pessoa.component';
 import { GerarCartaodecreditoComponent } from './components/gerar-cartaodecredito/gerar-cartaodecredito.component';
+import { VejatambemComponent } from './shared/vejatambem/vejatambem.component';
+import { GerarCnhComponent } from './components/gerar-cnh/gerar-cnh.component';
+import { GerarPisPasepComponent } from './components/gerar-pispasep/gerar-pispasep.component';
 
 @NgModule({
     declarations: [
@@ -20,6 +23,9 @@ import { GerarCartaodecreditoComponent } from './components/gerar-cartaodecredit
         GerarCnpjComponent,
         GerarPessoaComponent,
         GerarCartaodecreditoComponent,
+        GerarCnhComponent,
+        GerarPisPasepComponent,
+        VejatambemComponent,
     ],
     imports: [ BrowserModule, AppRoutingModule, FormsModule, ToastrModule.forRoot(), HttpClientModule ],
     providers: [],

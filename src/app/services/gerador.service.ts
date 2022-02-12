@@ -276,7 +276,7 @@ export class GeradorService {
                 return `${cns.substr(0, 3)} ${cns.substr(3, 4)} ${cns.substr(7, 4)} ${cns.substr(11, 4)}`;
             }
         }
-        return;
+        return '';
     }
 
     gerarPisPasep() {
@@ -512,6 +512,51 @@ export class GeradorService {
         const n8 = Math.round(Math.random() * 9);
 
         return `(${ddd}) ${n1}${n2}${n3}${n4}-${n5}${n6}${n7}${n8}`;
+    }
+
+    gerarTituloEleitor(state: string) {
+        if (state === '') {
+            state = '01';
+        }
+
+        const n1 = Math.round(Math.random() * 9);
+        const n2 = Math.round(Math.random() * 9);
+        const n3 = Math.round(Math.random() * 9);
+        const n4 = Math.round(Math.random() * 9);
+        const n5 = Math.round(Math.random() * 9);
+        const n6 = Math.round(Math.random() * 9);
+        const n7 = Math.round(Math.random() * 9);
+        const n8 = Math.round(Math.random() * 9);
+
+        const states = state.split('');
+        const n9 = parseInt(states[0]);
+        const n10 = parseInt(states[1]);
+
+        let d1 = n1 * 2 + n2 * 3 + n3 * 4 + n4 * 5 + n5 * 6 + n6 * 7 + n7 * 8 + n8 * 9;
+        d1 = d1 % 11;
+        d1 = this.validateRestOfDivision(d1, state);
+
+        let d2 = n9 * 7 + n10 * 8 + d1 * 9;
+        d2 = d2 % 11;
+        d2 = this.validateRestOfDivision(d2, state);
+
+        const numero = `${n1}${n2}${n3}${n4} ${n5}${n6}${n7}${n8} ${n9}${n10}${d1}${d2}`;
+
+        return numero;
+    }
+
+    validateRestOfDivision(dv: number, state: string) {
+        if (dv === 10) {
+            return 0;
+        }
+
+        if (dv === 0) {
+            if (state === '01' || state === '02') {
+                return 1;
+            }
+        }
+
+        return dv;
     }
 
     getCookie() {}

@@ -39,6 +39,8 @@ export class Pessoa {
     telefone: string = '';
     tipoSanguineo: string = '';
     usuario: string = '';
+    cns: string = '';
+    tituloEleitor: string = '';
 }
 
 export class ObjetoPessoa {
