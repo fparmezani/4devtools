@@ -24,7 +24,9 @@ export class GerarCartaodecreditoComponent implements OnInit {
         ];
     }
 
-    ngOnInit(): void {}
+    ngOnInit(): void {
+        this.gerarCartaoDeCredito();
+    }
 
     gerarCartaoDeCredito() {
         this.numero = this.service.gerarCartaoDeCredito(this.flag);

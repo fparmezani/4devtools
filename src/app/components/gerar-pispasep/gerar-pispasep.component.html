@@ -1,35 +1,37 @@
 <div class="card">
     <div class="card-body">
-        <h2 class="box-title">Gerar CNPJ</h2>
+        <h2 class="box-title">Gerar PIS/PASEP</h2>
     </div>
     <div class="row">
         <div class="col-lg-8">
             <div class="card-body">
-                <p class="text-muted m-b-15 font-12">Clique no botão "Gerar CNPJ" para gerar quantos números válidos
-                    quiser de CNPJ! Você ainda pode escolher o estado de origem e a formatação com pontuação, caso
-                    desejar.</p>
+                <p class="text-muted m-b-15 font-12">Crie quantos números de Pis/Pasep quiser clicando no botão "Gerar
+                    Pis/Pasep"!</p>
                 <div class="textarea-copy-container">
-                    <textarea id="cnpj" class="form-control input-lg field-copy m-b-20" type="text" [(ngModel)]="cnpj"
-                        readonly="">28732393288</textarea>
+                    <textarea id="pispsep" class="form-control input-lg field-copy m-b-20" type="text"
+                        [(ngModel)]="pispasep" readonly=""></textarea>
                     <span title="Copiar" class="btn-textarea-copy" (click)="copiar()"><i
                             class="fa fa-files-o"></i></span>
                 </div>
                 <hr>
                 <p class="text-muted"><label>
-                        <input id="formatacnpj" type="checkbox" [(ngModel)]="formataCNPJ" (click)="toggleFormat()"> Com
+                        <input id="formataPISPASEP" type="checkbox" [(ngModel)]="formatarPISPASEP"
+                            (click)="toggleFormat()">
+                        Com
                         pontuação?</label></p>
                 <div class="botoes">
-                    <button type="submit" class="btn btn-info btn-md m-b-10 m-l-5" (click)="gerarCNPJ()">Gerar
-                        CNPJ</button>
+                    <button type="submit" class="btn btn-info btn-md m-b-10 m-l-5" (click)="gerarPisPasep()">Gerar
+                        PIS/PASEP</button>
                     <button type="submit" class="btn btn-primary btn-md m-b-10 m-l-5" (click)="gerarCopiar()">Gerar e
                         Copiar
-                        CNPJ</button>
+                        PIS/PASEP</button>
                 </div>
             </div>
         </div>
         <div class="col-lg-4">
 
         </div>
+
     </div>
 </div>
 <app-vejatambem></app-vejatambem>
