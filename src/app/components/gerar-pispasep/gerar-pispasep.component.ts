@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import * as copy from 'copy-to-clipboard';
 import { ToastrService } from 'ngx-toastr';
 import { GeradorService } from 'src/app/services/gerador.service';
@@ -11,7 +12,9 @@ export class GerarPisPasepComponent implements OnInit {
     pispasep: string = '';
     formatarPISPASEP: boolean = true;
 
-    constructor(private service: GeradorService, private toastr: ToastrService) {}
+    constructor(private service: GeradorService, private toastr: ToastrService, private titleService: Title) {
+        this.titleService.setTitle('Gerador de CNH');
+    }
 
     ngOnInit(): void {
         this.gerarPisPasep();

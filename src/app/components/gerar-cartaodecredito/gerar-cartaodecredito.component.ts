@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import * as copy from 'copy-to-clipboard';
 import { ToastrService } from 'ngx-toastr';
 import { GeradorService } from 'src/app/services/gerador.service';
@@ -14,7 +15,8 @@ export class GerarCartaodecreditoComponent implements OnInit {
     flag: string = '';
     banners: any[] = [];
 
-    constructor(private service: GeradorService, private toastr: ToastrService) {
+    constructor(private service: GeradorService, private toastr: ToastrService, private titleService: Title) {
+        this.titleService.setTitle('Gerador de Cartão de Crédito');
         this.banners = [
             { name: 'visa', value: [ 4 ] },
             { name: 'mastercard', value: [ 51, 52, 53, 54, 55 ] },
