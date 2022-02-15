@@ -15,6 +15,7 @@ import { GerarCartaodecreditoComponent } from './components/gerar-cartaodecredit
 import { VejatambemComponent } from './shared/vejatambem/vejatambem.component';
 import { GerarCnhComponent } from './components/gerar-cnh/gerar-cnh.component';
 import { GerarPisPasepComponent } from './components/gerar-pispasep/gerar-pispasep.component';
+import { ContatoComponent } from './shared/contato/contato.component';
 
 @NgModule({
     declarations: [
@@ -26,6 +27,7 @@ import { GerarPisPasepComponent } from './components/gerar-pispasep/gerar-pispas
         GerarCnhComponent,
         GerarPisPasepComponent,
         VejatambemComponent,
+        ContatoComponent,
     ],
     imports: [ BrowserModule, AppRoutingModule, FormsModule, ToastrModule.forRoot(), HttpClientModule ],
     providers: [],

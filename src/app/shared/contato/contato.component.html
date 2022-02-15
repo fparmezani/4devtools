@@ -1,1 +1,52 @@
-<p>contato works!</p>
+<div class="col-md-8">
+    <div class="card">
+        <div class="card-body">
+            <div class="card-title">
+                <h2 style="color: rgb(69, 90, 100);">Entre em contato conosco</h2>
+            </div>
+            <p class="text-muted m-b-15 font-12">Entre em contato conosco para esclarecer dúvidas, relatar erros, dar
+                sugestões, fazer críticas construtivas, parcerias ou elogios.</p>
+            <div class="wp-block-contact-form-7-contact-form-selector">
+                <div role="form" class="wpcf7" id="wpcf7-f229-o1" lang="pt-BR" dir="ltr">
+                    <div class="screen-reader-response">
+                        <p role="status" aria-live="polite" aria-atomic="true"></p>
+                        <ul></ul>
+                    </div>
+
+                    <div style="display: none;">
+                        <input type="hidden" name="_wpcf7" value="229">
+                        <input type="hidden" name="_wpcf7_version" value="5.5.5">
+                        <input type="hidden" name="_wpcf7_locale" value="pt_BR">
+                        <input type="hidden" name="_wpcf7_unit_tag" value="wpcf7-f229-o1">
+                        <input type="hidden" name="_wpcf7_container_post" value="0">
+                        <input type="hidden" name="_wpcf7_posted_data_hash" value="">
+                    </div>
+                    <p><span class="text-muted">Nome</span><br>
+                        <span class="wpcf7-form-control-wrap nome"><input type="text" name="nome" value="" size="40"
+                                class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required form-control m-b-20"
+                                id="contact-name" aria-required="true" aria-invalid="false"
+                                placeholder="Digite seu nome..."></span>
+                    </p>
+                    <p><span class="text-muted">E-mail</span><br>
+                        <span class="wpcf7-form-control-wrap email"><input type="email" name="email" value="" size="40"
+                                class="wpcf7-form-control wpcf7-text wpcf7-email wpcf7-validates-as-required wpcf7-validates-as-email form-control m-b-20"
+                                id="contact-email" aria-required="true" aria-invalid="false"
+                                placeholder="Digite seu e-mail..."></span>
+                    </p>
+                    <p><span class="text-muted">Mensagem</span><br>
+                        <span class="wpcf7-form-control-wrap mensagem"><textarea name="mensagem" cols="40" rows="10"
+                                class="wpcf7-form-control wpcf7-textarea wpcf7-validates-as-required form-control"
+                                id="contact-message" aria-required="true" aria-invalid="false"
+                                placeholder="Digite sua mensagem..." [(ngModel)]="corpo"></textarea></span>
+                    </p>
+                    <p><button value="Enviar" class="btn btn-md btn-info btn-rounded"
+                            (click)="sendMessage()">Enviar</button>
+                        <span class="wpcf7-spinner"></span>
+                    </p>
+                    <div class="wpcf7-response-output" aria-hidden="true"></div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
