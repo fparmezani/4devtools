@@ -4,6 +4,7 @@ import * as copy from 'copy-to-clipboard';
 import { ToastrService } from 'ngx-toastr';
 import { HttpClient } from '@angular/common/http';
 import { CartaoCredito, Pessoa } from 'src/app/model/pessoa';
+import { Title } from '@angular/platform-browser';
 
 @Component({
     selector: 'app-gerar-pessoa',
@@ -21,7 +22,14 @@ export class GerarPessoaComponent implements OnInit {
     dataValidadeCartaoCredito: string = '';
     cvvCartaoCredito: string = '';
 
-    constructor(private service: GeradorService, private toastr: ToastrService, private http: HttpClient) {}
+    constructor(
+        private service: GeradorService,
+        private toastr: ToastrService,
+        private http: HttpClient,
+        private titleService: Title
+    ) {
+        this.titleService.setTitle('Gerador de Pessoas');
+    }
 
     gerarPessoa() {
         this.http.get<Pessoa>(`${this.URLGERADORBRASILEIRO}faker/pessoa?limit=1`).subscribe((response: any) => {

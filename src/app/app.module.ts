@@ -15,7 +15,6 @@ import { GerarCartaodecreditoComponent } from './components/gerar-cartaodecredit
 import { VejatambemComponent } from './shared/vejatambem/vejatambem.component';
 import { GerarCnhComponent } from './components/gerar-cnh/gerar-cnh.component';
 import { GerarPisPasepComponent } from './components/gerar-pispasep/gerar-pispasep.component';
-import { SMTPClient } from 'emailjs';
 
 @NgModule({
     declarations: [
@@ -27,7 +26,6 @@ import { SMTPClient } from 'emailjs';
         GerarCnhComponent,
         GerarPisPasepComponent,
         VejatambemComponent,
-        SMTPClient,
     ],
     imports: [ BrowserModule, AppRoutingModule, FormsModule, ToastrModule.forRoot(), HttpClientModule ],
     providers: [],

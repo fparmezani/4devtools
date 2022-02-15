@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, setTestabilityGetter } from '@angular/core';
 import { GeradorService } from 'src/app/services/gerador.service';
 import * as copy from 'copy-to-clipboard';
 import { ToastrService } from 'ngx-toastr';
+import { Title } from '@angular/platform-browser';
 
 @Component({
     selector: 'app-gerar-cpf',
@@ -12,7 +13,9 @@ export class GerarCpfComponent implements OnInit {
     cpfState: string = 'XX';
     formataCPF: boolean = true;
 
-    constructor(private geradorService: GeradorService, private toastr: ToastrService) {}
+    constructor(private geradorService: GeradorService, private toastr: ToastrService, private titleService: Title) {
+        this.titleService.setTitle('Gerador de CPF');
+    }
 
     ngOnInit(): void {
         this.gerarCpf();

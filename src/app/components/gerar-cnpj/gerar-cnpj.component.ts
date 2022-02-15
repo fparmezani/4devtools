@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { GeradorService } from 'src/app/services/gerador.service';
 import * as copy from 'copy-to-clipboard';
 import { ToastrService } from 'ngx-toastr';
+import { Title } from '@angular/platform-browser';
 
 @Component({
     selector: 'app-gerar-cnpj',
@@ -11,15 +12,18 @@ export class GerarCnpjComponent implements OnInit {
     cnpj: string = '';
     cnpjState: string = 'XX';
     formataCNPJ: boolean = true;
+    title = 'Gerador de CPF';
 
-    constructor(private geradorService: GeradorService, private toastr: ToastrService) {}
+    constructor(private service: GeradorService, private toastr: ToastrService, private titleService: Title) {
+        this.titleService.setTitle('Gerador de CNPJ');
+    }
 
     ngOnInit(): void {
         this.gerarCNPJ();
     }
 
     gerarCNPJ() {
-        this.cnpj = this.geradorService.gerarCNPJ(this.formataCNPJ);
+        this.cnpj = this.service.gerarCNPJ(this.formataCNPJ);
     }
 
     toggleFormat() {
