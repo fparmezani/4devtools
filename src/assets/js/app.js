@@ -3,6 +3,9 @@ const { formatDiagnosticsWithColorAndContext } = require('typescript');
 $.noConflict();
 jQuery(document).ready(function($) {
     'use strict';
+
+    console.log('opa');
+
     // Menu Trigger
     $('#menuToggle').on('click', function(event) {
         var windowWidth = $(window).width();

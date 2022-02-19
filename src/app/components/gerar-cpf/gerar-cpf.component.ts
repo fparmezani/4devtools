@@ -1,4 +1,4 @@
-import { Component, OnInit, setTestabilityGetter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { GeradorService } from 'src/app/services/gerador.service';
 import * as copy from 'copy-to-clipboard';
 import { ToastrService } from 'ngx-toastr';
