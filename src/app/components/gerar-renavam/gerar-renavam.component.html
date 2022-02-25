@@ -1,0 +1,36 @@
+<div class="card">
+    <div class="card-body">
+        <h2 class="box-title">Gerar Renavam</h2>
+    </div>
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="card-body">
+                <p class="text-muted m-b-15 font-12">Crie quantos números de RENAVAM quiser clicando no botão "Gerar
+                    Renavam"!</p>
+                <div class="textarea-copy-container">
+                    <textarea id="renavam" class="form-control input-lg field-copy m-b-20" type="text"
+                        [(ngModel)]="renavam" readonly=""></textarea>
+                    <span title=" Copiar" class="btn-textarea-copy" (click)="copiar()"><i
+                            class="fa fa-files-o"></i></span>
+                </div>
+                <hr>
+                <div class="botoes">
+                    <button type="submit" class="btn btn-info btn-md m-b-10 m-l-5" (click)="gerarRenavam()">Gerar
+                        Renavam</button>
+                    <button type="submit" class="btn btn-primary btn-md m-b-10 m-l-5" (click)="gerarCopiar()">Gerar e
+                        Copiar Renavam</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+
+        </div>
+    </div>
+</div>
+<app-vejatambem></app-vejatambem>

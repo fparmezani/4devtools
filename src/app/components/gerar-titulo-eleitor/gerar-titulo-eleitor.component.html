@@ -1,0 +1,62 @@
+<div class="card">
+    <div class="card-body">
+        <h2 class="box-title">Gerar Título Eleitor</h2>
+    </div>
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="card-body">
+                <div class="textarea-copy-container">
+                    <textarea id="tituloEleitor" class="form-control input-lg field-copy m-b-20" type="text"
+                        [(ngModel)]="tituloEleitor" readonly="">Gerando...</textarea>
+                    <span title="Copiar" class="btn-textarea-copy" (click)="copiar()"><i
+                            class="fa fa-files-o"></i></span>
+                </div>
+                <hr>
+                <div class="row m-b-15">
+                    <div class="col-md-12">
+                        <small class="text-muted">Estado de origem do Título Eleitor</small>
+                        <select id="estado" class="form-control input-lg-select" [(ngModel)]="estado"
+                            (change)="gerarTituloEleitor()">
+                            <option value="24">AC</option>
+                            <option value="17">AL</option>
+                            <option value="22">AM</option>
+                            <option value="25">AP</option>
+                            <option value="05">BA</option>
+                            <option value="07">CE</option>
+                            <option value="20">DF</option>
+                            <option value="14">ES</option>
+                            <option value="10">GO</option>
+                            <option value="11">MA</option>
+                            <option value="02">MG</option>
+                            <option value="19">MS</option>
+                            <option value="18">MT</option>
+                            <option value="13">PA</option>
+                            <option value="12">PB</option>
+                            <option value="08">PE</option>
+                            <option value="15">PI</option>
+                            <option value="06">PR</option>
+                            <option value="03">RJ</option>
+                            <option value="16">RN</option>
+                            <option value="23">RO</option>
+                            <option value="26">RR</option>
+                            <option value="04">RS</option>
+                            <option value="09">SC</option>
+                            <option value="21">SE</option>
+                            <option value="01" selected="">SP</option>
+                            <option value="27">TO</option>
+                            <option value="28">Exterior</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="botoes">
+                    <button type="submit" class="btn btn-info btn-md m-b-10 m-l-5" (click)="gerarTituloEleitor()">Gerar
+                        Título Eleitor</button>
+                    <button type="submit" class="btn btn-primary btn-md m-b-10 m-l-5" (click)="gerarCopiar()">Gerar e
+                        Copiar Título Eleitor</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+        </div>
+    </div>
+</div>
