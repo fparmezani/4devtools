@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+
 import { GerarCpfComponent } from './components/gerar-cpf/gerar-cpf.component';
 import { GerarCnpjComponent } from './components/gerar-cnpj/gerar-cnpj.component';
 import { ValidarCpfComponent } from './components/validar-cpf/validar-cpf.component';
@@ -13,10 +14,12 @@ import { SobreComponent } from './shared/sobre/sobre.component';
 import { VersaoComponent } from './shared/versao/versao.component';
 import { GerarCnhComponent } from './components/gerar-cnh/gerar-cnh.component';
 import { GerarPisPasepComponent } from './components/gerar-pispasep/gerar-pispasep.component';
+import { DashboardComponent } from './shared/dashboard/dashboard.component';
+import { GeradorCpfComponent } from './Views/gerador-cpf/gerador-cpf.component';
 
 const routes: Routes = [
-    { path: '', component: GerarCpfComponent },
-    { path: 'gerar-cpf', component: GerarCpfComponent },
+    { path: '', component: DashboardComponent },
+    { path: 'gerar-cpf', component: GeradorCpfComponent },
     { path: 'gerar-cnpj', component: GerarCnpjComponent },
     { path: 'gerar-pessoa', component: GerarPessoaComponent },
     { path: 'gerar-cartaodecredito', component: GerarCartaodecreditoComponent },

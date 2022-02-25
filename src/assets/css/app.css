@@ -73,6 +73,10 @@
     padding-top: 30px !important;
 }
 
+.m-h-300 {
+    min-height: 300px;
+}
+
 .btn-info,
 .btn-info:active,
 .btn-info:active:focus,
@@ -517,7 +521,7 @@ p,
 }
 
 .input-lg {
-    font-size: 22px;
+    font-size: 20px;
 }
 
 .input-lg-select {

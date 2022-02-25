@@ -1,5 +1,15 @@
 $.noConflict();
 
+setTimeout(()=>{
+    const cookieContainer = document.querySelector('.cookie-container');
+    const accepted = localStorage.getItem('cookieAccepted');
+    if (!accepted) {
+        cookieContainer?.classList.add('active');
+    }
+}, 2000);
+
+
+
 jQuery(document).ready(function($) {
     'use strict';
 
