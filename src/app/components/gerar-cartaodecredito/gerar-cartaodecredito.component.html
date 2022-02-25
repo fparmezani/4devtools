@@ -1,0 +1,90 @@
+<div class="card">
+    <div class="card-body">
+        <h2 class="box-title">Gerar Cartão de Crédito</h2>
+    </div>
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="card-body">
+                <p class="text-muted m-b-15 font-12">Clique no botão "Gerar Cartão de Crédito" para gerar quantos
+                    números válidos
+                    quiser de Cartão de Crédito! Você ainda pode escolher o estado de origem e a formatação com
+                    pontuação, caso
+                    desejar.</p>
+                <div class="row m-b-20">
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                        <p class="text-muted">Número do Cartão</p>
+                        <div class="textarea-copy-container">
+                            <textarea id="cpf" class="form-control input-lg field-copy" type="text" [(ngModel)]="numero"
+                                readonly="">28732393288</textarea>
+                            <span title="Copiar" class="btn-textarea-copy" (click)="copiar()"><i
+                                    class="fa fa-files-o"></i></span>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-12">
+                        <p class="text-muted">Data de Validade</p>
+                        <div class="textarea-copy-container">
+                            <textarea id="field-expiration-date"
+                                class="form-control m-b-20-max-768 input-lg field-copy-2" type="text" readonly=""
+                                [(ngModel)]="dataValidade">05/09/2027</textarea>
+                            <span title="Copiar" class="btn-textarea-copy-2"><i class="fa fa-files-o"></i></span>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-sm-12">
+                        <p class="text-muted">CVV</p>
+                        <div class="textarea-copy-container">
+                            <textarea id="field-cvv" class="form-control input-lg field-copy-3" type="text" readonly=""
+                                [(ngModel)]="cvv">232</textarea>
+                            <span title="Copiar" class="btn-textarea-copy-2"><i class="fa fa-files-o"></i></span>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="row m-b-15">
+                    <div class="col-md-4">
+                        <small class="text-muted">Selecione a Bandeira</small>
+                        <select id="cpfState" class="form-control input-lg-select" [(ngModel)]="flag"
+                            (change)="gerarCartaoDeCredito()">
+                            <option value="" selected="">Aleatório</option>
+                            <option value="0">VISA</option>
+                            <option value="1">MASTERCARD</option>
+                            <option value="2">ELO</option>
+                            <option value="3">DISCOVER</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="botoes">
+                    <button type="submit" class="btn btn-info btn-md m-b-10 m-l-5"
+                        (click)="gerarCartaoDeCredito()">Gerar
+                        Cartão de Crédito</button>
+                    <button type="submit" class="btn btn-primary btn-md m-b-10 m-l-5" (click)="gerarCopiar()">Gerar e
+                        Copiar
+                        Cartão de Crédito</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <script async
+                src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4731566944813042"
+                crossorigin="anonymous"></script>
+            <!-- 4DT-gerar-cartaocredito-quadrado -->
+            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-4731566944813042"
+                data-ad-slot="4301582797" data-ad-format="auto" data-full-width-responsive="true"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <script async
+                src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4731566944813042"
+                crossorigin="anonymous"></script>
+            <!-- 4DT-gerar-cartaocredito-horizontal -->
+            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-4731566944813042"
+                data-ad-slot="8336196573" data-ad-format="auto" data-full-width-responsive="true"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+    </div>
+</div>

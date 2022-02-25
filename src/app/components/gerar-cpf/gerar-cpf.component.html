@@ -1,0 +1,51 @@
+<div class="textarea-copy-container">
+    <textarea id="cpf" class="form-control input-lg field-copy m-b-20" type="text" [(ngModel)]="cpf"
+        readonly="">28732393288</textarea>
+    <span title="Copiar" class="btn-textarea-copy" (click)="copiar()"><i class="fa fa-files-o"></i></span>
+</div>
+<hr>
+<div class="row m-b-15">
+    <div class="col-md-12">
+        <small class="text-muted">Estado de origem do CPF</small>
+        <select id="cpfState" class="form-control input-lg-select" [(ngModel)]="cpfState" (change)="gerarCpf()">
+            <option value="XX" selected="">Aleatório</option>
+            <option value="AC">AC</option>
+            <option value="AL">AL</option>
+            <option value="AP">AP</option>
+            <option value="AM">AM</option>
+            <option value="BA">BA</option>
+            <option value="CE">CE</option>
+            <option value="DF">DF</option>
+            <option value="ES">ES</option>
+            <option value="GO">GO</option>
+            <option value="MA">MA</option>
+            <option value="MT">MT</option>
+            <option value="MS">MS</option>
+            <option value="MG">MG</option>
+            <option value="PA">PA</option>
+            <option value="PB">PB</option>
+            <option value="PR">PR</option>
+            <option value="PE">PE</option>
+            <option value="PI">PI</option>
+            <option value="RJ">RJ</option>
+            <option value="RN">RN</option>
+            <option value="RS">RS</option>
+            <option value="RO">RO</option>
+            <option value="RR">RR</option>
+            <option value="SC">SC</option>
+            <option value="SP">SP</option>
+            <option value="SE">SE</option>
+            <option value="TO">TO</option>
+        </select>
+    </div>
+</div>
+<p class="text-muted"><label>
+        <input id="formataCPF" type="checkbox" [(ngModel)]="formataCPF" (click)="toggleFormat()"> Com
+        pontuação?</label></p>
+<div class="botoes">
+    <button type="submit" class="btn btn-info btn-md m-b-10 m-l-5" (click)="gerarCpf()">Gerar
+        CPF</button>
+    <button type="submit" class="btn btn-primary btn-md m-b-10 m-l-5" (click)="gerarCopiar()">Gerar e
+        Copiar
+        CPF</button>
+</div>

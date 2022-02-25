@@ -1,0 +1,16 @@
+<div class="textarea-copy-container">
+    <textarea id="cnpj" class="form-control input-lg field-copy m-b-20" type="text" [(ngModel)]="cnpj"
+        readonly="">28732393288</textarea>
+    <span title="Copiar" class="btn-textarea-copy" (click)="copiar()"><i class="fa fa-files-o"></i></span>
+</div>
+<hr>
+<p class="text-muted"><label>
+        <input id="formatacnpj" type="checkbox" [(ngModel)]="formataCNPJ" (click)="toggleFormat()"> Com
+        pontuação?</label></p>
+<div class="botoes">
+    <button type="submit" class="btn btn-info btn-md m-b-10 m-l-5" (click)="gerarCNPJ()">Gerar
+        CNPJ</button>
+    <button type="submit" class="btn btn-primary btn-md m-b-10 m-l-5" (click)="gerarCopiar()">Gerar e
+        Copiar
+        CNPJ</button>
+</div>
