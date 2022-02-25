@@ -15,11 +15,11 @@ import { VersaoComponent } from './shared/versao/versao.component';
 import { GerarCnhComponent } from './components/gerar-cnh/gerar-cnh.component';
 import { GerarPisPasepComponent } from './components/gerar-pispasep/gerar-pispasep.component';
 import { DashboardComponent } from './shared/dashboard/dashboard.component';
+import { GeradorCpfComponent } from './Views/gerador-cpf/gerador-cpf.component';
 
 const routes: Routes = [
     { path: '', component: DashboardComponent },
-    //{ path: '', component: GerarCpfComponent },
-    { path: 'gerar-cpf', component: GerarCpfComponent },
+    { path: 'gerar-cpf', component: GeradorCpfComponent },
     { path: 'gerar-cnpj', component: GerarCnpjComponent },
     { path: 'gerar-pessoa', component: GerarPessoaComponent },
     { path: 'gerar-cartaodecredito', component: GerarCartaodecreditoComponent },

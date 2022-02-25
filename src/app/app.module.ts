@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -18,6 +19,9 @@ import { GerarCnhComponent } from './components/gerar-cnh/gerar-cnh.component';
 import { GerarPisPasepComponent } from './components/gerar-pispasep/gerar-pispasep.component';
 import { ContatoComponent } from './shared/contato/contato.component';
 import { DashboardComponent } from './shared/dashboard/dashboard.component';
+import { GeradorCpfComponent } from './Views/gerador-cpf/gerador-cpf.component';
+import { GeradorCnpjComponent } from './Views/gerador-cnpj/gerador-cnpj.component';
+import { GeradorCnhComponent } from './Views/gerador-cnh/gerador-cnh.component';
 
 @NgModule({
     declarations: [
@@ -31,8 +35,18 @@ import { DashboardComponent } from './shared/dashboard/dashboard.component';
         VejatambemComponent,
         ContatoComponent,
         DashboardComponent,
+        GeradorCpfComponent,
+        GeradorCnpjComponent,
+        GeradorCnhComponent,
     ],
-    imports: [ BrowserModule, AppRoutingModule, FormsModule, ToastrModule.forRoot(), HttpClientModule ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        FormsModule,
+        ToastrModule.forRoot(),
+        HttpClientModule,
+        BrowserAnimationsModule,
+    ],
     providers: [ DatePipe ],
     bootstrap: [ AppComponent ],
 })

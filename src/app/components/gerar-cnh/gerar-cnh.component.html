@@ -1,55 +1,13 @@
-<div class="card">
-    <div class="card-body">
-        <h2 class="box-title">Gerar CNH</h2>
-    </div>
-    <div class="row">
-        <div class="col-lg-8">
-            <div class="card-body">
-                <p class="text-muted m-b-15 font-12">Clique no botão "Gerar CNH" para gerar quantos números válidos
-                    quiser de CNH.</p>
-                <div class="textarea-copy-container">
-                    <textarea id="cnh" class="form-control input-lg field-copy m-b-20" type="text" [(ngModel)]="cnh"
-                        readonly=""></textarea>
-                    <span title="Copiar" class="btn-textarea-copy" (click)="copiar()"><i
-                            class="fa fa-files-o"></i></span>
-                </div>
-                <hr>
-
-
-                <div class="botoes">
-                    <button type="submit" class="btn btn-info btn-md m-b-10 m-l-5" (click)="gerarCnh()">Gerar
-                        CNH</button>
-                    <button type="submit" class="btn btn-primary btn-md m-b-10 m-l-5" (click)="gerarCopiar()">Gerar e
-                        Copiar
-                        CNH</button>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-4">
-            <script async
-                src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4731566944813042"
-                crossorigin="anonymous"></script>
-            <!-- 4DT-gerar-cnh-quadrado -->
-            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-4731566944813042"
-                data-ad-slot="6466380000" data-ad-format="auto" data-full-width-responsive="true"></ins>
-            <script>
-                (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
-        </div>
-
-    </div>
-    <div class="row">
-        <div class="col-lg-12">
-            <script async
-                src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4731566944813042"
-                crossorigin="anonymous"></script>
-            <!-- 4DT-gerar-cnh-horizontal -->
-            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-4731566944813042"
-                data-ad-slot="3502672290" data-ad-format="auto" data-full-width-responsive="true"></ins>
-            <script>
-                (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
-        </div>
-    </div>
+<div class="textarea-copy-container">
+    <textarea id="cnh" class="form-control input-lg field-copy m-b-20" type="text" [(ngModel)]="cnh"
+        readonly=""></textarea>
+    <span title="Copiar" class="btn-textarea-copy" (click)="copiar()"><i class="fa fa-files-o"></i></span>
 </div>
-<app-vejatambem></app-vejatambem>
+<hr>
+<div class="botoes">
+    <button type="submit" class="btn btn-info btn-md m-b-10 m-l-5" (click)="gerarCnh()">Gerar
+        CNH</button>
+    <button type="submit" class="btn btn-primary btn-md m-b-10 m-l-5" (click)="gerarCopiar()">Gerar e
+        Copiar
+        CNH</button>
+</div>

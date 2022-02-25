@@ -36,7 +36,6 @@ export class GerarCpfComponent implements OnInit {
     gerarCopiar() {
         this.gerarCpf();
         this.copiar();
-        this.toastr.success('Copiado!');
     }
 
     copiar() {
