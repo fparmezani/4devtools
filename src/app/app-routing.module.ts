@@ -16,15 +16,29 @@ import { GerarCnhComponent } from './components/gerar-cnh/gerar-cnh.component';
 import { GerarPisPasepComponent } from './components/gerar-pispasep/gerar-pispasep.component';
 import { DashboardComponent } from './shared/dashboard/dashboard.component';
 import { GeradorCpfComponent } from './Views/gerador-cpf/gerador-cpf.component';
+import { GerarNomeComponent } from './components/gerar-nome/gerar-nome.component';
+import { GerarRenavamComponent } from './components/gerar-renavam/gerar-renavam.component';
+import { GerarEnderecoComponent } from './components/gerar-endereco/gerar-endereco.component';
+import { GerarSenhaComponent } from './components/gerar-senha/gerar-senha.component';
+import { GerarTelefoneComponent } from './components/gerar-telefone/gerar-telefone.component';
+import { GerarTituloEleitorComponent } from './components/gerar-titulo-eleitor/gerar-titulo-eleitor.component';
+import { GeradorCnpjComponent } from './Views/gerador-cnpj/gerador-cnpj.component';
+import { GeradorCnhComponent } from './Views/gerador-cnh/gerador-cnh.component';
 
 const routes: Routes = [
     { path: '', component: DashboardComponent },
     { path: 'gerar-cpf', component: GeradorCpfComponent },
-    { path: 'gerar-cnpj', component: GerarCnpjComponent },
+    { path: 'gerar-cnpj', component: GeradorCnpjComponent },
     { path: 'gerar-pessoa', component: GerarPessoaComponent },
     { path: 'gerar-cartaodecredito', component: GerarCartaodecreditoComponent },
-    { path: 'gerar-cnh', component: GerarCnhComponent },
+    { path: 'gerar-cnh', component: GeradorCnhComponent },
     { path: 'gerar-pispasep', component: GerarPisPasepComponent },
+    { path: 'gerar-nome', component: GerarNomeComponent },
+    { path: 'gerar-renavam', component: GerarRenavamComponent },
+    { path: 'gerar-endereco', component: GerarEnderecoComponent },
+    { path: 'gerar-senha', component: GerarSenhaComponent },
+    { path: 'gerar-telefone', component: GerarTelefoneComponent },
+    { path: 'gerar-titulo-eleitor', component: GerarTituloEleitorComponent },
 
     { path: 'validar-cpf', component: ValidarCpfComponent },
     { path: 'validar-cnpj', component: ValidarCnpjComponent },
