@@ -33,6 +33,7 @@ import { DashboardComponent } from './shared/dashboard/dashboard.component';
 import { ContatoComponent } from './shared/contato/contato.component';
 import { VejatambemComponent } from './shared/vejatambem/vejatambem.component';
 import { GerarRenavamComponent } from './components/gerar-renavam/gerar-renavam.component';
+import { BuyMeACoffeComponent } from './shared/buy-me-a-coffe/buy-me-a-coffe.component';
 
 @NgModule({
     declarations: [
@@ -58,6 +59,7 @@ import { GerarRenavamComponent } from './components/gerar-renavam/gerar-renavam.
         VejatambemComponent,
         ContatoComponent,
         DashboardComponent,
+        BuyMeACoffeComponent,
     ],
     imports: [
         BrowserModule,
