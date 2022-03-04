@@ -24,6 +24,7 @@ import { GerarTelefoneComponent } from './components/gerar-telefone/gerar-telefo
 import { GerarTituloEleitorComponent } from './components/gerar-titulo-eleitor/gerar-titulo-eleitor.component';
 import { GeradorCnpjComponent } from './Views/gerador-cnpj/gerador-cnpj.component';
 import { GeradorCnhComponent } from './Views/gerador-cnh/gerador-cnh.component';
+import { BuyMeACoffeComponent } from './shared/buy-me-a-coffe/buy-me-a-coffe.component';
 
 const routes: Routes = [
     { path: '', component: DashboardComponent },
@@ -48,6 +49,7 @@ const routes: Routes = [
     { path: 'politica-de-privacidade', component: PoliticaPrivacidadeComponent },
     { path: 'sobre', component: SobreComponent },
     { path: 'versao', component: VersaoComponent },
+    { path: 'buy-me-a-coffe', component: BuyMeACoffeComponent },
 ];
 
 @NgModule({
