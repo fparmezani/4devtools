@@ -6,6 +6,18 @@
     background: red;
 }
 
+.f-s-8 {
+    font-size: 8px !important;
+}
+
+.f-s-10 {
+    font-size: 10px !important;
+}
+
+.f-s-12 {
+    font-size: 12px !important;
+}
+
 .f-s-16 {
     font-size: 16px !important;
 }

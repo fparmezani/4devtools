@@ -1987,22 +1987,22 @@ header .form-inline .search-form.close {
 
 .twt-feed .wtt-mark {
     color: rgba(255, 255, 255, 0.15);
-    font-size: 160px;
+    font-size: 130px;
     position: absolute;
     top: 10px;
-    left: 40%;
+    left: 60%;
 }
 
 .twt-feed {
     -webkit-border-radius: 4px 4px 0 0;
     color: #ffffff;
-    padding: 40px 10px 10px;
+    padding: 15px 10px 10px 10px;
     position: relative;
-    min-height: 170px;
+    min-height: 155px;
 }
 
 .weather-category {
-    padding: 15px 0;
+    padding: 15px 0px 0px 0px;
     color: #74829c;
 }
 .weather-category ul li {
@@ -2019,7 +2019,7 @@ header .form-inline .search-form.close {
 .twt-category {
     display: inline-block;
     margin-bottom: 11px;
-    margin-top: 10px;
+    margin-top: 5px;
     width: 100%;
 }
 .twt-category ul li {
