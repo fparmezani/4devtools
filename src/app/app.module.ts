@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, LOCALE_ID } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -34,6 +34,15 @@ import { ContatoComponent } from './shared/contato/contato.component';
 import { VejatambemComponent } from './shared/vejatambem/vejatambem.component';
 import { GerarRenavamComponent } from './components/gerar-renavam/gerar-renavam.component';
 import { BuyMeACoffeComponent } from './shared/buy-me-a-coffe/buy-me-a-coffe.component';
+import { DollarComponent } from './components/dollar/dollar.component';
+import { DigitOnlyModule } from '@uiowa/digit-only';
+
+import localePt from '@angular/common/locales/pt';
+import { registerLocaleData } from '@angular/common';
+import { EuroComponent } from './components/euro/euro.component';
+import { BitcoinComponent } from './components/bitcoin/bitcoin.component';
+
+registerLocaleData(localePt);
 
 @NgModule({
     declarations: [
@@ -60,6 +69,9 @@ import { BuyMeACoffeComponent } from './shared/buy-me-a-coffe/buy-me-a-coffe.com
         ContatoComponent,
         DashboardComponent,
         BuyMeACoffeComponent,
+        DollarComponent,
+        EuroComponent,
+        BitcoinComponent,
     ],
     imports: [
         BrowserModule,
@@ -68,8 +80,9 @@ import { BuyMeACoffeComponent } from './shared/buy-me-a-coffe/buy-me-a-coffe.com
         ToastrModule.forRoot(),
         HttpClientModule,
         BrowserAnimationsModule,
+        DigitOnlyModule,
     ],
-    providers: [ DatePipe ],
+    providers: [ DatePipe, { provide: LOCALE_ID, useValue: 'pt-BR' } ],
     bootstrap: [ AppComponent ],
 })
 export class AppModule {}

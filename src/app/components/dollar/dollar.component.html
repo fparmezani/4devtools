@@ -1,0 +1,41 @@
+<section class="card">
+    <div class="twt-feed bgblue">
+        <div class="corner-ribon black-ribon">
+            <i class="fa fa-dollar"></i>
+        </div>
+        <div class="fa fa-dollar wtt-mark"></div>
+        <div class="media">
+            <div class="media-body">
+                <h2 class="text-white display-12">{{ dollar | currency : 'BRL' : 'symbol':'1.4' }}</h2>
+                <p class="text-light">Cotação US - COMPRA</p>
+                <p class="text-light f-s-10">Data Consulta : {{ date_created }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="weather-category twt-category">
+        <ul>
+            <li class="f-s-10">
+                <h5>{{ dollarVenda | currency : 'BRL' : 'symbol':'1.4' }}</h5>
+                Venda
+            </li>
+            <li class="f-s-10">
+                <h5>{{ dollarMaximo | currency : 'BRL' : 'symbol':'1.4' }}</h5>
+                Máximo
+            </li>
+            <li class="f-s-10">
+                <h5>{{ dollarMinimo | currency : 'BRL' : 'symbol':'1.4' }}</h5>
+                Mínimo
+            </li>
+        </ul>
+    </div>
+    <div class="twt-write col-sm-12 p15">
+        <small class="text-muted">Quantidade</small>
+        <input id="quantidade" class="form-control input-lg field-copy m-b-20" type="number" [(ngModel)]="quantidade"
+            value="{{ quantidade }}" (ngModelChange)="convert()">
+        <div class="textarea-copy-container">
+            <textarea rows=1 class="form-control t-text-area" id="dollarConvert"
+                value="{{dollarConvert | currency : 'BRL' : 'symbol':'1.4'}}" readonly></textarea>
+            <span title="Copiar" class="btn-textarea-copy" (click)="copiar()"><i class="fa fa-files-o"></i></span>
+        </div>
+    </div>
+</section>
