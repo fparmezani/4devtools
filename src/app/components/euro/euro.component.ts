@@ -37,8 +37,6 @@ export class EuroComponent implements OnInit {
     }
 
     convert(): void {
-        console.log('euro', this.euro);
-        console.log('quantidade', this.quantidade);
         this.euroConvert = this.euro * parseFloat(this.quantidade);
     }
     copiar() {

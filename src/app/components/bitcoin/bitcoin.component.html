@@ -31,7 +31,7 @@
     <div class="twt-write col-sm-12 p15">
         <small class="text-muted">Quantidade</small>
         <input id="quantidade" class="form-control input-lg field-copy m-b-20" type="number" [(ngModel)]="quantidade"
-            value="{{ quantidade }}" (ngModelChange)="convert()">
+            value="{{ quantidade }}" (ngModelChange)="convert()" (change)="convert()">
         <div class="textarea-copy-container">
             <textarea rows=1 class="form-control t-text-area" id="bitcoinConvert"
                 value="{{bitcoinConvert | currency : 'BRL' : 'symbol':'1.4'}}" readonly></textarea>

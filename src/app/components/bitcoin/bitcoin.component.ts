@@ -37,8 +37,6 @@ export class BitcoinComponent implements OnInit {
     }
 
     convert(): void {
-        console.log('bitcoin', this.bitcoin);
-        console.log('quantidade', this.quantidade);
         this.bitcoinConvert = this.bitcoin * parseFloat(this.quantidade);
     }
     copiar() {

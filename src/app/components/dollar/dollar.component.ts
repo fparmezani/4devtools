@@ -37,8 +37,6 @@ export class DollarComponent implements OnInit {
     }
 
     convert(): void {
-        console.log('dollar', this.dollar);
-        console.log('quantidade', this.quantidade);
         this.dollarConvert = this.dollar * parseFloat(this.quantidade);
     }
     copiar() {
