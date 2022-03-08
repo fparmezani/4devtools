@@ -41,6 +41,8 @@ import localePt from '@angular/common/locales/pt';
 import { registerLocaleData } from '@angular/common';
 import { EuroComponent } from './components/euro/euro.component';
 import { BitcoinComponent } from './components/bitcoin/bitcoin.component';
+import { QueroajudarComponent } from './shared/queroajudar/queroajudar.component';
+import { AvisoComponent } from './shared/aviso/aviso.component';
 
 registerLocaleData(localePt);
 
@@ -72,6 +74,8 @@ registerLocaleData(localePt);
         DollarComponent,
         EuroComponent,
         BitcoinComponent,
+        QueroajudarComponent,
+        AvisoComponent,
     ],
     imports: [
         BrowserModule,
