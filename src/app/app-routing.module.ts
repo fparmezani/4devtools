@@ -3,8 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { GerarCpfComponent } from './components/gerar-cpf/gerar-cpf.component';
 import { GerarCnpjComponent } from './components/gerar-cnpj/gerar-cnpj.component';
-import { ValidarCpfComponent } from './components/validar-cpf/validar-cpf.component';
-import { ValidarCnpjComponent } from './components/validar-cnpj/validar-cnpj.component';
 import { GerarPessoaComponent } from './components/gerar-pessoa/gerar-pessoa.component';
 import { GerarCartaodecreditoComponent } from './components/gerar-cartaodecredito/gerar-cartaodecredito.component';
 import { ContatoComponent } from './shared/contato/contato.component';
@@ -40,9 +38,6 @@ const routes: Routes = [
     { path: 'gerar-senha', component: GerarSenhaComponent },
     { path: 'gerar-telefone', component: GerarTelefoneComponent },
     { path: 'gerar-titulo-eleitor', component: GerarTituloEleitorComponent },
-
-    { path: 'validar-cpf', component: ValidarCpfComponent },
-    { path: 'validar-cnpj', component: ValidarCnpjComponent },
 
     { path: 'contato', component: ContatoComponent },
     { path: 'termo-de-uso', component: TermoUsoComponent },

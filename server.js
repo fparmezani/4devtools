@@ -22,20 +22,18 @@ app.listen(PORT, () => {
 
 const sendMail = (user, callback) => {
     const transporter = nodemailer.createTransport({
-        host: 'mail.4devtools.com',
-        port: 465,
-        secure: true,
+        host: 'gmail',
         auth: {
-            user: 'contato@4devtools.com',
-            pass: 'Fernando@39',
+            user: 'fparmezani@gmail.com',
+            pass: 'hiljvnblkbrezuij',
         },
     });
 
     const mailOptions = {
-        from: `"Fernando", "contato@4devtools.com"`,
-        to: `<${user.email}>`,
+        from: `"${user.nome}", "${user.email}"`,
+        to: `fparmezani@gmail.com`,
         subject: 'Contato 4DevTools',
-        html: '<h1>And here is the place for HTML</h1>',
+        html: `${user.mensagem}`,
     };
 
     transporter.sendMail(mailOptions, callback);
