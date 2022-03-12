@@ -4,7 +4,7 @@ import { GeradorService } from 'src/app/services/gerador.service';
 import * as copy from 'copy-to-clipboard';
 import { ToastrService } from 'ngx-toastr';
 import { HttpClient } from '@angular/common/http';
-import { Title } from '@angular/platform-browser';
+import { Meta, Title } from '@angular/platform-browser';
 
 @Component({
     selector: 'app-gerar-endereco',
@@ -18,9 +18,19 @@ export class GerarEnderecoComponent implements OnInit {
         private service: GeradorService,
         private toastr: ToastrService,
         private http: HttpClient,
-        private titleService: Title
+        private title: Title,
+        private meta: Meta
     ) {
-        this.titleService.setTitle('Gerador de Endereços');
+        this.meta.addTags([
+            { name: 'description', content: 'Gerar Endereço' },
+            { name: 'author', content: 'Fernando Parmezani' },
+            {
+                name: 'keywords',
+                content: 'gerar endereço, gerador endereço, gerar endereço pessoa física',
+            },
+        ]);
+
+        this.title.setTitle('Gerador de Endereços');
     }
 
     gerarPessoa() {

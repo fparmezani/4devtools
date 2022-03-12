@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Title } from '@angular/platform-browser';
+import { Meta, Title } from '@angular/platform-browser';
 import * as copy from 'copy-to-clipboard';
 import { ToastrService } from 'ngx-toastr';
 import { GeradorService } from 'src/app/services/gerador.service';
@@ -11,8 +11,22 @@ import { GeradorService } from 'src/app/services/gerador.service';
 export class GerarRenavamComponent implements OnInit {
     renavam: string = '';
 
-    constructor(private service: GeradorService, private toastr: ToastrService, private titleService: Title) {
-        this.titleService.setTitle('Gerador de Nome');
+    constructor(
+        private service: GeradorService,
+        private toastr: ToastrService,
+        private title: Title,
+        private meta: Meta
+    ) {
+        this.meta.addTags([
+            { name: 'description', content: 'Gerar Renavam' },
+            { name: 'author', content: 'Fernando Parmezani' },
+            {
+                name: 'keywords',
+                content: 'gerar renavam, gerador renavam, gerar documento renavam',
+            },
+        ]);
+
+        this.title.setTitle('Gerador de Renavam');
     }
 
     ngOnInit(): void {

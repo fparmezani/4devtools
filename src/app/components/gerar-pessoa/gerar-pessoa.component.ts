@@ -4,7 +4,7 @@ import * as copy from 'copy-to-clipboard';
 import { ToastrService } from 'ngx-toastr';
 import { HttpClient } from '@angular/common/http';
 import { CartaoCredito, Pessoa } from 'src/app/model/pessoa';
-import { Title } from '@angular/platform-browser';
+import { Meta, Title } from '@angular/platform-browser';
 
 @Component({
     selector: 'app-gerar-pessoa',
@@ -26,9 +26,19 @@ export class GerarPessoaComponent implements OnInit {
         private service: GeradorService,
         private toastr: ToastrService,
         private http: HttpClient,
-        private titleService: Title
+        private title: Title,
+        private meta: Meta
     ) {
-        this.titleService.setTitle('Gerador de Pessoas');
+        this.meta.addTags([
+            { name: 'description', content: 'Gerar Pessoa Física' },
+            { name: 'author', content: 'Fernando Parmezani' },
+            {
+                name: 'keywords',
+                content: 'gerar pessoa, gerador pessoa, gerar documento pessoa física',
+            },
+        ]);
+
+        this.title.setTitle('Gerador de Pessoas');
     }
 
     gerarPessoa() {

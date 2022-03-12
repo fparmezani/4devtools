@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Title } from '@angular/platform-browser';
+import { Meta, Title } from '@angular/platform-browser';
 import * as copy from 'copy-to-clipboard';
 import { ToastrService } from 'ngx-toastr';
 import { GeradorService } from 'src/app/services/gerador.service';
@@ -11,8 +11,23 @@ import { GeradorService } from 'src/app/services/gerador.service';
 export class GerarCnhComponent implements OnInit {
     cnh: string = '';
 
-    constructor(private service: GeradorService, private toastr: ToastrService, private titleService: Title) {
-        this.titleService.setTitle('Gerador de CNH');
+    constructor(
+        private service: GeradorService,
+        private toastr: ToastrService,
+        private meta: Meta,
+        private title: Title
+    ) {
+        this.meta.addTags([
+            { name: 'description', content: 'Gerar Carteira Nacional de Habilitação' },
+            { name: 'author', content: 'Fernando Parmezani' },
+            {
+                name: 'keywords',
+                content:
+                    'gerar cnh, gerar carteira nacional de habilitação, gerador carteira nacional de habilitação, gerar documento carteira nacional de habilitação',
+            },
+        ]);
+
+        this.title.setTitle('Gerador de CNH - Carteira Nacional de Habilitação');
     }
 
     ngOnInit(): void {
