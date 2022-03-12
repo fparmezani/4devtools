@@ -3,8 +3,10 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const PORT = process.env.PORT || 8080;
 const nodemailer = require('nodemailer');
+var forceSsl = require('force-ssl-heroku');
 
 const app = express();
+app.use(forceSsl);
 
 //configure the Express middleware to accept CORS requests and parse request body into JSON
 app.use(cors({ origin: '*' }));
