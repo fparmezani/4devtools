@@ -12,6 +12,8 @@ export class GeradorCnpjComponent implements OnInit {
             { name: 'author', content: 'Fernando Parmezani' },
             { name: 'keywords', content: 'gerar cnpj, gerador cnpj, gerar documento cnpj' },
         ]);
+
+        this.title.setTitle('Gerador de CNPJ');
     }
 
     ngOnInit(): void {}
