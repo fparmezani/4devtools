@@ -16,19 +16,7 @@ export class GerarCnhComponent implements OnInit {
         private toastr: ToastrService,
         private meta: Meta,
         private title: Title
-    ) {
-        this.meta.addTags([
-            { name: 'description', content: 'Gerar Carteira Nacional de Habilitação' },
-            { name: 'author', content: 'Fernando Parmezani' },
-            {
-                name: 'keywords',
-                content:
-                    'gerar cnh, gerar carteira nacional de habilitação, gerador carteira nacional de habilitação, gerar documento carteira nacional de habilitação',
-            },
-        ]);
-
-        this.title.setTitle('Gerador de CNH - Carteira Nacional de Habilitação');
-    }
+    ) {}
 
     ngOnInit(): void {
         this.gerarCnh();
