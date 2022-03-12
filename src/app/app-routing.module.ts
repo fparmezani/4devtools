@@ -23,6 +23,7 @@ import { GerarTituloEleitorComponent } from './components/gerar-titulo-eleitor/g
 import { GeradorCnpjComponent } from './Views/gerador-cnpj/gerador-cnpj.component';
 import { GeradorCnhComponent } from './Views/gerador-cnh/gerador-cnh.component';
 import { BuyMeACoffeComponent } from './shared/buy-me-a-coffe/buy-me-a-coffe.component';
+import { PagenotfoundComponent } from './shared/pagenotfound/pagenotfound.component';
 
 const routes: Routes = [
     { path: '', component: DashboardComponent },
@@ -45,6 +46,13 @@ const routes: Routes = [
     { path: 'sobre', component: SobreComponent },
     { path: 'versao', component: VersaoComponent },
     { path: 'buy-me-a-coffe', component: BuyMeACoffeComponent },
+
+    //Wild Card Route for 404 request
+    {
+        path: '**',
+        pathMatch: 'full',
+        component: PagenotfoundComponent,
+    },
 ];
 
 @NgModule({

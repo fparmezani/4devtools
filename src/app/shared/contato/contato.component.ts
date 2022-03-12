@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
     selector: 'app-contato',
@@ -10,7 +11,7 @@ export class ContatoComponent implements OnInit {
     email: string = '';
     mensagem: string = '';
 
-    constructor(private _http: HttpClient) {}
+    constructor(private _http: HttpClient, private toastr: ToastrService) {}
 
     ngOnInit(): void {}
 
@@ -22,5 +23,9 @@ export class ContatoComponent implements OnInit {
         };
 
         return this._http.post('sendmail', obj);
+        this.toastr.success('Email enviado com sucesso');
+        this.nome = '';
+        this.email = '';
+        this.mensagem = '';
     }
 }

@@ -22,7 +22,7 @@ app.listen(PORT, () => {
 
 const sendMail = (user, callback) => {
     const transporter = nodemailer.createTransport({
-        host: 'gmail',
+        service: 'gmail',
         auth: {
             user: 'fparmezani@gmail.com',
             pass: 'hiljvnblkbrezuij',
@@ -35,7 +35,6 @@ const sendMail = (user, callback) => {
         subject: 'Contato 4DevTools',
         html: `${user.mensagem}`,
     };
-
     transporter.sendMail(mailOptions, callback);
 };
 
@@ -46,10 +45,10 @@ app.post('/sendmail', (req, res) => {
         if (err) {
             console.log(err);
             res.status(400);
-            res.send({ error: 'Failed to send email' });
+            res.send({ error: 'Failed to send email' + err });
         } else {
             console.log('Email has been sent');
-            res.send(info);
+            res.send('Email has been sent');
         }
     });
 });
