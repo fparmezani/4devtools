@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { Title } from '@angular/platform-browser';
+import { Meta, Title } from '@angular/platform-browser';
 import * as copy from 'copy-to-clipboard';
 import { ToastrService } from 'ngx-toastr';
 import { Pessoa } from 'src/app/model/pessoa';
@@ -18,9 +18,19 @@ export class GerarNomeComponent implements OnInit {
         private service: GeradorService,
         private toastr: ToastrService,
         private http: HttpClient,
-        private titleService: Title
+        private title: Title,
+        private meta: Meta
     ) {
-        this.titleService.setTitle('Gerador de Nome');
+        this.meta.addTags([
+            { name: 'description', content: 'Gerar de Nome de Pessoa Física' },
+            { name: 'author', content: 'Fernando Parmezani' },
+            {
+                name: 'keywords',
+                content: 'gerar nome, gerar de nome, gerador nome, gerar de nome, gerar nome pessoa física',
+            },
+        ]);
+
+        this.title.setTitle('Gerador de Nome');
     }
 
     ngOnInit(): void {

@@ -85,6 +85,9 @@
     padding-top: 30px !important;
 }
 
+.padding-0 {
+    padding: 0 !important;
+}
 .m-h-300 {
     min-height: 300px;
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
+import { Meta, Title } from '@angular/platform-browser';
 
 @Component({
     selector: 'app-contato',
@@ -11,7 +12,15 @@ export class ContatoComponent implements OnInit {
     email: string = '';
     mensagem: string = '';
 
-    constructor(private _http: HttpClient, private toastr: ToastrService) {}
+    constructor(private meta: Meta, private title: Title, private _http: HttpClient, private toastr: ToastrService) {
+        this.meta.addTags([
+            { name: 'description', content: 'Contato' },
+            { name: 'author', content: 'Fernando Parmezani' },
+            { name: 'keywords', content: 'gerar cpf, gerador cpf, gerar documento cpf' },
+        ]);
+
+        this.title.setTitle('Contato da Empresa');
+    }
 
     ngOnInit(): void {}
 

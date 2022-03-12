@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Title } from '@angular/platform-browser';
+import { Meta, Title } from '@angular/platform-browser';
 import * as copy from 'copy-to-clipboard';
 import { ToastrService } from 'ngx-toastr';
 import { Pessoa } from 'src/app/model/pessoa';
@@ -18,9 +18,19 @@ export class GerarTelefoneComponent implements OnInit {
         private service: GeradorService,
         private toastr: ToastrService,
         private http: HttpClient,
-        private titleService: Title
+        private title: Title,
+        private meta: Meta
     ) {
-        this.titleService.setTitle('Gerador de Telefone');
+        this.meta.addTags([
+            { name: 'description', content: 'Gerar Telefone' },
+            { name: 'author', content: 'Fernando Parmezani' },
+            {
+                name: 'keywords',
+                content: 'gerar telefone, gerador telefone, gerar telefone',
+            },
+        ]);
+
+        this.title.setTitle('Gerador de Telefone');
     }
 
     ngOnInit(): void {
