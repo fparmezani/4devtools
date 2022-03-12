@@ -12,32 +12,25 @@
                         <p role="status" aria-live="polite" aria-atomic="true"></p>
                         <ul></ul>
                     </div>
-
-                    <div style="display: none;">
-                        <input type="hidden" name="_wpcf7" value="229">
-                        <input type="hidden" name="_wpcf7_version" value="5.5.5">
-                        <input type="hidden" name="_wpcf7_locale" value="pt_BR">
-                        <input type="hidden" name="_wpcf7_unit_tag" value="wpcf7-f229-o1">
-                        <input type="hidden" name="_wpcf7_container_post" value="0">
-                        <input type="hidden" name="_wpcf7_posted_data_hash" value="">
-                    </div>
                     <p><span class="text-muted">Nome</span><br>
-                        <span class="wpcf7-form-control-wrap nome"><input type="text" name="nome" value="" size="40"
+                        <span class="wpcf7-form-control-wrap nome">
+                            <input type="text" name="nome" value="" size="40"
                                 class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required form-control m-b-20"
-                                id="contact-name" aria-required="true" aria-invalid="false"
-                                placeholder="Digite seu nome..."></span>
+                                id="nome" aria-required="true" aria-invalid="false" placeholder="Digite seu nome..."
+                                [(ngModel)]="nome"></span>
                     </p>
                     <p><span class="text-muted">E-mail</span><br>
                         <span class="wpcf7-form-control-wrap email"><input type="email" name="email" value="" size="40"
                                 class="wpcf7-form-control wpcf7-text wpcf7-email wpcf7-validates-as-required wpcf7-validates-as-email form-control m-b-20"
-                                id="contact-email" aria-required="true" aria-invalid="false"
-                                placeholder="Digite seu e-mail..."></span>
+                                [id]="email" aria-required="true" aria-invalid="false"
+                                placeholder="Digite seu e-mail..." [(ngModel)]="email"></span>
                     </p>
                     <p><span class="text-muted">Mensagem</span><br>
-                        <span class="wpcf7-form-control-wrap mensagem"><textarea name="mensagem" cols="40" rows="10"
+                        <span class="wpcf7-form-control-wrap mensagem">
+                            <textarea name="mensagem" cols="40" rows="10"
                                 class="wpcf7-form-control wpcf7-textarea wpcf7-validates-as-required form-control"
-                                id="contact-message" aria-required="true" aria-invalid="false"
-                                placeholder="Digite sua mensagem..." [(ngModel)]="corpo"></textarea></span>
+                                [id]="mensagem" aria-required="true" aria-invalid="false"
+                                placeholder="Digite sua mensagem..." [(ngModel)]="mensagem"></textarea></span>
                     </p>
                     <p><button value="Enviar" class="btn btn-md btn-info btn-rounded"
                             (click)="sendMessage()">Enviar</button>

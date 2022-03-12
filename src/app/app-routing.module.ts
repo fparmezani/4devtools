@@ -3,8 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { GerarCpfComponent } from './components/gerar-cpf/gerar-cpf.component';
 import { GerarCnpjComponent } from './components/gerar-cnpj/gerar-cnpj.component';
-import { ValidarCpfComponent } from './components/validar-cpf/validar-cpf.component';
-import { ValidarCnpjComponent } from './components/validar-cnpj/validar-cnpj.component';
 import { GerarPessoaComponent } from './components/gerar-pessoa/gerar-pessoa.component';
 import { GerarCartaodecreditoComponent } from './components/gerar-cartaodecredito/gerar-cartaodecredito.component';
 import { ContatoComponent } from './shared/contato/contato.component';
@@ -25,6 +23,7 @@ import { GerarTituloEleitorComponent } from './components/gerar-titulo-eleitor/g
 import { GeradorCnpjComponent } from './Views/gerador-cnpj/gerador-cnpj.component';
 import { GeradorCnhComponent } from './Views/gerador-cnh/gerador-cnh.component';
 import { BuyMeACoffeComponent } from './shared/buy-me-a-coffe/buy-me-a-coffe.component';
+import { PagenotfoundComponent } from './shared/pagenotfound/pagenotfound.component';
 
 const routes: Routes = [
     { path: '', component: DashboardComponent },
@@ -41,15 +40,19 @@ const routes: Routes = [
     { path: 'gerar-telefone', component: GerarTelefoneComponent },
     { path: 'gerar-titulo-eleitor', component: GerarTituloEleitorComponent },
 
-    { path: 'validar-cpf', component: ValidarCpfComponent },
-    { path: 'validar-cnpj', component: ValidarCnpjComponent },
-
     { path: 'contato', component: ContatoComponent },
     { path: 'termo-de-uso', component: TermoUsoComponent },
     { path: 'politica-de-privacidade', component: PoliticaPrivacidadeComponent },
     { path: 'sobre', component: SobreComponent },
     { path: 'versao', component: VersaoComponent },
     { path: 'buy-me-a-coffe', component: BuyMeACoffeComponent },
+
+    //Wild Card Route for 404 request
+    {
+        path: '**',
+        pathMatch: 'full',
+        component: PagenotfoundComponent,
+    },
 ];
 
 @NgModule({

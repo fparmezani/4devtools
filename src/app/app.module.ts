@@ -43,6 +43,7 @@ import { EuroComponent } from './components/euro/euro.component';
 import { BitcoinComponent } from './components/bitcoin/bitcoin.component';
 import { QueroajudarComponent } from './shared/queroajudar/queroajudar.component';
 import { AvisoComponent } from './shared/aviso/aviso.component';
+import { PagenotfoundComponent } from './shared/pagenotfound/pagenotfound.component';
 
 registerLocaleData(localePt);
 
@@ -76,6 +77,7 @@ registerLocaleData(localePt);
         BitcoinComponent,
         QueroajudarComponent,
         AvisoComponent,
+        PagenotfoundComponent,
     ],
     imports: [
         BrowserModule,
