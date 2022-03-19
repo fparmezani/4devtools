@@ -30,7 +30,7 @@ export class GerarTelefoneComponent implements OnInit {
             },
         ]);
 
-        this.title.setTitle('Gerador de Telefone');
+        this.title.setTitle('Gerador de Telefone - 4DevTools');
     }
 
     ngOnInit(): void {

@@ -38,7 +38,7 @@ export class GerarPessoaComponent implements OnInit {
             },
         ]);
 
-        this.title.setTitle('Gerador de Pessoas');
+        this.title.setTitle('Gerador de Pessoas - 4DevTools');
     }
 
     gerarPessoa() {
