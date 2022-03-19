@@ -27,7 +27,7 @@ export class GerarTituloEleitorComponent implements OnInit {
             },
         ]);
 
-        this.title.setTitle('Gerador de Título de Eleitor');
+        this.title.setTitle('Gerador de Título de Eleitor - 4DevTools');
     }
     gerarTituloEleitor() {
         this.tituloEleitor = this.service.gerarTituloEleitor(this.estado);

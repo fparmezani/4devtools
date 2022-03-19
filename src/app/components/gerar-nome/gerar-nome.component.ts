@@ -30,7 +30,7 @@ export class GerarNomeComponent implements OnInit {
             },
         ]);
 
-        this.title.setTitle('Gerador de Nome');
+        this.title.setTitle('Gerador de Nome - 4DevTools');
     }
 
     ngOnInit(): void {

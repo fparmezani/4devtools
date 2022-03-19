@@ -26,7 +26,7 @@ export class GerarRenavamComponent implements OnInit {
             },
         ]);
 
-        this.title.setTitle('Gerador de Renavam');
+        this.title.setTitle('Gerador de Renavam - 4DevTools');
     }
 
     ngOnInit(): void {

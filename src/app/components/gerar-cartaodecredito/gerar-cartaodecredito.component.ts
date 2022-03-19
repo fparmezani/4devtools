@@ -30,7 +30,7 @@ export class GerarCartaodecreditoComponent implements OnInit {
             },
         ]);
 
-        this.title.setTitle('Gerado de Cartão de Crédito');
+        this.title.setTitle('Gerado de Cartão de Crédito - 4DevTools');
 
         this.banners = [
             { name: 'visa', value: [ 4 ] },

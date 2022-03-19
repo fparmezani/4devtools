@@ -30,7 +30,7 @@ export class GerarEnderecoComponent implements OnInit {
             },
         ]);
 
-        this.title.setTitle('Gerador de Endereços');
+        this.title.setTitle('Gerador de Endereços - 4DevTools');
     }
 
     gerarPessoa() {

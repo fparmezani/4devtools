@@ -30,7 +30,7 @@ export class GerarSenhaComponent implements OnInit {
             },
         ]);
 
-        this.title.setTitle('Gerador de Senha');
+        this.title.setTitle('Gerador de Senha - 4DevTools');
     }
 
     ngOnInit(): void {

@@ -27,7 +27,7 @@ export class GerarPisPasepComponent implements OnInit {
             },
         ]);
 
-        this.title.setTitle('Gerador de PIS/PASEP');
+        this.title.setTitle('Gerador de PIS/PASEP - 4DevTools');
     }
 
     ngOnInit(): void {
