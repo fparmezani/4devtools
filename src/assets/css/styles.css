@@ -1498,9 +1498,19 @@ header .form-inline .search-form.close {
     -webkit-box-shadow: 0 0 20px rgba(0, 0, 0, 0.08);
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.08);
 }
-.card .box-title {
+
+.card .box-subtitle {
     font-weight: 600;
     font-size: 1.5em;
+    padding: 5px 0;
+    font-weight: 600;
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+}
+
+.card .box-title {
+    font-weight: 600;
+    font-size: 1.5rem;
     padding: 5px 0;
     color: #8c52ff;
     font-weight: bold;

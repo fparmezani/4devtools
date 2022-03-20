@@ -25,6 +25,16 @@ import { GeradorCnhComponent } from './Views/gerador-cnh/gerador-cnh.component';
 import { BuyMeACoffeComponent } from './shared/buy-me-a-coffe/buy-me-a-coffe.component';
 import { PagenotfoundComponent } from './shared/pagenotfound/pagenotfound.component';
 import { CpfComponent } from './blog/cpf/cpf.component';
+import { CnpjComponent } from './blog/cnpj/cnpj.component';
+import { CartaodecreditoComponent } from './blog/cartaodecredito/cartaodecredito.component';
+import { RenavamComponent } from './blog/renavam/renavam.component';
+import { TituloeleitorComponent } from './blog/tituloeleitor/tituloeleitor.component';
+import { CnsComponent } from './blog/cns/cns.component';
+import { PispasepComponent } from './blog/pispasep/pispasep.component';
+import { BitcoinComponent } from './components/bitcoin/bitcoin.component';
+import { EthereumComponent } from './blog/ethereum/ethereum.component';
+import { AihComponent } from './blog/aih/aih.component';
+import { OqueeBitcoinComponent } from './blog/oqueebitcoin/oqueebitcoin.component';
 
 const routes: Routes = [
     { path: '', component: DashboardComponent },
@@ -49,6 +59,16 @@ const routes: Routes = [
     { path: 'buy-me-a-coffe', component: BuyMeACoffeComponent },
 
     { path: 'blog/cpf', component: CpfComponent },
+    { path: 'blog/cnpj', component: CnpjComponent },
+    { path: 'blog/cartaocredito', component: CartaodecreditoComponent },
+    { path: 'blog/renavam', component: RenavamComponent },
+    { path: 'blog/tituloeleitor', component: TituloeleitorComponent },
+    { path: 'blog/cns', component: CnsComponent },
+    { path: 'blog/pispasep', component: PispasepComponent },
+    { path: 'blog/oqueebitcoin', component: OqueeBitcoinComponent },
+    { path: 'blog/ethereum', component: EthereumComponent },
+    { path: 'blog/aih', component: AihComponent },
+
     //Wild Card Route for 404 request
     {
         path: '**',
