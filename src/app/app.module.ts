@@ -44,6 +44,7 @@ import { BitcoinComponent } from './components/bitcoin/bitcoin.component';
 import { QueroajudarComponent } from './shared/queroajudar/queroajudar.component';
 import { AvisoComponent } from './shared/aviso/aviso.component';
 import { PagenotfoundComponent } from './shared/pagenotfound/pagenotfound.component';
+import { CpfComponent } from './blog/cpf/cpf.component';
 
 registerLocaleData(localePt);
 
@@ -78,6 +79,7 @@ registerLocaleData(localePt);
         QueroajudarComponent,
         AvisoComponent,
         PagenotfoundComponent,
+        CpfComponent,
     ],
     imports: [
         BrowserModule,
