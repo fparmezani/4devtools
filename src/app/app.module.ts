@@ -44,7 +44,19 @@ import { BitcoinComponent } from './components/bitcoin/bitcoin.component';
 import { QueroajudarComponent } from './shared/queroajudar/queroajudar.component';
 import { AvisoComponent } from './shared/aviso/aviso.component';
 import { PagenotfoundComponent } from './shared/pagenotfound/pagenotfound.component';
+
+/*Blog */
 import { CpfComponent } from './blog/cpf/cpf.component';
+import { CnpjComponent } from './blog/cnpj/cnpj.component';
+import { CartaodecreditoComponent } from './blog/cartaodecredito/cartaodecredito.component';
+import { RenavamComponent } from './blog/renavam/renavam.component';
+import { TituloeleitorComponent } from './blog/tituloeleitor/tituloeleitor.component';
+import { CnsComponent } from './blog/cns/cns.component';
+import { PispasepComponent } from './blog/pispasep/pispasep.component';
+import { EthereumComponent } from './blog/ethereum/ethereum.component';
+import { AihComponent } from './blog/aih/aih.component';
+import { LeiatambemComponent } from './shared/leiatambem/leiatambem.component';
+import { OqueeBitcoinComponent } from './blog/oqueebitcoin/oqueebitcoin.component';
 
 registerLocaleData(localePt);
 
@@ -80,6 +92,16 @@ registerLocaleData(localePt);
         AvisoComponent,
         PagenotfoundComponent,
         CpfComponent,
+        CnpjComponent,
+        CartaodecreditoComponent,
+        RenavamComponent,
+        TituloeleitorComponent,
+        CnsComponent,
+        PispasepComponent,
+        EthereumComponent,
+        AihComponent,
+        LeiatambemComponent,
+        OqueeBitcoinComponent,
     ],
     imports: [
         BrowserModule,
