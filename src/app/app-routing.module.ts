@@ -24,6 +24,7 @@ import { GeradorCnpjComponent } from './Views/gerador-cnpj/gerador-cnpj.componen
 import { GeradorCnhComponent } from './Views/gerador-cnh/gerador-cnh.component';
 import { BuyMeACoffeComponent } from './shared/buy-me-a-coffe/buy-me-a-coffe.component';
 import { PagenotfoundComponent } from './shared/pagenotfound/pagenotfound.component';
+import { CpfComponent } from './blog/cpf/cpf.component';
 
 const routes: Routes = [
     { path: '', component: DashboardComponent },
@@ -47,6 +48,7 @@ const routes: Routes = [
     { path: 'versao', component: VersaoComponent },
     { path: 'buy-me-a-coffe', component: BuyMeACoffeComponent },
 
+    { path: 'blog/cpf', component: CpfComponent },
     //Wild Card Route for 404 request
     {
         path: '**',
