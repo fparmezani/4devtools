@@ -35,6 +35,8 @@ import { BitcoinComponent } from './components/bitcoin/bitcoin.component';
 import { EthereumComponent } from './blog/ethereum/ethereum.component';
 import { AihComponent } from './blog/aih/aih.component';
 import { OqueeBitcoinComponent } from './blog/oqueebitcoin/oqueebitcoin.component';
+import { WhatsappComponent } from './components/whatsapp/whatsapp.component';
+import { TelegramComponent } from './components/telegram/telegram.component';
 
 const routes: Routes = [
     { path: '', component: DashboardComponent },
@@ -58,6 +60,8 @@ const routes: Routes = [
     { path: 'versao', component: VersaoComponent },
     { path: 'buy-me-a-coffe', component: BuyMeACoffeComponent },
 
+    /*BLOG */
+
     { path: 'blog/cpf', component: CpfComponent },
     { path: 'blog/cnpj', component: CnpjComponent },
     { path: 'blog/cartaocredito', component: CartaodecreditoComponent },
@@ -68,6 +72,10 @@ const routes: Routes = [
     { path: 'blog/oqueebitcoin', component: OqueeBitcoinComponent },
     { path: 'blog/ethereum', component: EthereumComponent },
     { path: 'blog/aih', component: AihComponent },
+
+    /*LINK */
+    { path: 'whatsapp', component: WhatsappComponent },
+    { path: 'telegram', component: TelegramComponent },
 
     //Wild Card Route for 404 request
     {
