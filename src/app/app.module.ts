@@ -10,6 +10,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 import { DatePipe } from '@angular/common';
 
+import { TextMaskModule } from 'angular2-text-mask';
+
 /* Components */
 import { GerarCpfComponent } from './components/gerar-cpf/gerar-cpf.component';
 import { GerarCnpjComponent } from './components/gerar-cnpj/gerar-cnpj.component';
@@ -57,6 +59,8 @@ import { EthereumComponent } from './blog/ethereum/ethereum.component';
 import { AihComponent } from './blog/aih/aih.component';
 import { LeiatambemComponent } from './shared/leiatambem/leiatambem.component';
 import { OqueeBitcoinComponent } from './blog/oqueebitcoin/oqueebitcoin.component';
+import { WhatsappComponent } from './components/whatsapp/whatsapp.component';
+import { TelegramComponent } from './components/telegram/telegram.component';
 
 registerLocaleData(localePt);
 
@@ -102,6 +106,8 @@ registerLocaleData(localePt);
         AihComponent,
         LeiatambemComponent,
         OqueeBitcoinComponent,
+        WhatsappComponent,
+        TelegramComponent,
     ],
     imports: [
         BrowserModule,
@@ -111,6 +117,7 @@ registerLocaleData(localePt);
         HttpClientModule,
         BrowserAnimationsModule,
         DigitOnlyModule,
+        TextMaskModule,
     ],
     providers: [ DatePipe, { provide: LOCALE_ID, useValue: 'pt-BR' } ],
     bootstrap: [ AppComponent ],
