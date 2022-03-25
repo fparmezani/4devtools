@@ -8,9 +8,8 @@ import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 
 import { ToastrModule } from 'ngx-toastr';
-import { DatePipe } from '@angular/common';
-
-import { TextMaskModule } from 'angular2-text-mask';
+import { CommonModule, DatePipe } from '@angular/common';
+import { IMaskModule } from 'angular-imask';
 
 /* Components */
 import { GerarCpfComponent } from './components/gerar-cpf/gerar-cpf.component';
@@ -117,7 +116,8 @@ registerLocaleData(localePt);
         HttpClientModule,
         BrowserAnimationsModule,
         DigitOnlyModule,
-        TextMaskModule,
+        CommonModule,
+        IMaskModule,
     ],
     providers: [ DatePipe, { provide: LOCALE_ID, useValue: 'pt-BR' } ],
     bootstrap: [ AppComponent ],
