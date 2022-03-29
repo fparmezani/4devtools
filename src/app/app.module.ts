@@ -60,6 +60,7 @@ import { LeiatambemComponent } from './shared/leiatambem/leiatambem.component';
 import { OqueeBitcoinComponent } from './blog/oqueebitcoin/oqueebitcoin.component';
 import { WhatsappComponent } from './components/whatsapp/whatsapp.component';
 import { TelegramComponent } from './components/telegram/telegram.component';
+import { GerarRgComponent } from './components/gerar-rg/gerar-rg.component';
 
 registerLocaleData(localePt);
 
@@ -107,6 +108,7 @@ registerLocaleData(localePt);
         OqueeBitcoinComponent,
         WhatsappComponent,
         TelegramComponent,
+        GerarRgComponent,
     ],
     imports: [
         BrowserModule,

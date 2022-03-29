@@ -578,6 +578,32 @@ export class GeradorService {
         return dv;
     }
 
+    gerarRg() {
+        const n1 = Math.floor(Math.random() * 4 + 1);
+        const n2 = Math.round(Math.random() * 9);
+        const n3 = Math.round(Math.random() * 9);
+        const n4 = Math.round(Math.random() * 9);
+        const n5 = Math.round(Math.random() * 9);
+        const n6 = Math.round(Math.random() * 9);
+        const n7 = Math.round(Math.random() * 9);
+        const n8 = Math.round(Math.random() * 9);
+
+        const sum = n1 * 2 + n2 * 3 + n3 * 4 + n4 * 5 + n5 * 6 + n6 * 7 + n7 * 8 + n8 * 9;
+
+        let digit = 0;
+
+        digit = 11 - sum % 11;
+
+        if (digit === 11) digit = 0;
+
+        const rg =
+            digit === 10
+                ? `${n1}${n2}.${n3}${n4}${n5}.${n6}${n7}${n8}-X`
+                : `${n1}${n2}.${n3}${n4}${n5}.${n6}${n7}${n8}-${digit}`;
+
+        return rg;
+    }
+
     getCookie() {}
 
     setCookie() {}
