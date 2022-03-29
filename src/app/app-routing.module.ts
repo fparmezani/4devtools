@@ -37,10 +37,12 @@ import { AihComponent } from './blog/aih/aih.component';
 import { OqueeBitcoinComponent } from './blog/oqueebitcoin/oqueebitcoin.component';
 import { WhatsappComponent } from './components/whatsapp/whatsapp.component';
 import { TelegramComponent } from './components/telegram/telegram.component';
+import { GerarRgComponent } from './components/gerar-rg/gerar-rg.component';
 
 const routes: Routes = [
     { path: '', component: DashboardComponent },
     { path: 'gerar-cpf', component: GeradorCpfComponent },
+    { path: 'gerar-rg', component: GerarRgComponent },
     { path: 'gerar-cnpj', component: GeradorCnpjComponent },
     { path: 'gerar-pessoa', component: GerarPessoaComponent },
     { path: 'gerar-cartaodecredito', component: GerarCartaodecreditoComponent },
