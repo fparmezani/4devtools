@@ -1,10 +1,10 @@
 export class Cotacao {
-    USD = new USD();
-    EUR = new EUR();
-    BTC = new BTC();
+    USDBRL = new USDBRL();
+    EURBRL = new EURBRL();
+    BTCBRL = new BTCBRL();
 }
 
-export class USD {
+export class USDBRL {
     code: string = '';
     codein: string = '';
     name: string = '';
@@ -18,7 +18,7 @@ export class USD {
     create_date: string = '';
 }
 
-export class EUR {
+export class EURBRL {
     code: string = '';
     codein: string = '';
     name: string = '';
@@ -32,7 +32,7 @@ export class EUR {
     create_date: string = '';
 }
 
-export class BTC {
+export class BTCBRL {
     code: string = '';
     codein: string = '';
     name: string = '';

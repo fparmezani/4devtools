@@ -26,12 +26,12 @@ export class DollarComponent implements OnInit {
 
     ngOnInit(): void {
         this.service.getCotacao('USD-BRL').subscribe((response) => {
-            this.dollar = +Number(response.USD.bid).toFixed(4);
-            this.dollarVenda = +Number(response.USD.ask).toFixed(4);
-            this.dollarMaximo = +Number(response.USD.high).toFixed(4);
-            this.dollarMinimo = +Number(response.USD.low).toFixed(4);
-            this.variacao = +Number(response.USD.varBid).toFixed(4);
-            this.date_created = new Date(response.USD.create_date).toLocaleDateString();
+            this.dollar = +Number(response.USDBRL.bid).toFixed(4);
+            this.dollarVenda = +Number(response.USDBRL.ask).toFixed(4);
+            this.dollarMaximo = +Number(response.USDBRL.high).toFixed(4);
+            this.dollarMinimo = +Number(response.USDBRL.low).toFixed(4);
+            this.variacao = +Number(response.USDBRL.varBid).toFixed(4);
+            this.date_created = new Date(response.USDBRL.create_date).toLocaleDateString();
             this.convert();
         });
     }
