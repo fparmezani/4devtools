@@ -28,12 +28,12 @@ export class BitcoinComponent implements OnInit {
         this.service.getCotacao('BTC-BRL').subscribe((response) => {
             console.log(response);
 
-            this.bitcoin = +Number(response.BTC.bid).toFixed(2) * 1000;
-            this.bitcoinVenda = +Number(response.BTC.ask).toFixed(2) * 1000;
-            this.bitcoinMaximo = +Number(response.BTC.high).toFixed(2) * 1000;
-            this.bitcoinMinimo = +Number(response.BTC.low).toFixed(2) * 1000;
-            this.variacao = +Number(response.BTC.varBid).toFixed(2) * 1000;
-            this.date_created = new Date(response.BTC.create_date).toLocaleDateString();
+            this.bitcoin = +Number(response.BTCBRL.bid).toFixed(2) * 1000;
+            this.bitcoinVenda = +Number(response.BTCBRL.ask).toFixed(2) * 1000;
+            this.bitcoinMaximo = +Number(response.BTCBRL.high).toFixed(2) * 1000;
+            this.bitcoinMinimo = +Number(response.BTCBRL.low).toFixed(2) * 1000;
+            this.variacao = +Number(response.BTCBRL.varBid).toFixed(2) * 1000;
+            this.date_created = new Date(response.BTCBRL.create_date).toLocaleDateString();
             this.convert();
         });
     }
@@ -41,6 +41,7 @@ export class BitcoinComponent implements OnInit {
     convert(): void {
         this.bitcoinConvert = this.bitcoin * parseFloat(this.quantidade);
     }
+
     copiar() {
         copy(this.bitcoinConvert.toFixed(4));
         this.toastr.success('Copiado!');

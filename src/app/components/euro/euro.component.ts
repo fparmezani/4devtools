@@ -26,12 +26,12 @@ export class EuroComponent implements OnInit {
 
     ngOnInit(): void {
         this.service.getCotacao('EUR').subscribe((response) => {
-            this.euro = +Number(response.EUR.bid).toFixed(4);
-            this.euroVenda = +Number(response.EUR.ask).toFixed(4);
-            this.euroMaximo = +Number(response.EUR.high).toFixed(4);
-            this.euroMinimo = +Number(response.EUR.low).toFixed(4);
-            this.variacao = +Number(response.EUR.varBid).toFixed(4);
-            this.date_created = new Date(response.EUR.create_date).toLocaleDateString();
+            this.euro = +Number(response.EURBRL.bid).toFixed(4);
+            this.euroVenda = +Number(response.EURBRL.ask).toFixed(4);
+            this.euroMaximo = +Number(response.EURBRL.high).toFixed(4);
+            this.euroMinimo = +Number(response.EURBRL.low).toFixed(4);
+            this.variacao = +Number(response.EURBRL.varBid).toFixed(4);
+            this.date_created = new Date(response.EURBRL.create_date).toLocaleDateString();
             this.convert();
         });
     }
