@@ -50,7 +50,11 @@ export class WhatsappComponent implements OnInit {
 
     gerarLink() {
         if (this.mensagem == '') this.mensagem = 'Olá';
-        this.URL = `https://api.whatsapp.com/send?phone=${this.numero}&text=${this.mensagem}`;
+        this.URL = `https://api.whatsapp.com/send?phone=55${this.numero
+            .replace('(', '')
+            .replace(')', '')
+            .replace(' ', '')
+            .replace('-', '')}&text=${this.mensagem}`;
     }
 
     gerarCopiar() {
