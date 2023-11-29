@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Title } from '@angular/platform-browser';
+import { Meta, Title } from '@angular/platform-browser';
 import * as copy from 'copy-to-clipboard';
 import { ToastrService } from 'ngx-toastr';
 import { GeradorService } from 'src/app/services/gerador.service';
@@ -11,9 +11,12 @@ import { GeradorService } from 'src/app/services/gerador.service';
 export class GerarCnhComponent implements OnInit {
     cnh: string = '';
 
-    constructor(private service: GeradorService, private toastr: ToastrService, private titleService: Title) {
-        this.titleService.setTitle('Gerador de CNH');
-    }
+    constructor(
+        private service: GeradorService,
+        private toastr: ToastrService,
+        private meta: Meta,
+        private title: Title
+    ) {}
 
     ngOnInit(): void {
         this.gerarCnh();

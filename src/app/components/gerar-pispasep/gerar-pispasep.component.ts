@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Title } from '@angular/platform-browser';
+import { Meta, Title } from '@angular/platform-browser';
 import * as copy from 'copy-to-clipboard';
 import { ToastrService } from 'ngx-toastr';
 import { GeradorService } from 'src/app/services/gerador.service';
@@ -12,8 +12,22 @@ export class GerarPisPasepComponent implements OnInit {
     pispasep: string = '';
     formatarPISPASEP: boolean = true;
 
-    constructor(private service: GeradorService, private toastr: ToastrService, private titleService: Title) {
-        this.titleService.setTitle('Gerador de CNH');
+    constructor(
+        private service: GeradorService,
+        private toastr: ToastrService,
+        private title: Title,
+        private meta: Meta
+    ) {
+        this.meta.addTags([
+            { name: 'description', content: 'Gerar PIS/PASEP' },
+            { name: 'author', content: 'Fernando Parmezani' },
+            {
+                name: 'keywords',
+                content: 'gerar pis pasep, gerador pis pasep, gerar documento pis pasep',
+            },
+        ]);
+
+        this.title.setTitle('Gerador de PIS/PASEP - 4DevTools');
     }
 
     ngOnInit(): void {

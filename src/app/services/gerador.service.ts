@@ -222,22 +222,22 @@ export class GeradorService {
         return cnpj;
     }
 
-    gerarAniversario() {
-        let month = '0' + (Math.floor(Math.random() * 12) + 1).toString();
-        month = month.substr(month.length - 2);
+    // gerarAniversario() {
+    //     let month = '0' + (Math.floor(Math.random() * 12) + 1).toString();
+    //     month = month.substr(month.length - 2);
 
-        const arrMonth31Days = [ '01', '03', '05', '07', '08', '10', '12' ];
-        const arrMonth30Days = [ '04', '06', '09', '11' ];
-        const randomDay =
-            $.inArray(month, arrMonth31Days) !== -1 ? 31 : $.inArray(month, arrMonth30Days) !== -1 ? 30 : 28;
+    //     const arrMonth31Days = [ '01', '03', '05', '07', '08', '10', '12' ];
+    //     const arrMonth30Days = [ '04', '06', '09', '11' ];
+    //     const randomDay =
+    //         $.inArray(month, arrMonth31Days) !== -1 ? 31 : $.inArray(month, arrMonth30Days) !== -1 ? 30 : 28;
 
-        let day = '0' + (Math.floor(Math.random() * randomDay) + 1).toString();
-        day = day.substr(day.length - 2);
+    //     let day = '0' + (Math.floor(Math.random() * randomDay) + 1).toString();
+    //     day = day.substr(day.length - 2);
 
-        const year = new Date().getFullYear() - Math.floor(Math.random() * 90) - 1;
+    //     const year = new Date().getFullYear() - Math.floor(Math.random() * 90) - 1;
 
-        return `${day}/${month}/${year}`;
-    }
+    //     return `${day}/${month}/${year}`;
+    // }
 
     gerarCns() {
         let cns = '0';
@@ -576,6 +576,32 @@ export class GeradorService {
         }
 
         return dv;
+    }
+
+    gerarRg() {
+        const n1 = Math.floor(Math.random() * 4 + 1);
+        const n2 = Math.round(Math.random() * 9);
+        const n3 = Math.round(Math.random() * 9);
+        const n4 = Math.round(Math.random() * 9);
+        const n5 = Math.round(Math.random() * 9);
+        const n6 = Math.round(Math.random() * 9);
+        const n7 = Math.round(Math.random() * 9);
+        const n8 = Math.round(Math.random() * 9);
+
+        const sum = n1 * 2 + n2 * 3 + n3 * 4 + n4 * 5 + n5 * 6 + n6 * 7 + n7 * 8 + n8 * 9;
+
+        let digit = 0;
+
+        digit = 11 - sum % 11;
+
+        if (digit === 11) digit = 0;
+
+        const rg =
+            digit === 10
+                ? `${n1}${n2}.${n3}${n4}${n5}.${n6}${n7}${n8}-X`
+                : `${n1}${n2}.${n3}${n4}${n5}.${n6}${n7}${n8}-${digit}`;
+
+        return rg;
     }
 
     getCookie() {}

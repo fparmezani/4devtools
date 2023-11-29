@@ -3,8 +3,10 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const PORT = process.env.PORT || 8080;
 const nodemailer = require('nodemailer');
+var forceSsl = require('force-ssl-heroku');
 
 const app = express();
+app.use(forceSsl);
 
 //configure the Express middleware to accept CORS requests and parse request body into JSON
 app.use(cors({ origin: '*' }));
@@ -22,22 +24,19 @@ app.listen(PORT, () => {
 
 const sendMail = (user, callback) => {
     const transporter = nodemailer.createTransport({
-        host: 'mail.4devtools.com',
-        port: 465,
-        secure: true,
+        service: 'gmail',
         auth: {
-            user: 'contato@4devtools.com',
-            pass: 'Fernando@39',
+            user: 'fparmezani@gmail.com',
+            pass: 'hiljvnblkbrezuij',
         },
     });
 
     const mailOptions = {
-        from: `"Fernando", "contato@4devtools.com"`,
-        to: `<${user.email}>`,
+        from: `"${user.nome}", "${user.email}"`,
+        to: `fparmezani@gmail.com`,
         subject: 'Contato 4DevTools',
-        html: '<h1>And here is the place for HTML</h1>',
+        html: `${user.mensagem}`,
     };
-
     transporter.sendMail(mailOptions, callback);
 };
 
@@ -48,10 +47,10 @@ app.post('/sendmail', (req, res) => {
         if (err) {
             console.log(err);
             res.status(400);
-            res.send({ error: 'Failed to send email' });
+            res.send({ error: 'Failed to send email' + err });
         } else {
             console.log('Email has been sent');
-            res.send(info);
+            res.send('Email has been sent');
         }
     });
 });

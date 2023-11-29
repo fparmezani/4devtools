@@ -6,6 +6,18 @@
     background: red;
 }
 
+.f-s-8 {
+    font-size: 8px !important;
+}
+
+.f-s-10 {
+    font-size: 10px !important;
+}
+
+.f-s-12 {
+    font-size: 12px !important;
+}
+
 .f-s-16 {
     font-size: 16px !important;
 }
@@ -15,6 +27,11 @@
 .f-s-40 {
     font-size: 40px !important;
 }
+
+.f-h-60 {
+    height: 60px !important;
+}
+
 .m-b-0 {
     margin-bottom: 0px !important;
 }
@@ -51,6 +68,9 @@
 .m-t-8 {
     margin-top: 8px !important;
 }
+.m-t-10 {
+    margin-top: 10px !important;
+}
 .m-t-15 {
     margin-top: 15px !important;
 }
@@ -73,6 +93,9 @@
     padding-top: 30px !important;
 }
 
+.padding-0 {
+    padding: 0 !important;
+}
 .m-h-300 {
     min-height: 300px;
 }

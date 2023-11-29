@@ -1,0 +1,193 @@
+<div class="card">
+    <div class="card-body">
+        <h1 class="box-title">Gerar Título Eleitor</h1>
+    </div>
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="card-body">
+                <div class="textarea-copy-container">
+                    <textarea id="tituloEleitor" class="form-control input-lg field-copy m-b-20" type="text"
+                        [(ngModel)]="tituloEleitor" readonly="">Gerando...</textarea>
+                    <span title="Copiar" class="btn-textarea-copy" (click)="copiar()"><i
+                            class="fa fa-files-o"></i></span>
+                </div>
+                <hr>
+                <div class="row m-b-15">
+                    <div class="col-md-12">
+                        <small class="text-muted">Estado de origem do Título Eleitor</small>
+                        <select id="estado" class="form-control input-lg-select" [(ngModel)]="estado"
+                            (change)="gerarTituloEleitor()">
+                            <option value="24">AC</option>
+                            <option value="17">AL</option>
+                            <option value="22">AM</option>
+                            <option value="25">AP</option>
+                            <option value="05">BA</option>
+                            <option value="07">CE</option>
+                            <option value="20">DF</option>
+                            <option value="14">ES</option>
+                            <option value="10">GO</option>
+                            <option value="11">MA</option>
+                            <option value="02">MG</option>
+                            <option value="19">MS</option>
+                            <option value="18">MT</option>
+                            <option value="13">PA</option>
+                            <option value="12">PB</option>
+                            <option value="08">PE</option>
+                            <option value="15">PI</option>
+                            <option value="06">PR</option>
+                            <option value="03">RJ</option>
+                            <option value="16">RN</option>
+                            <option value="23">RO</option>
+                            <option value="26">RR</option>
+                            <option value="04">RS</option>
+                            <option value="09">SC</option>
+                            <option value="21">SE</option>
+                            <option value="01" selected="">SP</option>
+                            <option value="27">TO</option>
+                            <option value="28">Exterior</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="botoes">
+                    <button type="submit" class="btn btn-info btn-md m-b-10 m-l-5" (click)="gerarTituloEleitor()">Gerar
+                        Título Eleitor</button>
+                    <button type="submit" class="btn btn-primary btn-md m-b-10 m-l-5" (click)="gerarCopiar()">Gerar e
+                        Copiar Título Eleitor</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+        </div>
+    </div>
+</div>
+
+<app-vejatambem></app-vejatambem>
+<app-queroajudar></app-queroajudar>
+<app-aviso></app-aviso>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <h2 class="box-title f-s-20 m-b-10">Título de Eleitor: o que é, para que serve e como funciona o gerador
+                </h2>
+
+                <p>O título de eleitor é aquele documento que comprova que você, como cidadão, está inscrito na
+                    Justiça
+                    Eleitoral do Brasil. Ou seja, pode exercer a sua função nas urnas como um cidadão brasileiro ou
+                    justificar o
+                    seu voto em casos específicos.
+                </p>
+                <p>
+                    Ele surgiu em 1875 e era chamado na época de Título de Qualificação. Desde então ele veio
+                    evoluindo até
+                    se
+                    transformar no que é hoje, tendo até a versão digital do documento podendo substituir a
+                    impressa.
+                </p>
+                <p>
+                    Atualmente, com a tecnologia, é possível fazer o seu título de eleitor através da internet.
+                    Basta
+                    digitalizar os seus documentos e preencher todos os campos solicitados através do “Título Net”.
+                    O mesmo
+                    vale
+                    para regularizar o seu título e alterar o local de votação.
+                </p>
+                <p>
+                    Todo cidadão brasileiro que tenha acima de 16 anos de idade pode fazer o seu título de eleitor,
+                    sendo um
+                    documento obrigatório para quem tiver completado 18 anos de idade e precisará votar na próxima
+                    eleição
+                    que
+                    houver - seja municipal, estadual ou nacional.
+                </p>
+                <p>
+                    Portanto, é importante estar atento às datas disponíveis para a realização do documento ou fazer
+                    a
+                    regularização necessária.
+                </p>
+                <p>
+                    Se você está morando em outro local que não seja sua cidade natal, onde votaria, é preciso fazer
+                    a
+                    alteração
+                    para que possa participar da votação em outro Estado. Pessoas que moram fora do país podem
+                    apenas
+                    justificar
+                    o voto, comprovando o motivo de não terem comparecido às urnas.
+                </p>
+                <p>
+                    Fazer o seu título de eleitor vai muito além de possuir mais um documento nacional, se trata de
+                    algo de
+                    grande importância para o crescimento do nosso país - que é escolher os nossos próximos
+                    governantes.
+                </p>
+                <p>
+                    Cada eleitor vota em uma unidade específica no dia das eleições, sendo definido por ele mesmo no
+                    momento
+                    em
+                    que é feito o documento. Em casos de mudança, como citamos acima, é possível fazer a alteração
+                    do local
+                    de
+                    votação (podendo ser uma troca de bairro, cidade, estado, etc).
+                </p>
+                <p>
+                    Além disso, você sabia que o título de eleitor é requisitado para ingressar na faculdade
+                    pública, por
+                    exemplo? Também é um requisito ao ingressar em um novo emprego, se inscrever em concursos
+                    públicos e
+                    diversos outros processos públicos.
+                </p>
+                <p>
+                    Ou seja, a melhor opção é garantir o seu título de eleitor assim que você tiver o seu direito -
+                    ou seja,
+                    tiver a idade necessária para solicitar o documento.
+                </p>
+                <h2 class="box-subtitle">Gerador de título de eleitor</h2>
+
+                <p>O gerador de título do eleitor serve para a realização de testes para auxiliar nos testes de
+                    softwares e
+                    é
+                    voltado para quem está estudando assuntos da área, quem já trabalha com programação e analistas
+                    de
+                    dados.
+                </p>
+                <p>
+                    É uma forma de testar o serviço que será oferecido antes de pôr no ar, evitando desgaste do
+                    consumidor e
+                    do
+                    próprio profissional que estará responsável pela ação.
+                </p>
+                <p>
+                    Utilizar esses dados para realizar atividades ilegais é algo antiético e não deve ser feito em
+                    nenhum
+                    momento. Portanto, utilize apenas para fins educativos e para testes de softwares - que é para
+                    que essa
+                    funcionalidade foi idealizada.
+                </p>
+                <h2 class="box-subtitle">Conclusão</h2>
+
+                <p> O título de eleitor é um documento de grande importância para aqueles que já possuem 18 anos de
+                    idade ou
+                    mais, sendo indispensável. Se os jovens que completaram 16 anos de idade sentirem vontade de
+                    participar
+                    das
+                    votações, eles podem solicitar o documento e votar normalmente, mas não é algo obrigatório.
+                </p>
+                <p>
+                    Ao utilizar o gerador de título de eleitor, esteja ciente de que se trata de um material para
+                    teste e
+                    não
+                    para fins ilegais. Portanto, utilize com sabedoria e evite problemas futuros.
+                </p>
+                <p>
+                    Esperamos que o nosso gerador possa lhe ajudar a realizar seus testes e concluir seus estudos.
+                    Para
+                    consulta
+                    de demais números, confira na aba lateral todas as possibilidades oferecidas aqui em nosso site.
+                </p>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+<app-leiatambem></app-leiatambem>
