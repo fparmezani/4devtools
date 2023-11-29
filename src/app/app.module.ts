@@ -9,7 +9,6 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { ToastrModule } from 'ngx-toastr';
 import { CommonModule, DatePipe } from '@angular/common';
-import { IMaskModule } from 'angular-imask';
 
 /* Components */
 import { GerarCpfComponent } from './components/gerar-cpf/gerar-cpf.component';
@@ -118,8 +117,7 @@ registerLocaleData(localePt);
         HttpClientModule,
         BrowserAnimationsModule,
         DigitOnlyModule,
-        CommonModule,
-        IMaskModule,
+        CommonModule
     ],
     providers: [ DatePipe, { provide: LOCALE_ID, useValue: 'pt-BR' } ],
     bootstrap: [ AppComponent ],
