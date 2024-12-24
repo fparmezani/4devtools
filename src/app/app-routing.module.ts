@@ -40,7 +40,7 @@ import { TelegramComponent } from './components/telegram/telegram.component';
 import { GerarRgComponent } from './components/gerar-rg/gerar-rg.component';
 
 const routes: Routes = [
-    // { path: '', component: DashboardComponent },
+    { path: '', component: DashboardComponent },
     { path: 'gerar-cpf', component: GeradorCpfComponent },
     { path: 'gerar-rg', component: GerarRgComponent },
     { path: 'gerar-cnpj', component: GeradorCnpjComponent },
@@ -64,7 +64,7 @@ const routes: Routes = [
 
     /*BLOG */
 
-    { path: '', component: CpfComponent },
+    { path: 'blog/cpf', component: CpfComponent },
     { path: 'blog/cnpj', component: CnpjComponent },
     { path: 'blog/cartaocredito', component: CartaodecreditoComponent },
     { path: 'blog/renavam', component: RenavamComponent },
