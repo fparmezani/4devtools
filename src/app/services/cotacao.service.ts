@@ -11,7 +11,7 @@ export class CotacaoService {
     constructor(private http: HttpClient) {}
 
     getCotacao(moeda: string): Observable<Cotacao> {
-        const request = this.URL + '/' + moeda + ?token=7b9cf009de479ad708a7e084d89e53521422c0c006a73587f4cbf69e2c5dee75;
+        const request = this.URL + '/' + moeda + '?token=7b9cf009de479ad708a7e084d89e53521422c0c006a73587f4cbf69e2c5dee75';
         return this.http.get<Cotacao>(request);
     }
 }
