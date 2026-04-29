@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
+import { fakerPT_BR as faker } from '@faker-js/faker';
 import { Banner } from '../model/banner';
 import { DDD } from '../model/DDD';
 import { Operadora } from '../model/operadora';
+import { CartaoCredito, Endereco, Pessoa } from '../model/pessoa';
 
 @Injectable({
     providedIn: 'root',
@@ -602,6 +604,78 @@ export class GeradorService {
                 : `${n1}${n2}.${n3}${n4}${n5}.${n6}${n7}${n8}-${digit}`;
 
         return rg;
+    }
+
+    private bairros = [
+        'Centro', 'Jardim América', 'Vila Nova', 'Boa Vista', 'São João',
+        'Jardim Europa', 'Santa Cruz', 'Alto da Lapa', 'Bela Vista', 'Ipiranga',
+        'Moema', 'Tatuapé', 'Lapa', 'Pinheiros', 'Vila Mariana', 'Consolação',
+        'Liberdade', 'Brooklin', 'Itaim Bibi', 'Morumbi',
+    ];
+
+    gerarNome(): string {
+        return faker.person.fullName().toUpperCase();
+    }
+
+    gerarDataNascimento(): string {
+        return faker.date.birthdate({ min: 18, max: 80, mode: 'age' }).toLocaleDateString('pt-BR');
+    }
+
+    gerarEndereco(): Endereco {
+        const end = new Endereco();
+        end.cep = faker.location.zipCode('#####-###');
+        end.logradouro = faker.location.streetAddress();
+        end.numero = faker.number.int({ min: 1, max: 9999 }).toString();
+        end.bairro = this.bairros[Math.floor(Math.random() * this.bairros.length)];
+        end.cidade = faker.location.city();
+        end.estado = faker.location.state();
+        end.estadoSigla = faker.location.state({ abbreviated: true });
+        return end;
+    }
+
+    getIdStateBySigla(state: string): string {
+        const estados: { nome: string; value: string }[] = [
+            { nome: 'AC', value: '24' }, { nome: 'AL', value: '17' },
+            { nome: 'AM', value: '22' }, { nome: 'AP', value: '25' },
+            { nome: 'BA', value: '05' }, { nome: 'CE', value: '07' },
+            { nome: 'DF', value: '20' }, { nome: 'ES', value: '14' },
+            { nome: 'GO', value: '10' }, { nome: 'MA', value: '11' },
+            { nome: 'MG', value: '02' }, { nome: 'MS', value: '19' },
+            { nome: 'MT', value: '18' }, { nome: 'PA', value: '13' },
+            { nome: 'PB', value: '12' }, { nome: 'PE', value: '08' },
+            { nome: 'PI', value: '15' }, { nome: 'PR', value: '06' },
+            { nome: 'RJ', value: '03' }, { nome: 'RN', value: '16' },
+            { nome: 'RO', value: '23' }, { nome: 'RR', value: '26' },
+            { nome: 'RS', value: '04' }, { nome: 'SC', value: '09' },
+            { nome: 'SE', value: '21' }, { nome: 'SP', value: '01' },
+            { nome: 'TO', value: '27' },
+        ];
+        return estados.find((x) => x.nome === state)?.value ?? '01';
+    }
+
+    gerarPessoaCompleta(estado: string): Pessoa {
+        const pessoa = new Pessoa();
+        pessoa.nome = this.gerarNome();
+        pessoa.mae = this.gerarNome();
+        pessoa.pai = this.gerarNome();
+        pessoa.dataNascimento = this.gerarDataNascimento();
+        pessoa.rg = this.gerarRg();
+        pessoa.email = this.gerarEmail(pessoa.nome);
+        pessoa.senha = this.gerarPassword();
+        pessoa.celular = this.gerarCelular(null);
+        pessoa.telefone = this.gerarTelefone(null);
+        pessoa.endereco = this.gerarEndereco();
+        pessoa.cpf = this.gerarCpf(estado, true);
+        pessoa.cnh = this.gerarCnh();
+        pessoa.renavan = this.gerarRenavan();
+        pessoa.pispasep = this.gerarPisPasep();
+        pessoa.cns = this.gerarCns();
+        pessoa.tituloEleitor = this.gerarTituloEleitor(this.getIdStateBySigla(estado));
+        pessoa.cartaodecredito = new CartaoCredito();
+        pessoa.cartaodecredito.numero = this.gerarCartaoDeCredito('');
+        pessoa.cartaodecredito.cvv = this.gerarCvv();
+        pessoa.cartaodecredito.dataValidade = this.gerarDataValidade();
+        return pessoa;
     }
 
     getCookie() {}

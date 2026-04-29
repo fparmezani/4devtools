@@ -1,9 +1,7 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 import * as copy from 'copy-to-clipboard';
 import { ToastrService } from 'ngx-toastr';
-import { Pessoa } from 'src/app/model/pessoa';
 import { GeradorService } from 'src/app/services/gerador.service';
 
 @Component({
@@ -12,12 +10,10 @@ import { GeradorService } from 'src/app/services/gerador.service';
 })
 export class GerarNomeComponent implements OnInit {
     nome: string = '';
-    URLGERADORBRASILEIRO = 'https://geradorbrasileiro.com/api/';
 
     constructor(
         private service: GeradorService,
         private toastr: ToastrService,
-        private http: HttpClient,
         private title: Title,
         private meta: Meta
     ) {
@@ -29,7 +25,6 @@ export class GerarNomeComponent implements OnInit {
                 content: 'gerar nome, gerar de nome, gerador nome, gerar de nome, gerar nome pessoa física',
             },
         ]);
-
         this.title.setTitle('Gerador de Nome - 4DevTools');
     }
 
@@ -38,11 +33,7 @@ export class GerarNomeComponent implements OnInit {
     }
 
     gerarNome() {
-        this.nome = this.service.gerarPisPasep();
-        this.http.get<Pessoa>(`${this.URLGERADORBRASILEIRO}faker/pessoa?limit=1`).subscribe((response: any) => {
-            let nome = response.values[0].nome;
-            this.nome = nome;
-        });
+        this.nome = this.service.gerarNome();
     }
 
     gerarCopiar() {
