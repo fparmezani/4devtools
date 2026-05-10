@@ -8,7 +8,7 @@ import { Meta, Title } from '@angular/platform-browser';
 export class GeradorCnhComponent implements OnInit {
     constructor(private meta: Meta, private title: Title) {
         this.meta.addTags([
-            { name: 'description', content: 'DashBoard' },
+            { name: 'description', content: 'Gerador de CNH válido para testes de software. Gere números de Carteira Nacional de Habilitação gratuitamente.' },
             { name: 'author', content: 'Fernando Parmezani' },
             { name: 'keywords', content: 'gerar cnh, gerador cnh, gerar documento cnh' },
         ]);
