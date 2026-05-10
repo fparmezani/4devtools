@@ -4,4 +4,4 @@ Disallow:
 Disallow: /login/
 Disallow: /assets/
 Disallow: /api/
-Sitemap: 4devtools.com/sitemap.xml
+Sitemap: https://4devtools.com/sitemap.xml
