@@ -64,10 +64,10 @@
                 <h2 class="box-subtitle">Validação de telefone em sistemas</h2>
 
                 <p>Ao desenvolver sistemas que recebem números de telefone, é importante validar tanto o formato
-                    quanto o DDD informado. Uma regex básica para celulares brasileiros com DDD seria
-                    <code>\([1-9]{2}\)\s?9[0-9]{4}-?[0-9]{4}</code>. Para uma validação mais robusta,
-                    recomenda-se usar bibliotecas como <strong>libphonenumber</strong> do Google, disponível
-                    para Java, JavaScript, PHP e outras linguagens.
+                    quanto o DDD informado. A validação deve garantir que o DDD seja um código real, que celulares
+                    comecem com 9 e tenham 9 dígitos, e que telefones fixos tenham 8 dígitos. Para uma validação
+                    mais robusta, recomenda-se usar bibliotecas como <strong>libphonenumber</strong> do Google,
+                    disponível para Java, JavaScript, PHP e outras linguagens.
                 </p>
 
                 <h2 class="box-subtitle">Gerador de telefone para testes</h2>
