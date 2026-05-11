@@ -60,6 +60,7 @@ import { OqueeBitcoinComponent } from './blog/oqueebitcoin/oqueebitcoin.componen
 import { WhatsappComponent } from './components/whatsapp/whatsapp.component';
 import { TelegramComponent } from './components/telegram/telegram.component';
 import { GerarRgComponent } from './components/gerar-rg/gerar-rg.component';
+import { JwtDecoderComponent } from './components/jwt-decoder/jwt-decoder.component';
 
 registerLocaleData(localePt);
 
@@ -108,6 +109,7 @@ registerLocaleData(localePt);
         WhatsappComponent,
         TelegramComponent,
         GerarRgComponent,
+        JwtDecoderComponent,
     ],
     imports: [
         BrowserModule,
