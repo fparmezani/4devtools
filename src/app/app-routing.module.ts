@@ -38,6 +38,7 @@ import { OqueeBitcoinComponent } from './blog/oqueebitcoin/oqueebitcoin.componen
 import { WhatsappComponent } from './components/whatsapp/whatsapp.component';
 import { TelegramComponent } from './components/telegram/telegram.component';
 import { GerarRgComponent } from './components/gerar-rg/gerar-rg.component';
+import { JwtDecoderComponent } from './components/jwt-decoder/jwt-decoder.component';
 
 const routes: Routes = [
     { path: '', component: DashboardComponent },
@@ -76,6 +77,7 @@ const routes: Routes = [
     { path: 'blog/aih', component: AihComponent },
 
     /*LINK */
+    { path: 'jwt-decoder', component: JwtDecoderComponent },
     { path: 'whatsapp', component: WhatsappComponent },
     { path: 'telegram', component: TelegramComponent },
 
