@@ -1,0 +1,237 @@
+<div class="card">
+    <div class="card-body">
+        <h1 class="box-title">JWT Decoder e Validator</h1>
+        <p class="text-muted m-t-10">Cole um token JWT no campo abaixo para decodificar o header e o payload,
+            verificar a data de expiração e inspecionar os claims do token. A decodificação é feita inteiramente
+            no seu navegador — nenhum dado é enviado para servidores externos.
+        </p>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card-body">
+
+                <p class="text-muted m-b-10 font-12">Cole o token JWT completo (header.payload.signature) abaixo:</p>
+                <div class="m-b-15">
+                    <textarea id="jwtInput" class="form-control" rows="4"
+                        placeholder="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"
+                        [(ngModel)]="jwtToken"
+                        style="font-family: monospace; font-size: 12px; word-break: break-all;"></textarea>
+                </div>
+
+                <div class="botoes m-b-20">
+                    <button type="button" class="btn btn-info btn-md m-b-10 m-l-5" (click)="decodificar()">
+                        <i class="fa fa-search"></i> Decodificar Token
+                    </button>
+                    <button type="button" class="btn btn-default btn-md m-b-10 m-l-5" (click)="limpar()">
+                        <i class="fa fa-times"></i> Limpar
+                    </button>
+                </div>
+
+                <div *ngIf="error" class="alert alert-danger m-b-15">
+                    <i class="fa fa-exclamation-triangle"></i> {{ error }}
+                </div>
+
+                <div *ngIf="isValid">
+                    <div class="alert m-b-15"
+                        [ngClass]="isExpired ? 'alert-danger' : 'alert-success'">
+                        <i class="fa" [ngClass]="isExpired ? 'fa-times-circle' : 'fa-check-circle'"></i>
+                        <strong>{{ isExpired ? ' Token EXPIRADO' : ' Token com estrutura válida' }}</strong>
+                        <span *ngIf="expiresAt">
+                            — Expiração: <strong>{{ getExpDisplay() }}</strong>
+                        </span>
+                        <span *ngIf="!expiresAt"> — Sem campo de expiração (exp)</span>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 m-b-20">
+                            <div class="card" style="border-left: 4px solid #7460ee;">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-center m-b-10">
+                                        <h4 class="box-subtitle m-0" style="color: #7460ee;">
+                                            <i class="fa fa-lock"></i> HEADER
+                                        </h4>
+                                        <button class="btn btn-xs btn-default" (click)="copiarHeader()">
+                                            <i class="fa fa-files-o"></i> Copiar
+                                        </button>
+                                    </div>
+                                    <pre style="background:#f8f9fa; padding:10px; border-radius:4px; font-size:12px; margin:0; overflow-x:auto;">{{ formatarJson(header) }}</pre>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 m-b-20">
+                            <div class="card" style="border-left: 4px solid #21c1d6;">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-center m-b-10">
+                                        <h4 class="box-subtitle m-0" style="color: #21c1d6;">
+                                            <i class="fa fa-user"></i> PAYLOAD
+                                        </h4>
+                                        <button class="btn btn-xs btn-default" (click)="copiarPayload()">
+                                            <i class="fa fa-files-o"></i> Copiar
+                                        </button>
+                                    </div>
+                                    <pre style="background:#f8f9fa; padding:10px; border-radius:4px; font-size:12px; margin:0; overflow-x:auto;">{{ formatarJson(payload) }}</pre>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 m-b-20" *ngIf="payload?.iat || payload?.exp || payload?.sub || payload?.iss">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="box-subtitle m-b-10"><i class="fa fa-info-circle"></i> Claims detectados</h4>
+                                    <table class="table table-sm table-bordered" style="font-size: 13px;">
+                                        <thead>
+                                            <tr>
+                                                <th>Claim</th>
+                                                <th>Valor</th>
+                                                <th>Descrição</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngIf="payload?.sub">
+                                                <td><code>sub</code></td>
+                                                <td>{{ payload.sub }}</td>
+                                                <td>Subject — identificador do usuário</td>
+                                            </tr>
+                                            <tr *ngIf="payload?.iss">
+                                                <td><code>iss</code></td>
+                                                <td>{{ payload.iss }}</td>
+                                                <td>Issuer — emissor do token</td>
+                                            </tr>
+                                            <tr *ngIf="payload?.aud">
+                                                <td><code>aud</code></td>
+                                                <td>{{ payload.aud }}</td>
+                                                <td>Audience — público-alvo do token</td>
+                                            </tr>
+                                            <tr *ngIf="payload?.iat">
+                                                <td><code>iat</code></td>
+                                                <td>{{ getIatDisplay() }}</td>
+                                                <td>Issued At — data de emissão</td>
+                                            </tr>
+                                            <tr *ngIf="payload?.exp">
+                                                <td><code>exp</code></td>
+                                                <td [class.text-danger]="isExpired" [class.text-success]="!isExpired">
+                                                    {{ getExpDisplay() }}
+                                                    <span *ngIf="isExpired"> (expirado)</span>
+                                                    <span *ngIf="!isExpired"> (ativo)</span>
+                                                </td>
+                                                <td>Expiration — data de expiração</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 m-b-10">
+                            <div class="card" style="border-left: 4px solid #f62d51;">
+                                <div class="card-body">
+                                    <h4 class="box-subtitle m-b-5" style="color: #f62d51;">
+                                        <i class="fa fa-key"></i> SIGNATURE
+                                    </h4>
+                                    <p class="text-muted font-12 m-b-5">A assinatura não pode ser verificada sem a chave
+                                        secreta. A validação acima verifica apenas a estrutura e o formato do token.</p>
+                                    <code style="word-break: break-all; font-size: 11px;">{{ signature }}</code>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<app-vejatambem></app-vejatambem>
+<app-queroajudar></app-queroajudar>
+<app-aviso></app-aviso>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <h2 class="box-title f-s-20 m-b-10">JWT (JSON Web Token): o que é, como funciona e como usar em sistemas</h2>
+
+                <p>O JWT, ou JSON Web Token, é um padrão aberto definido pela <strong>RFC 7519</strong> amplamente
+                    utilizado para autenticação e troca de informações entre sistemas de forma segura e compacta. Ele
+                    permite que um servidor emita um token assinado digitalmente que pode ser verificado por qualquer
+                    parte que possua a chave pública, sem a necessidade de consultar um banco de dados a cada
+                    requisição.
+                </p>
+
+                <h2 class="box-subtitle">Estrutura de um token JWT</h2>
+
+                <p>Um token JWT é composto por três partes separadas por pontos (<code>.</code>), cada uma codificada
+                    em Base64URL:</p>
+                <ul>
+                    <li><strong>Header</strong>: contém o tipo do token (<code>JWT</code>) e o algoritmo de assinatura
+                        utilizado, como <code>HS256</code> (HMAC-SHA256) ou <code>RS256</code> (RSA-SHA256).</li>
+                    <li><strong>Payload</strong>: contém os <em>claims</em> — informações sobre o usuário ou contexto,
+                        como <code>sub</code> (subject/ID do usuário), <code>iat</code> (issued at/data de emissão) e
+                        <code>exp</code> (expiration/data de expiração).</li>
+                    <li><strong>Signature</strong>: é a assinatura digital gerada combinando o header, o payload e uma
+                        chave secreta (ou par de chaves no caso de RSA). É o que garante que o token não foi
+                        adulterado.</li>
+                </ul>
+
+                <h2 class="box-subtitle">Como o JWT é usado na autenticação</h2>
+
+                <p>O fluxo típico de autenticação com JWT funciona assim: o usuário faz login com suas credenciais;
+                    o servidor valida e emite um token JWT assinado; o cliente armazena o token (geralmente no
+                    localStorage ou em um cookie HttpOnly) e o envia no header <code>Authorization: Bearer &lt;token&gt;</code>
+                    em cada requisição subsequente. O servidor então valida a assinatura do token sem precisar
+                    consultar o banco de dados, tornando o processo stateless e escalável.
+                </p>
+
+                <h2 class="box-subtitle">Claims padrão do JWT</h2>
+
+                <p>A especificação RFC 7519 define os seguintes claims registrados mais utilizados:</p>
+                <ul>
+                    <li><code>iss</code> (Issuer): identifica quem emitiu o token — geralmente o domínio da API.</li>
+                    <li><code>sub</code> (Subject): identifica o principal sujeito do token, normalmente o ID do usuário.</li>
+                    <li><code>aud</code> (Audience): identifica os destinatários para os quais o JWT é destinado.</li>
+                    <li><code>exp</code> (Expiration Time): timestamp Unix indicando quando o token expira.</li>
+                    <li><code>iat</code> (Issued At): timestamp Unix de quando o token foi emitido.</li>
+                    <li><code>nbf</code> (Not Before): timestamp indicando antes de qual momento o token não é válido.</li>
+                    <li><code>jti</code> (JWT ID): identificador único do token, útil para evitar replay attacks.</li>
+                </ul>
+
+                <h2 class="box-subtitle">Algoritmos de assinatura: HS256 vs RS256</h2>
+
+                <p>O <strong>HS256</strong> usa HMAC com SHA-256 e uma chave secreta simétrica — a mesma chave
+                    é usada para assinar e verificar. É simples, mas exige que tanto o emissor quanto o verificador
+                    compartilhem a chave secreta. Já o <strong>RS256</strong> usa RSA com SHA-256 e um par de
+                    chaves assimétricas: a chave privada assina o token e a chave pública verifica. É o padrão
+                    recomendado para sistemas distribuídos, pois a chave pública pode ser compartilhada livremente
+                    sem comprometer a segurança.
+                </p>
+
+                <h2 class="box-subtitle">Boas práticas de segurança com JWT</h2>
+
+                <p>Ao implementar JWT em seus sistemas, siga estas práticas:</p>
+                <ul>
+                    <li>Defina sempre um tempo de expiração curto (<code>exp</code>) — entre 15 minutos e 1 hora para
+                        tokens de acesso.</li>
+                    <li>Use <strong>refresh tokens</strong> de longa duração armazenados em cookies HttpOnly para
+                        renovar os access tokens sem exigir novo login.</li>
+                    <li>Nunca armazene dados sensíveis no payload — ele é apenas codificado em Base64, não criptografado.</li>
+                    <li>Prefira <strong>RS256</strong> em arquiteturas de microsserviços para evitar compartilhar
+                        chaves secretas entre serviços.</li>
+                    <li>Implemente uma <strong>blocklist</strong> de tokens revogados para lidar com logout forçado
+                        e tokens comprometidos.</li>
+                </ul>
+
+                <h2 class="box-subtitle">JWT Decoder do 4DevTools</h2>
+
+                <p>O JWT Decoder do 4DevTools permite decodificar qualquer token JWT diretamente no navegador,
+                    sem enviar dados para servidores externos. Você pode visualizar o header, o payload formatado
+                    em JSON, os claims interpretados com as datas de emissão e expiração em formato legível, e
+                    a assinatura do token. É ideal para depurar integrações com APIs, inspecionar tokens em
+                    ambiente de desenvolvimento e validar o conteúdo de tokens em fluxos de autenticação.
+                    Para complementar seus testes de autenticação, confira também o
+                    <a href="/gerar-senha">Gerador de Senha</a> e o <a href="/gerar-pessoa">Gerador de Pessoa</a>.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+<app-leiatambem></app-leiatambem>
