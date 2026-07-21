@@ -41,7 +41,8 @@ import { GerarRgComponent } from './components/gerar-rg/gerar-rg.component';
 import { JwtDecoderComponent } from './components/jwt-decoder/jwt-decoder.component';
 
 const routes: Routes = [
-    { path: '', component: DashboardComponent },
+    { path: '', redirectTo: 'gerar-cnpj', pathMatch: 'full' },
+    { path: 'dashboard', component: DashboardComponent },
     { path: 'gerar-cpf', component: GeradorCpfComponent },
     { path: 'gerar-rg', component: GerarRgComponent },
     { path: 'gerar-cnpj', component: GeradorCnpjComponent },

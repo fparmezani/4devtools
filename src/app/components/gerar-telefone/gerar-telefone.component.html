@@ -1,17 +1,12 @@
 <div class="card">
     <div class="card-body">
-        <h1 class="box-title">Gerar Telefone</h1>
-        <p class="text-muted m-t-10">O gerador de telefone cria números brasileiros com formato válido, incluindo
-            DDDs reais e o dígito 9 obrigatório para celulares, conforme as regras da ANATEL. Perfeito para
-            testar campos de telefone, validações de formulário e sistemas de comunicação. Use o botão abaixo
-            para gerar números fictícios prontos para uso em testes.
-        </p>
+        <h1 class="box-title">Telefones no Brasil: formato, DDDs e como validar números em sistemas</h1>
+        <p class="text-muted m-t-10">O número de telefone brasileiro é formado por um DDD de dois dígitos seguido
+            do número local, com o nono dígito nos celulares, conforme as regras da ANATEL.</p>
     </div>
-    <div class="row">
-        <div class="col-lg-8">
-            <div class="card-body">
-                <p class="text-muted m-b-15 font-12">Crie quantas TELEFONES quiser clicando no botão "Gerar
-                    telefone"!</p>
+    <div class="card-body" style="padding-top: 0;">
+        <div style="border: 1px solid #e0e0e0; border-radius: 6px; padding: 20px;">
+            <h2 class="box-title f-s-20 m-b-10">Gere um telefone</h2>
                 <div class="textarea-copy-container">
                     <textarea id="telefone" class="form-control input-lg field-copy m-b-20" type="text"
                         [(ngModel)]="telefone" readonly="readonly">Gerando...</textarea>
@@ -25,15 +20,24 @@
                     <button type="submit" class="btn btn-primary btn-md m-b-10 m-l-5" (click)="gerarCopiar()">Gerar e
                         Copiar Telefone</button>
                 </div>
-            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <script async
+                src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4731566944813042"
+                crossorigin="anonymous"></script>
+            <!-- 4DT-gerar-telefone — TODO: trocar data-ad-slot pelo slot real desta página -->
+            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-4731566944813042"
+                data-ad-slot="0000000000" data-ad-format="auto" data-full-width-responsive="true"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
         </div>
     </div>
     <div class="row">
         <div class="col-lg-12">
             <div class="card-body">
-                <h2 class="box-title f-s-20 m-b-10">Telefones no Brasil: formato, DDDs e como validar números
-                    em sistemas</h2>
-
                 <p>O sistema de numeração telefônica brasileiro é regulamentado pela ANATEL (Agência Nacional de
                     Telecomunicações) e passou por mudanças significativas nos últimos anos, especialmente com a
                     adição do nono dígito aos celulares, que foi implementada gradualmente em todos os estados
