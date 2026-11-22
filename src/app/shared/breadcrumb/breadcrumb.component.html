@@ -1,0 +1,8 @@
+<nav *ngIf="crumbs.length" class="crumbs" aria-label="Trilha de navegação">
+    <ol>
+        <li *ngFor="let c of crumbs; let last = last">
+            <a *ngIf="!last" [href]="c.path">{{ c.label }}</a>
+            <span *ngIf="last" aria-current="page">{{ c.label }}</span>
+        </li>
+    </ol>
+</nav>

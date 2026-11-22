@@ -941,3 +941,42 @@ input[type=number] {
 .doc-card span { font-size: .9rem; line-height: 1.5; }
 .doc-card .doc-card-tema { align-self: flex-start; font-size: .75rem; font-weight: 600; text-transform: uppercase; letter-spacing: .04em; color: #8c52ff; background: #f3f0ff; padding: 2px 8px; border-radius: 999px; }
 @media (prefers-reduced-motion: reduce) { .doc-card { transition: none; } .doc-card:hover { transform: none; } }
+
+/* Trilha de navegação (breadcrumb) */
+.crumbs { margin: 0 0 12px; font-size: 13px; color: #6b6b76; }
+.crumbs ol { display: flex; flex-wrap: wrap; gap: 2px 0; margin: 0; padding: 0; list-style: none; }
+.crumbs li { min-width: 0; overflow-wrap: anywhere; }
+.crumbs li:not(:last-child)::after { content: "›"; margin: 0 8px; color: #b0b0ba; }
+.crumbs a { color: #2a6fb0; }
+.crumbs a:hover { text-decoration: underline; }
+.crumbs [aria-current] { color: #444; }
+
+/* Links do autor na página Sobre */
+.autor-links { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 12px; padding: 0; list-style: none; }
+.autor-links a { display: inline-flex; align-items: center; gap: 6px; padding: 5px 12px; border: 1px solid #d5d8e0; border-radius: 999px; font-size: 13px; color: #2a6fb0; background: #fff; }
+.autor-links a:hover { border-color: #2a6fb0; text-decoration: none; }
+
+/* Apoio ao projeto: link discreto no rodapé, sem botão chamativo */
+.footer-apoio { color: #6b6b76; }
+
+/* Página de apoio */
+.apoio-texto { max-width: 760px; }
+.apoio p, .apoio li { color: #4a5560; }
+.apoio-texto p { margin-bottom: 14px; line-height: 1.65; }
+.apoio-lead { font-size: 17px; color: #2f3a44 !important; }
+.apoio-texto ul, .apoio-texto ol { margin: 0 0 14px; padding-left: 22px; line-height: 1.65; }
+.apoio-texto li { margin-bottom: 6px; padding-left: 2px; }
+.apoio .box-subtitle { margin-top: 28px; margin-bottom: 14px; }
+.apoio-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; }
+.apoio-item { min-width: 0; padding: 18px; border: 1px solid #e3e3e8; border-radius: 8px; background: #fafafc; }
+.apoio-item .fa { display: flex; align-items: center; justify-content: center; width: 38px; height: 38px; margin-bottom: 12px; border-radius: 50%; background: #efe8ff; color: #8c52ff; font-size: 17px; }
+.apoio-item h3 { margin: 0 0 6px; font-size: 16px; font-weight: 600; color: #2f3a44; }
+.apoio-item p { margin: 0; font-size: 14px; line-height: 1.55; }
+.apoio-pix { display: flex; flex-wrap: wrap; align-items: center; gap: 24px 40px; padding: 22px 26px; border: 1px solid #e3e3e8; border-radius: 8px; background: #fafafc; }
+.apoio-passos { flex: 1 1 260px; min-width: 0; margin: 0; padding-left: 22px; line-height: 1.7; }
+.apoio-passos li { margin-bottom: 8px; }
+.apoio-qr { display: block; flex: 0 0 auto; width: 220px; max-width: 100%; height: auto; margin: 0 auto; border: 1px solid #e3e3e8; border-radius: 8px; background: #fff; }
+.apoio-assinatura { margin-top: 22px; }
+.apoio-nota { font-size: 12px; color: #8a949c !important; }
+.apoio .box-title { margin-bottom: 14px; }
+.apoio-dica { font-size: 13px; color: #6b757d !important; }
