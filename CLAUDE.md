@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-**4DevTools** is an Angular 13 application that generates Brazilian test data (CPF, CNPJ, RG, CNH, PIS/PASEP, Título de Eleitor, etc.) for developers and testers. It also shows currency exchange rates (USD, EUR, BTC) and includes informational blog posts about each document type. The app is deployed on Heroku with an Express backend.
+**4DevTools** is an Angular 13 application that generates Brazilian test data (CPF, CNPJ, RG, CNH, PIS/PASEP, Título de Eleitor, etc.) for developers and testers. It also shows currency exchange rates (USD, EUR, BTC) and includes informational blog posts about each document type. The app is deployed on Vercel (auto-deploy from GitHub `main`) as static prerendered pages, configured in `vercel.json`.
 
 ## Commands
 
@@ -13,10 +13,10 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ng serve                          # http://localhost:4200
 
 # Production server (Express serves built dist/)
-npm start                         # node server.js, port 8080
+npm start                         # node server.js, port 8080 — local preview of the prerendered build only (not used in production)
 
 # Build
-ng build                          # output: dist/for-dev-tools/
+npm run build                     # prerender (Angular Universal): dist/4DevTools/browser/<rota>/index.html
 ng build --watch --configuration development
 
 # Tests
@@ -54,7 +54,7 @@ src/app/
 
 **CotacaoService**: Fetches live exchange rates from `economia.awesomeapi.com.br`. The Dollar, Euro, and Bitcoin components use it. The API token is embedded in the URL in `cotacao.service.ts`.
 
-**Express backend** (`server.js`): Only does two things — serves the built Angular SPA from `dist/for-dev-tools/`, and exposes `POST /sendmail` for the contact form using nodemailer.
+**Hosting**: Vercel serves `dist/4DevTools/browser/` statically (`vercel.json`: no framework preset, no SPA fallback, `trailingSlash: false`). Unknown URLs get `404.html` with status 404. `server.js` (Express) is only a local preview and is not deployed.
 
 **Copy-to-clipboard**: Components use the `copy-to-clipboard` npm package (imported as `import * as copy from 'copy-to-clipboard'`) and show a `ToastrService` success toast after copying.
 
@@ -67,3 +67,9 @@ src/app/
 3. Optionally create a View under `src/app/Views/gerador-<name>/` for SEO meta tags.
 4. Register both in `app.module.ts` declarations and `app-routing.module.ts`.
 5. Add a blog article under `src/app/blog/<name>/` if informational content is needed.
+
+### SEO / prerender
+
+- Every route's `<title>`, description, canonical (`https://www.4devtools.com`) and robots come from `data: seo(...)` in `app-routing.module.ts`, applied by `services/seo.service.ts`. Don't set titles/meta in components.
+- When adding a route: add `data: seo(...)`, add it to `prerender-routes.txt` (otherwise the server returns 404) and to `src/sitemap.xml`.
+- Code that touches `window`/`document`/`localStorage` must be guarded with `isPlatformBrowser`, since pages are rendered in Node at build time.
