@@ -4,7 +4,7 @@
     "scripts": {
         "ng": "ng",
         "start": "node server",
-        "build": "ng run 4DevTools:prerender && node -e \"require('fs').copyFileSync('dist/4DevTools/browser/index.original.html','dist/4DevTools/browser/404.html')\"",
+        "build": "ng run 4DevTools:prerender && node scripts/vercel-output.js",
         "watch": "ng build --watch --configuration development",
         "test": "ng test",
         "dev:ssr": "ng run 4DevTools:serve-ssr",

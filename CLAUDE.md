@@ -54,7 +54,7 @@ src/app/
 
 **CotacaoService**: Fetches live exchange rates from `economia.awesomeapi.com.br`. The Dollar, Euro, and Bitcoin components use it. The API token is embedded in the URL in `cotacao.service.ts`.
 
-**Hosting**: Vercel serves `dist/4DevTools/browser/` statically (`vercel.json`: no framework preset, no SPA fallback, `trailingSlash: false`). Unknown URLs get `404.html` with status 404. `server.js` (Express) is only a local preview and is not deployed.
+**Hosting**: Vercel. `npm run build` prerenders, then `scripts/vercel-output.js` writes `.vercel/output` (Build Output API v3) with our own routing: `/x/` → 308 `/x`, prerendered pages, static files, everything else → `404.html` with status 404. This bypasses the project-level "Angular" preset SPA fallback. `server.js` (Express) is only a local preview and is not deployed.
 
 **Copy-to-clipboard**: Components use the `copy-to-clipboard` npm package (imported as `import * as copy from 'copy-to-clipboard'`) and show a `ToastrService` success toast after copying.
 
