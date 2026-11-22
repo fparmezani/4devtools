@@ -495,29 +495,15 @@ export class GeradorService {
         return `(${ddd}) ${operator}${n3}${n4}-${n5}${n6}${n7}${n8}`;
     }
 
-    gerarDDD(estado: number) {
-        let arrNumber: any = [];
-
-        this.DDDs.forEach((ddd) => {
-            arrNumber.push(ddd.value);
-        });
-
-        // let number = arrNumber[Math.floor(Math.random() * arrNumber.length)];
-
-        const ddd = this.DDDs[Math.floor(Math.random() * this.DDDs.length)];
-        return arrNumber[Math.floor(Math.random() * ddd.value.length)];
-
-        // return dddState[Math.floor(Math.random() * dddState)];
+    gerarDDD(estado?: string | null) {
+        const lista = estado ? this.DDDs.filter((d) => d.nome === estado) : this.DDDs;
+        const ddds = (lista.length ? lista : this.DDDs).reduce((acc: number[], d) => acc.concat(d.value), []);
+        return ddds[Math.floor(Math.random() * ddds.length)];
     }
 
     gerarOperatoraCelular() {
-        let arrNumber: any = [];
-
-        this.operadoras.forEach((operadora) => {
-            arrNumber.push(operadora.value);
-        });
-
-        return arrNumber[Math.floor(Math.random() * arrNumber.length)];
+        const prefixos = this.operadoras.reduce((acc: number[], o) => acc.concat(o.value), []);
+        return prefixos[Math.floor(Math.random() * prefixos.length)];
     }
 
     gerarTelefone(estado: any) {
