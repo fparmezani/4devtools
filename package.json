@@ -45,6 +45,7 @@
         "ngx-toastr": "^14.2.1",
         "nodemailer": "^6.7.2",
         "path": "^0.12.7",
+        "prismjs": "^1.29.0",
         "rxjs": "~7.4.0",
         "tslib": "^2.3.0",
         "zone.js": "~0.11.4"
@@ -58,6 +59,7 @@
         "@types/jasmine": "^3.10.3",
         "@types/jquery": "^3.5.13",
         "@types/node": "^12.20.43",
+        "@types/prismjs": "^1.26.0",
         "jasmine-core": "~3.10.0",
         "karma": "^6.3.16",
         "karma-chrome-launcher": "~3.1.0",

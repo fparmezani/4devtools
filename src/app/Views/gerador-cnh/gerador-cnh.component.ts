@@ -1,19 +1,19 @@
-import { Component, OnInit } from '@angular/core';
-import { Meta, Title } from '@angular/platform-browser';
+import { Component } from '@angular/core';
+import { SNIPPETS } from 'src/app/shared/snippets';
+import { passoDv } from 'src/app/shared/tabela-dv/tabela-dv.component';
+
+const BASE = '456789123'.split('');
 
 @Component({
     selector: 'app-gerador-cnh',
     templateUrl: './gerador-cnh.component.html',
 })
-export class GeradorCnhComponent implements OnInit {
-    constructor(private meta: Meta, private title: Title) {
-        this.meta.addTags([
-            { name: 'description', content: 'Gerador de CNH válido para testes de software. Gere números de Carteira Nacional de Habilitação gratuitamente.' },
-            { name: 'author', content: 'Fernando Parmezani' },
-            { name: 'keywords', content: 'gerar cnh, gerador cnh, gerar documento cnh' },
-        ]);
-        this.title.setTitle('Gerador de CNH - Carteira Nacional de Habilitação');
-    }
+export class GeradorCnhComponent {
+    readonly snippets = SNIPPETS['cnh'];
+    readonly regex = '^\d{11}$';
 
-    ngOnInit(): void {}
+    readonly passo1 = passoDv(BASE, BASE.map(Number), [ 9, 8, 7, 6, 5, 4, 3, 2, 1 ]);
+    readonly dv1 = this.passo1.resto >= 10 ? 0 : this.passo1.resto;
+    readonly passo2 = passoDv(BASE, BASE.map(Number), [ 1, 2, 3, 4, 5, 6, 7, 8, 9 ]);
+    readonly dv2 = this.passo2.resto >= 10 ? 0 : this.passo2.resto;
 }

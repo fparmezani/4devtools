@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://www.4devtools.com/</loc><lastmod>2026-11-22</lastmod></url>
   <url><loc>https://www.4devtools.com/gerar-cpf</loc><lastmod>2026-11-22</lastmod></url>
   <url><loc>https://www.4devtools.com/gerar-cnpj</loc><lastmod>2026-11-22</lastmod></url>
   <url><loc>https://www.4devtools.com/gerar-cnh</loc><lastmod>2026-11-22</lastmod></url>
@@ -24,10 +25,15 @@
   <url><loc>https://www.4devtools.com/blog/pispasep</loc><lastmod>2026-11-22</lastmod></url>
   <url><loc>https://www.4devtools.com/blog/cartaocredito</loc><lastmod>2026-11-22</lastmod></url>
   <url><loc>https://www.4devtools.com/blog/aih</loc><lastmod>2026-11-22</lastmod></url>
-  <url><loc>https://www.4devtools.com/blog/oqueebitcoin</loc><lastmod>2026-11-22</lastmod></url>
-  <url><loc>https://www.4devtools.com/blog/ethereum</loc><lastmod>2026-11-22</lastmod></url>
   <url><loc>https://www.4devtools.com/sobre</loc><lastmod>2026-11-22</lastmod></url>
   <url><loc>https://www.4devtools.com/contato</loc><lastmod>2026-11-22</lastmod></url>
   <url><loc>https://www.4devtools.com/politica-de-privacidade</loc><lastmod>2026-11-22</lastmod></url>
   <url><loc>https://www.4devtools.com/termo-de-uso</loc><lastmod>2026-11-22</lastmod></url>
+  <url><loc>https://www.4devtools.com/tutoriais</loc><lastmod>2026-11-22</lastmod></url>
+  <url><loc>https://www.4devtools.com/tutoriais/dados-de-teste-lgpd</loc><lastmod>2026-11-22</lastmod></url>
+  <url><loc>https://www.4devtools.com/tutoriais/cnpj-alfanumerico</loc><lastmod>2026-11-22</lastmod></url>
+  <url><loc>https://www.4devtools.com/tutoriais/validar-cpf-cnpj-angular</loc><lastmod>2026-11-22</lastmod></url>
+  <url><loc>https://www.4devtools.com/tutoriais/massa-de-dados-faker-python</loc><lastmod>2026-11-22</lastmod></url>
+  <url><loc>https://www.4devtools.com/tutoriais/mascaras-javascript</loc><lastmod>2026-11-22</lastmod></url>
+  <url><loc>https://www.4devtools.com/tutoriais/playwright-dados-gerados</loc><lastmod>2026-11-22</lastmod></url>
 </urlset>

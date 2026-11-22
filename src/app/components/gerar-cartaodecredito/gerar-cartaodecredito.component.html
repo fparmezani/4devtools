@@ -1,12 +1,18 @@
-<div class="card">
-    <div class="card-body">
-        <h1 class="box-title">Cartão de Crédito: tudo sobre essa ferramenta</h1>
-        <p class="text-muted m-t-10">O cartão de crédito é um meio de pagamento que permite comprar a prazo, com os
-            valores reunidos em uma fatura paga mensalmente.</p>
-    </div>
-    <div class="card-body" style="padding-top: 0;">
-        <div style="border: 1px solid #e0e0e0; border-radius: 6px; padding: 20px;">
-            <h2 class="box-title f-s-20 m-b-10">Gere seu cartão de crédito</h2>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card doc">
+            <div class="card-body">
+                <h1 class="box-title">Gerador de Cartão de Crédito para testes</h1>
+                <p class="doc-lead">Gere números de cartão fictícios que passam no algoritmo de Luhn, com validade e
+                    CVV, para testar formulários de checkout e validações de front-end. Abaixo você entende como o
+                    número é formado, vê o cálculo de Luhn passo a passo e encontra funções de validação em
+                    TypeScript, Python, C# e Java.</p>
+            </div>
+
+            <div class="card-body pt-0">
+                <div class="doc-tool">
+                    <h2 class="box-title f-s-20 m-b-10">Gere um cartão</h2>
+            
                 <div class="row m-b-20">
                     <div class="col-lg-12 col-md-12 col-sm-12">
                         <p class="text-muted">Número do Cartão</p>
@@ -57,106 +63,159 @@
                         Copiar
                         Cartão de Crédito</button>
                 </div>
+            
+                </div>
+                <p class="doc-alert">
+                    <strong>Estes números não fazem compras.</strong> Eles só passam na verificação matemática de
+                    Luhn: não têm conta, saldo nem limite, e qualquer transação real é recusada pelo banco emissor.
+                    Tentar usar cartões que não são seus é crime. Para testar pagamentos de ponta a ponta, use os
+                    cartões de teste do seu gateway (veja abaixo).
+                </p>
             </div>
-        </div>
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="card-body">
-                <p>O cartão de crédito se tornou um dos queridinhos dos brasileiros, sendo que todo mundo possui pelo
-                    menos
-                    uma
-                    opção de crédito em sua carteira. Mas, ele pode ser um grande vilão se essas pessoas não souberem
-                    lidar
-                    com
-                    uma opção de gastar dinheiro sem ao menos ter dinheiro para gastar ainda.</p>
 
-                <p>O único limite que é definido é o que o cartão possibilita. Do contrário, seria possível gastar muito
-                    dinheiro sem que haja uma garantia de pagamento em algum momento.</p>
+            <div class="card-body pt-0">
+                <nav class="doc-toc" aria-label="Nesta página">
+                    <strong>Nesta página</strong>
+                    <a href="/gerar-cartaodecredito#estrutura">Como o número é formado</a>
+                    <a href="/gerar-cartaodecredito#luhn">Algoritmo de Luhn</a>
+                    <a href="/gerar-cartaodecredito#codigo">Validação em código</a>
+                    <a href="/gerar-cartaodecredito#gateways">Testes de pagamento</a>
+                    <a href="/gerar-cartaodecredito#erros">Erros comuns</a>
+                    <a href="/gerar-cartaodecredito#seguranca">PCI DSS e LGPD</a>
+                    <a href="/gerar-cartaodecredito#faq">Perguntas frequentes</a>
+                </nav>
 
-                <p>No final, o valor gasto só é pago quando é feito o fechamento da fatura do cartão. Ou seja, é
-                    levantado
-                    todo
-                    o valor gasto no período de um mês (sendo possível selecionar a data de fechamento conforme seja
-                    mais
-                    fácil
-                    para a realização do pagamento) e é feito o pagamento de todos os gastos de uma só vez.</p>
+                <h2 id="estrutura" class="box-subtitle">Como o número do cartão é formado</h2>
+                <p>O número do cartão (PAN, de <em>Primary Account Number</em>) segue a norma ISO/IEC 7812 e tem, em
+                    geral, de 13 a 19 dígitos (a maioria tem 16):</p>
+                <ul>
+                    <li><strong>Primeiro dígito:</strong> o setor. <code>4</code> e <code>5</code> são bancário e
+                        financeiro, por exemplo.</li>
+                    <li><strong>Primeiros 6 a 8 dígitos (BIN ou IIN):</strong> identificam a bandeira e o banco
+                        emissor.</li>
+                    <li><strong>Dígitos seguintes:</strong> identificam a conta do cliente.</li>
+                    <li><strong>Último dígito:</strong> o verificador, calculado pelo algoritmo de Luhn.</li>
+                </ul>
+                <div class="doc-table-wrap">
+                    <table class="doc-table">
+                        <thead>
+                            <tr><th>Bandeira</th><th>Começa com</th><th>Tamanho comum</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Visa</td><td>4</td><td>16</td></tr>
+                            <tr><td>Mastercard</td><td>51 a 55 e 2221 a 2720</td><td>16</td></tr>
+                            <tr><td>American Express</td><td>34 ou 37</td><td>15</td></tr>
+                            <tr><td>Elo, Hipercard e outras</td><td>Faixas próprias de BIN</td><td>16</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p>Detectar a bandeira pelos primeiros dígitos é útil para mostrar o logo no formulário, mas faixas
+                    de BIN mudam com o tempo. Em produção, confie na resposta do gateway.</p>
 
-                <p>Quando o pagamento não é efetuado ou é feito com atraso, haverá juros em cima desse valor que irão
-                    crescer
-                    cada dia que passar.</p>
+                <h2 id="luhn" class="box-subtitle">Algoritmo de Luhn, passo a passo</h2>
+                <p>O Luhn detecta erros de digitação, como um dígito trocado. Vamos calcular o verificador de
+                    <code>4539 1488 0343 646</code>. Da direita para a esquerda, a partir do dígito que fica
+                    imediatamente à esquerda do verificador, <strong>dobre um dígito sim, outro não</strong>. Se o
+                    dobro passar de 9, subtraia 9:</p>
+                <div class="doc-table-wrap">
+                    <table class="doc-table doc-table-num">
+                        <tbody>
+                            <tr><th>Dígito</th><td *ngFor="let l of linhasLuhn">{{ l.n }}</td></tr>
+                            <tr><th>Dobra?</th><td *ngFor="let l of linhasLuhn">{{ l.dobra ? '×2' : '' }}</td></tr>
+                            <tr><th>Resultado</th><td *ngFor="let l of linhasLuhn">{{ l.resultado }}</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p>Soma = <strong>{{ somaLuhn }}</strong>. O verificador é o número que falta para a soma chegar ao
+                    próximo múltiplo de 10: <code>(10 − {{ somaLuhn }} % 10) % 10 = {{ dvLuhn }}</code>. Resultado:
+                    <code>4539 1488 0343 646{{ dvLuhn }}</code>.</p>
+                <p>Para <strong>validar</strong> um número completo, o processo é o mesmo, incluindo o verificador
+                    sem dobrá-lo: se a soma total for múltipla de 10, o número é válido.</p>
 
-                <p>Hoje em dia é muito mais fácil ter um cartão de crédito, principalmente com as versões digitais que
-                    facilitam o processo e tudo pode ser feito no próprio celular de quem está solicitando. O Nubank e o
-                    Inter,
-                    por exemplo, são opções de cartões de crédito de fácil acesso e sem anuidade.</p>
+                <h2 id="codigo" class="box-subtitle">Validação de cartão em código</h2>
+                <p>As funções abaixo aceitam o número com ou sem espaços e conferem só o Luhn. Isso basta para dar
+                    retorno rápido no formulário; a aprovação de verdade é sempre do gateway.</p>
+                <app-code-tabs [snippets]="snippets"></app-code-tabs>
+                <p class="text-muted">Casos para os seus testes unitários: <code>4539 1488 0343 6467</code>,
+                    <code>4242 4242 4242 4242</code> e <code>3782 822463 10005</code> (Amex, 15 dígitos) são válidos;
+                    <code>4539 1488 0343 6468</code> (verificador errado) e <code>1234</code> (curto demais) são
+                    inválidos.</p>
 
-                <p>O cartão de crédito sem anuidade foi uma das novidades que chegaram há alguns anos e estão tomando
-                    conta
-                    do
-                    mercado. Afinal, se existe uma opção onde você não precisa pagar nada para ter o seu cartão é melhor
-                    utilizá-la do que pagar por um mesmo tipo de serviço.</p>
+                <h2 id="gateways" class="box-subtitle">Testes de pagamento: use os cartões do seu gateway</h2>
+                <p>Os números gerados aqui servem para testar <strong>validação de formulário</strong>. Para testar
+                    autorização, recusa, estorno, 3-D Secure ou webhooks, use o <strong>ambiente de testes
+                        (sandbox)</strong> do seu provedor de pagamento, com os cartões de teste publicados na
+                    documentação dele. Esses cartões simulam cenários específicos (aprovado, saldo insuficiente,
+                    cartão expirado etc.), o que um número aleatório não consegue fazer.</p>
+                <p>Um exemplo conhecido é o <code>4242 4242 4242 4242</code>, cartão de teste do Stripe. Cada gateway
+                    tem sua própria lista; consulte sempre a documentação oficial.</p>
+                <p>Em bibliotecas de dados falsos, o <code>@faker-js/faker</code> tem
+                    <code>faker.finance.creditCardNumber()</code>, e o Faker do Python tem
+                    <code>fake.credit_card_number()</code>.</p>
 
-                <p> Tanto pessoa física quanto pessoa jurídica podem solicitar o cartão de crédito. Em ambos os casos é
-                    feito
-                    uma verificação do perfil do solicitante (principalmente se possui dividendos e qual a renda mensal
-                    atual).
-                </p>
+                <h2 id="erros" class="box-subtitle">Erros comuns ao trabalhar com cartão</h2>
+                <ul>
+                    <li><strong>Fixar 16 dígitos:</strong> American Express tem 15, e há cartões com até 19.</li>
+                    <li><strong>Usar <code>type="number"</code> no campo:</strong> o navegador pode cortar zeros,
+                        mostrar setas e usar notação científica. Use texto com
+                        <code>inputmode="numeric"</code> e <code>autocomplete="cc-number"</code>.</li>
+                    <li><strong>Exigir CVV de 3 dígitos:</strong> o da Amex tem 4.</li>
+                    <li><strong>Validar a data de validade pelo dia:</strong> o cartão vale até o último dia do mês
+                        impresso (formato <code>MM/AA</code>).</li>
+                    <li><strong>Confiar só no Luhn:</strong> ele não diz se o cartão existe, tem limite ou está
+                        bloqueado.</li>
+                </ul>
 
-                <p>Informações como as citadas acima são importantes para saber se a pessoa será aprovada ou não na
-                    análise
-                    de
-                    crédito. Sendo aprovada, o limite do cartão pode ser definido de acordo com o valor que o consumidor
-                    recebe
-                    de renda mensalmente.</p>
+                <h2 id="seguranca" class="box-subtitle">PCI DSS e LGPD</h2>
+                <p>Dados de cartão têm regras próprias, definidas pelo <strong>PCI DSS</strong> (<em>Payment Card
+                    Industry Data Security Standard</em>), o padrão de segurança exigido pelas bandeiras. Os pontos que
+                    mais afetam quem desenvolve:</p>
+                <ul>
+                    <li><strong>O CVV nunca pode ser armazenado</strong> depois da autorização, nem criptografado.
+                    </li>
+                    <li><strong>O número completo não deve aparecer em logs</strong>, mensagens de erro ou
+                        ferramentas de monitoramento. Mostre só os 4 últimos dígitos (ex.:
+                        <code>**** **** **** 6467</code>).</li>
+                    <li><strong>Prefira a tokenização do gateway:</strong> o formulário envia o cartão direto ao
+                        provedor e o seu sistema guarda só um token. Isso reduz muito o escopo do PCI DSS.</li>
+                    <li><strong>Nunca use cartões reais em homologação</strong>, nem os seus.</li>
+                </ul>
+                <p>Além disso, o número do cartão ligado ao titular é <strong>dado pessoal</strong> pela LGPD (art.
+                    5º, I) e exige medidas de segurança adequadas (art. 46). Veja mais boas práticas na seção de LGPD
+                    do <a href="/gerar-cpf#lgpd">Gerador de CPF</a>.</p>
+                <p class="text-muted">Este conteúdo é informativo e não substitui a orientação da área de segurança,
+                    do encarregado de dados (DPO) ou do jurídico da sua empresa.</p>
 
-                <p>É uma forma de evitar que ultrapassem os gastos de acordo com o valor que ele pode pagar. Assim, o
-                    banco
-                    se
-                    protege de possíveis não pagamentos.</p>
+                <h2 id="faq" class="box-subtitle">Perguntas frequentes</h2>
+                <div class="doc-faq">
+                    <details>
+                        <summary>Dá para fazer compras com o cartão gerado?</summary>
+                        <p>Não. O número só passa na verificação de Luhn. Não existe conta por trás, e o banco
+                            recusa qualquer transação.</p>
+                    </details>
+                    <details>
+                        <summary>É legal usar um gerador de cartão de crédito?</summary>
+                        <p>Sim, para testar formulários e validações. Ilegal é tentar usar números de cartões que não
+                            são seus em compras ou cadastros reais.</p>
+                    </details>
+                    <details>
+                        <summary>Para que servem a validade e o CVV gerados?</summary>
+                        <p>Para preencher formulários de teste por completo. Eles são aleatórios e não têm relação
+                            com nenhum cartão real.</p>
+                    </details>
+                    <details>
+                        <summary>Qual cartão uso para testar pagamento aprovado e recusado?</summary>
+                        <p>Os cartões de teste do sandbox do seu gateway de pagamento. Cada um simula um resultado
+                            diferente, descrito na documentação do provedor.</p>
+                    </details>
+                </div>
 
-                <p>E sim, é possível ter sua solicitação de crédito negada pelos mesmos motivos que citamos acima. Se
-                    você
-                    possui muitas dívidas, não pagou as últimas contas em dia ou não possui uma renda mensal,
-                    possivelmente
-                    você
-                    terá dificuldades para conseguir solicitar um cartão de crédito pessoal.</p>
-
-                <p>Existem opções que aceitam mesmo nessas condições, mas envolverá outras questões (como taxas mais
-                    altas)
-                    para garantir certa segurança.</p>
-
-
-                <h2 class="box-subtitle">Gerador de cartão de crédito</h2>
-
-                <p>Um <a href="/gerar-cartaodecredito">gerador de cartão de crédito</a> serve para auxiliar nos testes
-                    de softwares e é voltado para quem
-                    está estudando assuntos da área, quem já trabalha com programação e analistas de dados.</p>
-
-                <p>É uma forma de testar o serviço que será oferecido antes de pôr no ar, evitando desgaste do
-                    consumidor e
-                    do
-                    próprio profissional que estará responsável pela ação.</p>
-
-                <p>Utilizar esses dados para realizar atividades ilegais é algo antiético e não deve ser feito em nenhum
-                    momento.</p>
-
-
-                <h2 class="box-subtitle">Conclusão</h2>
-
-                <p>Ter um cartão de crédito é algo que requer muita responsabilidade, assim como utilizar o gerador de
-                    cartão de crédito para a realização de testes de software e demais ações necessárias para colocar um
-                    programa para funcionar.</p>
-
-                <p>Ao utilizar o gerador de cartão de crédito, esteja ciente de que se trata de um material para teste e
-                    não para fins ilegais. Portanto, utilize com sabedoria e evite problemas futuros.</p>
-
-                <p>Esperamos que o nosso gerador possa lhe ajudar a realizar seus testes e concluir seus estudos.
-                    Para um cadastro de comprador completo, combine com o <a href="/gerar-pessoa">Gerador de Pessoa</a>,
-                    que já inclui nome, CPF, endereço e telefone. Para saber mais sobre cartões de crédito, leia o
-                    <a href="/blog/cartaocredito">artigo completo sobre cartão de crédito</a>.
-                </p>
-
+                <h2 class="box-subtitle">Veja também</h2>
+                <p>O <a href="/gerar-pessoa">Gerador de Pessoa</a> cria um cadastro completo com cartão, e o artigo
+                    <a href="/blog/cartaocredito">Número do cartão de crédito: como funciona</a> explica cada parte do
+                    número.</p>
             </div>
         </div>
     </div>
 </div>
+<app-leiatambem></app-leiatambem>

@@ -1,0 +1,78 @@
+<div class="row">
+    <div class="col-lg-12">
+        <article class="card doc doc-artigo">
+            <div class="card-body">
+                <h1 class="box-title">Dados de teste e LGPD: guia prático para desenvolvedores</h1>
+                <p class="doc-lead">Usar uma cópia da produção em homologação é rápido, mas expõe dados de clientes a mais pessoas,
+                    máquinas e ferramentas. Veja o que a LGPD diz sobre isso e como montar ambientes de teste com dados sintéticos,
+                    anonimizados e logs mascarados.</p>
+                <p class="doc-meta">Por <a href="/sobre">Fernando Parmezani</a> · Publicado em 22 de novembro de 2026</p>
+
+                <h2 class="box-subtitle">Por que dados reais em teste são um problema</h2>
+                <p>Pela LGPD (Lei nº 13.709/2018), qualquer operação com dados pessoais, inclusive copiar, guardar ou consultar
+                    num ambiente de testes, é <strong>tratamento</strong> (art. 5º, X). Isso traz algumas obrigações:</p>
+                <ul>
+                    <li><strong>Finalidade e necessidade (art. 6º, I e III):</strong> os dados só podem ser usados para o
+                        propósito informado ao titular, e no mínimo necessário. "Testar uma tela nova" raramente justifica o CPF
+                        verdadeiro de milhares de clientes.</li>
+                    <li><strong>Segurança (art. 46):</strong> a empresa deve proteger os dados com medidas técnicas e
+                        administrativas. Ambientes de teste costumam ter menos proteção: acessos amplos, dumps em notebooks, logs
+                        detalhados, ferramentas de terceiros.</li>
+                    <li><strong>Incidentes (art. 48):</strong> um vazamento em homologação é um incidente de segurança como
+                        qualquer outro, e pode exigir comunicação à ANPD e aos titulares.</li>
+                </ul>
+                <p>Some a isso que muitas bases têm <strong>dados sensíveis</strong> (art. 5º, II), como saúde, biometria e
+                    filiação sindical ou política, que exigem cuidado redobrado.</p>
+
+                <h2 class="box-subtitle">Três estratégias, da mais segura para a menos</h2>
+                <h3 class="doc-h3">1. Dados sintéticos</h3>
+                <p>Gere os dados do zero: nomes, CPFs, endereços e telefones fictícios, mas em formato válido. Como não se referem
+                    a ninguém, ficam fora do problema. É a melhor opção para seeds, fixtures, testes automatizados e demonstrações.
+                    Os geradores do 4DevTools (<a href="/gerar-cpf">CPF</a>, <a href="/gerar-cnpj">CNPJ</a>,
+                    <a href="/gerar-pessoa">Pessoa</a>) e bibliotecas como o Faker servem para isso. Veja o tutorial
+                    <a href="/tutoriais/massa-de-dados-faker-python">Massa de dados de teste com Python e Faker</a>.</p>
+
+                <h3 class="doc-h3">2. Cópia anonimizada</h3>
+                <p>Às vezes você precisa do volume e das particularidades da produção, por exemplo para testar desempenho ou
+                    reproduzir um bug. Nesse caso, restaure a cópia num ambiente isolado e <strong>substitua os dados pessoais antes
+                        de liberar o acesso</strong>. A LGPD diz que dados anonimizados não são dados pessoais (art. 12), desde que
+                    a anonimização não possa ser revertida com esforços razoáveis.</p>
+                <p>Um primeiro passo em SQL, trocando ou apagando campos que identificam pessoas:</p>
+                <app-code-tabs [snippets]="t.lgpdSql"></app-code-tabs>
+                <p>Para colunas que precisam continuar válidas (um CPF que passa na validação do sistema, por exemplo), troque o
+                    valor real por um gerado:</p>
+                <app-code-tabs [snippets]="t.lgpdPython"></app-code-tabs>
+                <p>Atenção ao que <strong>não</strong> é anonimização: criptografar a coluna ou trocar o CPF por um código que
+                    pode ser convertido de volta (com uma tabela de correspondência guardada em outro lugar) é
+                    <em>pseudonimização</em>. O dado continua sendo pessoal. Também cuidado com combinações: data de nascimento
+                    completa, CEP e sexo, juntos, podem identificar uma pessoa mesmo sem nome e CPF.</p>
+
+                <h3 class="doc-h3">3. Acesso restrito à cópia real (exceção)</h3>
+                <p>Se não houver alternativa, trate o ambiente como produção: mesmo controle de acesso, mesma criptografia, logs
+                    de quem acessou, prazo para apagar a cópia e registro do motivo. Na prática, sai mais caro do que anonimizar.</p>
+
+                <h2 class="box-subtitle">Logs: o vazamento silencioso</h2>
+                <p>Logs costumam ser enviados para ferramentas de terceiros e guardados por meses, e é comum alguém registrar o
+                    objeto inteiro de uma requisição, com CPF, e-mail e telefone. Mascare os campos antes de registrar:</p>
+                <app-code-tabs [snippets]="t.lgpdMascararLog"></app-code-tabs>
+                <p>Melhor ainda é não registrar o dado: muitas vezes o ID interno do cliente basta para investigar um problema.</p>
+
+                <h2 class="box-subtitle">Checklist para o seu time</h2>
+                <ul>
+                    <li>Seeds e fixtures usam apenas dados gerados.</li>
+                    <li>Nenhum dump de produção é restaurado fora da produção sem passar pelo script de anonimização.</li>
+                    <li>O script de anonimização cobre todas as tabelas com dados pessoais, inclusive as novas. Revise a cada
+                        migração.</li>
+                    <li>CPF, e-mail, telefone e tokens são mascarados nos logs.</li>
+                    <li>Prints, vídeos e tickets de bug usam dados fictícios.</li>
+                    <li>Cópias e exportações temporárias têm prazo para serem apagadas.</li>
+                </ul>
+                <p class="text-muted">Este conteúdo é informativo e não substitui a orientação do encarregado de dados (DPO) ou do
+                    jurídico da sua empresa.</p>
+
+                <h2 class="box-subtitle">Outros tutoriais</h2>
+                <app-tutoriais-lista atual="dados-de-teste-lgpd"></app-tutoriais-lista>
+            </div>
+        </article>
+    </div>
+</div>

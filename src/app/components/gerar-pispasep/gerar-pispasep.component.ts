@@ -1,3 +1,5 @@
+import { SNIPPETS } from 'src/app/shared/snippets';
+import { passoDv } from 'src/app/shared/tabela-dv/tabela-dv.component';
 import { Component, OnInit } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 import * as copy from 'copy-to-clipboard';
@@ -9,6 +11,9 @@ import { GeradorService } from 'src/app/services/gerador.service';
     templateUrl: './gerar-pispasep.component.html',
 })
 export class GerarPisPasepComponent implements OnInit {
+    readonly snippets = SNIPPETS['pis'];
+    readonly passo = passoDv('1201234567'.split(''), '1201234567'.split('').map(Number), [ 3, 2, 9, 8, 7, 6, 5, 4, 3, 2 ]);
+    readonly dv = 11 - this.passo.resto >= 10 ? 0 : 11 - this.passo.resto;
     pispasep: string = '';
     formatarPISPASEP: boolean = true;
 

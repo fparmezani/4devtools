@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, Type } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { GerarCpfComponent } from './components/gerar-cpf/gerar-cpf.component';
@@ -32,22 +32,39 @@ import { TituloeleitorComponent } from './blog/tituloeleitor/tituloeleitor.compo
 import { CnsComponent } from './blog/cns/cns.component';
 import { PispasepComponent } from './blog/pispasep/pispasep.component';
 import { BitcoinComponent } from './components/bitcoin/bitcoin.component';
-import { EthereumComponent } from './blog/ethereum/ethereum.component';
 import { AihComponent } from './blog/aih/aih.component';
-import { OqueeBitcoinComponent } from './blog/oqueebitcoin/oqueebitcoin.component';
 import { WhatsappComponent } from './components/whatsapp/whatsapp.component';
 import { TelegramComponent } from './components/telegram/telegram.component';
 import { GerarRgComponent } from './components/gerar-rg/gerar-rg.component';
 import { JwtDecoderComponent } from './components/jwt-decoder/jwt-decoder.component';
 
+import { TutoriaisIndiceComponent } from './tutoriais/indice/tutoriais-indice.component';
+import { TutorialLgpdComponent } from './tutoriais/dados-de-teste-lgpd/dados-de-teste-lgpd.component';
+import { TutorialCnpjAlfanumericoComponent } from './tutoriais/cnpj-alfanumerico/cnpj-alfanumerico.component';
+import { TutorialAngularComponent } from './tutoriais/validar-cpf-cnpj-angular/validar-cpf-cnpj-angular.component';
+import { TutorialFakerComponent } from './tutoriais/massa-de-dados-faker-python/massa-de-dados-faker-python.component';
+import { TutorialMascarasComponent } from './tutoriais/mascaras-javascript/mascaras-javascript.component';
+import { TutorialPlaywrightComponent } from './tutoriais/playwright-dados-gerados/playwright-dados-gerados.component';
+import { HomeComponent } from './shared/home/home.component';
+import { TUTORIAIS } from './tutoriais/tutoriais.data';
+
 const seo = (title: string, description: string, noindex = false) => ({ seo: { title, description, noindex } });
 
+const TUTORIAL_COMPONENTES: Record<string, Type<unknown>> = {
+    'dados-de-teste-lgpd': TutorialLgpdComponent,
+    'cnpj-alfanumerico': TutorialCnpjAlfanumericoComponent,
+    'validar-cpf-cnpj-angular': TutorialAngularComponent,
+    'massa-de-dados-faker-python': TutorialFakerComponent,
+    'mascaras-javascript': TutorialMascarasComponent,
+    'playwright-dados-gerados': TutorialPlaywrightComponent,
+};
+
 const routes: Routes = [
-    { path: '', redirectTo: 'gerar-cnpj', pathMatch: 'full' },
+    { path: '', pathMatch: 'full', component: HomeComponent, data: seo('Geradores de CPF, CNPJ e dados de teste para desenvolvedores', 'Gere CPF, CNPJ (inclusive alfanumérico), CNH, PIS, RENAVAM e outros dados fictícios para testes, com cálculo explicado e validação em TypeScript, Python, C# e Java.') },
     { path: 'dashboard', component: DashboardComponent, data: seo('Cotações do Dólar, Euro e Bitcoin hoje', 'Acompanhe as cotações diárias do dólar americano, do euro e do bitcoin em reais e converta valores na hora.', true) },
     { path: 'gerar-cpf', component: GeradorCpfComponent, data: seo('Gerador de CPF válido para testes', 'Gere números de CPF válidos, com ou sem máscara e por estado, para testar sistemas e formulários. Dados fictícios, só para desenvolvimento.') },
-    { path: 'gerar-rg', component: GerarRgComponent, data: seo('Gerador de RG para testes', 'Gere números de RG com dígito verificador para testar cadastros e validações em sistemas. Dados fictícios para desenvolvedores e QA.') },
-    { path: 'gerar-cnpj', component: GeradorCnpjComponent, data: seo('Gerador de CNPJ válido para testes', 'Gere números de CNPJ válidos, com ou sem pontuação, para testar sistemas, APIs e formulários. Dados fictícios para desenvolvedores e testadores.') },
+    { path: 'gerar-rg', component: GerarRgComponent, data: seo('Gerador de RG para testes', 'Gere números de RG no formato de SP com dígito verificador (0 a 9 ou X). Entenda por que o RG varia por estado, a nova CIN e veja funções de validação.') },
+    { path: 'gerar-cnpj', component: GeradorCnpjComponent, data: seo('Gerador de CNPJ válido para testes (numérico e alfanumérico)', 'Gere CNPJs válidos no formato tradicional ou no novo formato alfanumérico, com ou sem pontuação. Veja o cálculo passo a passo e funções de validação em TypeScript, Python, C# e Java.') },
     { path: 'gerar-pessoa', component: GerarPessoaComponent, data: seo('Gerador de Pessoa fictícia para testes', 'Gere dados completos de pessoas fictícias (nome, CPF, RG, endereço, telefone e e-mail) para popular bancos de dados de teste.') },
     { path: 'gerar-cartaodecredito', component: GerarCartaodecreditoComponent, data: seo('Gerador de Cartão de Crédito para testes', 'Gere números de cartão de crédito fictícios que passam no algoritmo de Luhn para testar checkouts e validações. Não servem para compras.') },
     { path: 'gerar-cnh', component: GeradorCnhComponent, data: seo('Gerador de CNH válida para testes', 'Gere números de CNH (Carteira Nacional de Habilitação) com dígitos verificadores válidos para testar sistemas. Dados fictícios.') },
@@ -67,16 +84,19 @@ const routes: Routes = [
     { path: 'buy-me-a-coffe', component: BuyMeACoffeComponent, data: seo('Apoie o 4DevTools', 'Ajude a manter o 4DevTools gratuito e com novas ferramentas para a comunidade de desenvolvedores.') },
 
     /*BLOG */
-    { path: 'blog/cpf', component: CpfComponent, data: seo('CPF: o que é, como funciona e como é calculado', 'Entenda o que é o CPF, para que serve e como são calculados os dígitos verificadores do Cadastro de Pessoa Física.') },
-    { path: 'blog/cnpj', component: CnpjComponent, data: seo('CNPJ: o que é e como funciona', 'Entenda o que é o CNPJ, como é formado o número do Cadastro Nacional da Pessoa Jurídica e como validá-lo.') },
-    { path: 'blog/cartaocredito', component: CartaodecreditoComponent, data: seo('Número do cartão de crédito: como funciona', 'Entenda como é formado o número do cartão de crédito, o que indica cada parte e como funciona a validação pelo algoritmo de Luhn.') },
-    { path: 'blog/renavam', component: RenavamComponent, data: seo('RENAVAM: o que é e para que serve', 'Entenda o que é o RENAVAM, onde encontrá-lo no documento do veículo e como funciona o seu dígito verificador.') },
-    { path: 'blog/tituloeleitor', component: TituloeleitorComponent, data: seo('Título de Eleitor: o que é e como é formado', 'Entenda o que é o Título de Eleitor, como é formado o seu número e o que significam os dígitos verificadores.') },
-    { path: 'blog/cns', component: CnsComponent, data: seo('Cartão Nacional de Saúde (CNS): o que é', 'Entenda o que é o Cartão Nacional de Saúde (Cartão SUS), para que serve e como é formado o número do CNS.') },
-    { path: 'blog/pispasep', component: PispasepComponent, data: seo('PIS/PASEP: o que é e como funciona', 'Entenda o que é o PIS/PASEP, a diferença entre eles, o NIT e como é calculado o dígito verificador.') },
-    { path: 'blog/oqueebitcoin', component: OqueeBitcoinComponent, data: seo('O que é Bitcoin e como funciona', 'Entenda o que é o Bitcoin, como funciona a blockchain e a mineração da criptomoeda mais conhecida do mundo.') },
-    { path: 'blog/ethereum', component: EthereumComponent, data: seo('O que é Ethereum e como funciona', 'Entenda o que é o Ethereum, para que servem os contratos inteligentes e qual a diferença em relação ao Bitcoin.') },
-    { path: 'blog/aih', component: AihComponent, data: seo('AIH: o que é a Autorização de Internação Hospitalar', 'Entenda o que é a AIH (Autorização de Internação Hospitalar) do SUS, para que serve e como é formado o seu número.') },
+    { path: 'blog/cpf', component: CpfComponent, data: seo('CPF: o que é, para que serve e como consultar', 'Entenda o que é o CPF, para que serve, como tirar, como consultar a situação cadastral e por que ele está virando o número único do cidadão.') },
+    { path: 'blog/cnpj', component: CnpjComponent, data: seo('CNPJ: o que é, quem precisa e como funciona', 'Entenda o que é o CNPJ, quem precisa ter, como o número é formado, o que muda com o CNPJ alfanumérico e como consultar uma empresa.') },
+    { path: 'blog/cartaocredito', component: CartaodecreditoComponent, data: seo('Número do cartão de crédito: o que significa cada parte', 'Entenda o que indicam os dígitos do cartão, para que servem CVV e validade, por que o cartão virtual tem outro número e como evitar golpes.') },
+    { path: 'blog/renavam', component: RenavamComponent, data: seo('RENAVAM: o que é, onde encontrar e para que serve', 'Entenda o que é o RENAVAM, onde encontrá-lo no CRLV, para que é usado e qual a diferença entre RENAVAM, placa e chassi.') },
+    { path: 'blog/tituloeleitor', component: TituloeleitorComponent, data: seo('Título de Eleitor: o que é, quem precisa e como funciona', 'Veja quem é obrigado a votar, como tirar ou transferir o título, para que serve a quitação eleitoral e como o número é formado.') },
+    { path: 'blog/cns', component: CnsComponent, data: seo('Cartão Nacional de Saúde (CNS): o que é e como usar', 'Entenda o que é o Cartão do SUS, como consultar o número no Meu SUS Digital, para que ele serve e o que muda com o uso do CPF.') },
+    { path: 'blog/pispasep', component: PispasepComponent, data: seo('PIS/PASEP: o que é, como consultar e quem recebe o abono', 'Entenda a diferença entre PIS e PASEP, onde consultar o seu número e quais são as regras do abono salarial.') },
+    { path: 'blog/aih', component: AihComponent, data: seo('AIH: o que é a Autorização de Internação Hospitalar', 'Entenda o que é a AIH do SUS, quando ela é emitida, como funciona o processo de internação e para que servem os seus dados.') },
+
+
+    /*TUTORIAIS */
+    { path: 'tutoriais', component: TutoriaisIndiceComponent, data: seo('Tutoriais para desenvolvedores', 'Guias práticos sobre validação de CPF e CNPJ, CNPJ alfanumérico, máscaras, dados de teste, Faker, Playwright e LGPD, com código testado.') },
+    ...TUTORIAIS.map((t) => ({ path: 'tutoriais/' + t.slug, component: TUTORIAL_COMPONENTES[t.slug], data: seo(t.titulo, t.resumo) })),
 
     /*LINK */
     { path: 'jwt-decoder', component: JwtDecoderComponent, data: seo('JWT Decoder: decodifique e valide tokens JWT online', 'Decodifique e valide tokens JWT online. Veja header, payload e expiração do token direto no navegador, sem enviar dados a servidores.') },

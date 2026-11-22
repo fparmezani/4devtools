@@ -47,3 +47,6 @@ Thumbs.db
 /backup
 # Vercel Build Output
 /.vercel
+
+# Screenshots de validação
+/.playwright-mcp

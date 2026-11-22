@@ -1,0 +1,67 @@
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card doc">
+            <div class="card-body">
+                <h1 class="box-title">Geradores de documentos e dados de teste para desenvolvedores</h1>
+                <p class="doc-lead">O 4DevTools gera CPF, CNPJ (inclusive alfanumérico), CNH, PIS, RENAVAM e outros
+                    dados brasileiros fictícios para testar sistemas sem usar informações de pessoas reais. Cada
+                    gerador explica como o número é formado e traz funções de validação prontas em TypeScript,
+                    Python, C# e Java.</p>
+
+                <h2 class="box-subtitle">Documentos</h2>
+                <div class="doc-cards">
+                    <a *ngFor="let f of documentos" class="doc-card" [href]="f.rota">
+                        <img class="doc-card-img" [src]="f.imagem" width="1280" height="720" loading="lazy" decoding="async"
+                            [alt]="'Miniatura do ' + f.nome" />
+                        <strong>{{ f.nome }}</strong>
+                        <span>{{ f.descricao }}</span>
+                    </a>
+                </div>
+
+                <h2 class="box-subtitle">Cadastros completos</h2>
+                <div class="doc-cards">
+                    <a *ngFor="let f of cadastros" class="doc-card" [href]="f.rota">
+                        <img class="doc-card-img" [src]="f.imagem" width="1280" height="720" loading="lazy" decoding="async"
+                            [alt]="'Miniatura do ' + f.nome" />
+                        <strong>{{ f.nome }}</strong>
+                        <span>{{ f.descricao }}</span>
+                    </a>
+                </div>
+
+                <h2 class="box-subtitle">Utilitários</h2>
+                <div class="doc-cards">
+                    <a *ngFor="let f of utilitarios" class="doc-card" [href]="f.rota">
+                        <img class="doc-card-img" [src]="f.imagem" width="1280" height="720" loading="lazy" decoding="async"
+                            [alt]="'Miniatura do ' + f.nome" />
+                        <strong>{{ f.nome }}</strong>
+                        <span>{{ f.descricao }}</span>
+                    </a>
+                </div>
+
+                <h2 class="box-subtitle">Tutoriais</h2>
+                <p>Guias práticos com código testado para problemas do dia a dia.
+                    <a href="/tutoriais">Ver todos os tutoriais</a>.</p>
+                <app-tutoriais-lista></app-tutoriais-lista>
+
+                <h2 class="box-subtitle">Como os dados são gerados</h2>
+                <ul>
+                    <li><strong>No seu navegador:</strong> os números são calculados no próprio navegador, com os
+                        mesmos algoritmos de dígito verificador usados pelos órgãos emissores. Os dados gerados não
+                        são enviados nem guardados pelo 4DevTools.</li>
+                    <li><strong>Válidos, mas fictícios:</strong> os números passam nas validações de formato, mas não
+                        são consultados em nenhuma base. Podem coincidir com documentos reais, por isso devem ser
+                        usados só em testes.</li>
+                    <li><strong>Testados:</strong> os geradores e as funções de validação publicadas são conferidos
+                        contra milhares de casos e contra bibliotecas de referência.</li>
+                </ul>
+                <p class="doc-alert">Use os dados gerados apenas para desenvolvimento e testes de software. Usar
+                    números de documentos para se passar por outra pessoa ou empresa é crime.</p>
+
+                <h2 class="box-subtitle">Quem faz o 4DevTools</h2>
+                <p>O 4DevTools é mantido por <a href="/sobre">Fernando Parmezani</a>, desenvolvedor, para ajudar
+                    quem desenvolve e testa sistemas no Brasil. Encontrou um erro ou quer sugerir uma ferramenta?
+                    Fale com a gente pela página de <a href="/contato">contato</a>.</p>
+            </div>
+        </div>
+    </div>
+</div>

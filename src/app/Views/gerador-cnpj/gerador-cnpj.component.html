@@ -1,120 +1,201 @@
-<div class="card">
-    <div class="card-body">
-        <h1 class="box-title">CNPJ: o que é e como funciona?</h1>
-        <p class="text-muted m-t-10">O CNPJ (Cadastro Nacional da Pessoa Jurídica) é o número que identifica
-            empresas e organizações perante a Receita Federal.</p>
-    </div>
-    <div class="card-body" style="padding-top: 0;">
-        <div style="border: 1px solid #e0e0e0; border-radius: 6px; padding: 20px;">
-            <h2 class="box-title f-s-20 m-b-10">Gere seu CNPJ</h2>
-            <app-gerar-cnpj></app-gerar-cnpj>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-lg-12">
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card doc">
             <div class="card-body">
-                <p>Ele é basicamente o registro da sua empresa, tornando-o um negócio legalmente aceito, ou seja,
-                    regularizado.
-                    Pode se dizer que ele possui a mesma função do CPF, mas dessa vez voltado para a pessoa jurídica.
+                <h1 class="box-title">Gerador de CNPJ válido para testes (numérico e alfanumérico)</h1>
+                <p class="doc-lead">Gere CNPJs com dígitos verificadores corretos, no formato tradicional ou no novo
+                    formato alfanumérico, para testar cadastros, APIs e integrações. Abaixo do gerador você encontra
+                    a estrutura do número, o cálculo passo a passo com letras e funções de validação prontas em
+                    TypeScript, Python, C# e Java.</p>
+            </div>
+
+            <div class="card-body pt-0">
+                <div class="doc-tool">
+                    <h2 class="box-title f-s-20 m-b-10">Gere um CNPJ</h2>
+                    <app-gerar-cnpj></app-gerar-cnpj>
+                </div>
+                <p class="doc-alert">
+                    <strong>Só para testes.</strong> Os números são calculados aleatoriamente e não são consultados
+                    em nenhuma base. Um CNPJ gerado pode, por coincidência, pertencer a uma empresa real. Não use em
+                    notas fiscais, contratos, cadastros reais ou para se passar por outra empresa.
                 </p>
-                <p>É através do Cadastro Nacional de Pessoa Jurídica que o governo poderá acompanhar as transações
-                    financeiras,
-                    se o pagamento dos impostos estão em dia, dentre outros detalhes importantes no meio jurídico de uma
-                    empresa. Todo esse acompanhamento é feito pela Receita Federal, assim como com o CPF.</p>
-                <p>O CNPJ vai além das empresas, também sendo necessário para outras instituições que realizam uma certa
-                    movimentação de dinheiro. Por exemplo, uma ONG necessita ter seu próprio Cadastro Nacional de Pessoa
-                    Jurídica. Além dela, sindicatos e associações também precisam estar registrados como CNPJ.</p>
-                <p>Sem esse registro sua empresa não existe legalmente, ou seja, poderá haver muitos problemas por conta
-                    disso.
-                    Ele também irá proporcionar diversos benefícios e funcionalidades necessárias para que sua empresa
-                    avance no
-                    mercado.</p>
-                <p>Por exemplo, só é possível abrir uma conta PJ - Pessoa Jurídica - se sua empresa for registrada como
-                    CNPJ. E
-                    essa opção é importante para saber separar suas finanças e ter um controle financeiro melhor sobre o
-                    que
-                    é
-                    pessoal e o que é jurídico.</p>
-                <p>Com a conta de Pessoa Jurídica vem também benefícios, como pagar taxas mais acessíveis, não precisar
-                    pagar
-                    mensalidades (em alguns casos), além de poder fazer PIX e transferências bancárias sem custos
-                    adicionais.</p>
-                <h2 class="box-subtitle">CNPJ para Emitir Nota Fiscal</h2>
+            </div>
 
-                <p>Emitir nota fiscal é garantir que sua empresa esteja seguindo as regras perante a Lei. Além disso, é
-                    uma
-                    forma de oferecer tudo que o seu consumidor precisa para uma troca correta e atendendo todas as
-                    expectativas.</p>
-                <p>E só é possível fazer uma emissão de nota fiscal de sua empresa se ela existir legalmente, ou seja,
-                    se
-                    ela
-                    possuir o Cadastro Nacional de Pessoa Jurídica - o CNPJ.</p>
+            <div class="card-body pt-0">
+                <nav class="doc-toc" aria-label="Nesta página">
+                    <strong>Nesta página</strong>
+                    <a href="/gerar-cnpj#estrutura">Como o CNPJ é formado</a>
+                    <a href="/gerar-cnpj#alfanumerico">CNPJ alfanumérico</a>
+                    <a href="/gerar-cnpj#calculo">Cálculo dos dígitos verificadores</a>
+                    <a href="/gerar-cnpj#codigo">Validação em código</a>
+                    <a href="/gerar-cnpj#regex">Regex e máscara</a>
+                    <a href="/gerar-cnpj#erros">Erros comuns</a>
+                    <a href="/gerar-cnpj#testes">CNPJ fictício em testes</a>
+                    <a href="/gerar-cnpj#lgpd">LGPD</a>
+                    <a href="/gerar-cnpj#faq">Perguntas frequentes</a>
+                </nav>
 
-                <h2 class="box-subtitle">CPF na nota fiscal</h2>
+                <h2 id="estrutura" class="box-subtitle">Como o CNPJ é formado</h2>
+                <p>O CNPJ (Cadastro Nacional da Pessoa Jurídica) tem 14 posições, escritas no formato
+                    <code>00.000.000/0000-00</code>, divididas em três partes:</p>
+                <ul>
+                    <li><strong>Raiz (8 primeiras posições):</strong> identifica a empresa. É a mesma para a matriz e
+                        todas as filiais.</li>
+                    <li><strong>Ordem (4 posições após a barra):</strong> identifica o estabelecimento.
+                        <code>0001</code> costuma ser a matriz; <code>0002</code>, <code>0003</code>… as filiais.</li>
+                    <li><strong>Dígitos verificadores (2 últimas):</strong> calculados a partir das 12 posições
+                        anteriores para detectar erros de digitação.</li>
+                </ul>
+                <p>Por isso, dois CNPJs com a mesma raiz e ordens diferentes pertencem à mesma empresa. Se o seu
+                    sistema agrupa estabelecimentos, use os 8 primeiros caracteres como chave da empresa.</p>
 
-                <p>Ao
-                    contr&aacute;rio do que muitos acreditam, o CPF na nota est&aacute; mais
-                    relacionado com o com&eacute;rcio do que com voc&ecirc; - como pessoa
-                    f&iacute;sica.</p>
+                <h2 id="alfanumerico" class="box-subtitle">CNPJ alfanumérico: o que mudou</h2>
+                <p>Com a <strong>Instrução Normativa RFB nº 2.229/2024</strong>, a Receita Federal passou a emitir, a
+                    partir de julho de 2026, CNPJs com <strong>letras maiúsculas e números</strong> nas 12 primeiras
+                    posições. Os dois dígitos verificadores continuam sendo números. Exemplo oficial:
+                    <code>12.ABC.345/01DE-35</code>.</p>
+                <ul>
+                    <li>Os CNPJs já existentes <strong>não mudam</strong>. Os dois formatos convivem.</li>
+                    <li>O tamanho continua 14 posições e a máscara continua a mesma.</li>
+                    <li>O cálculo dos verificadores continua sendo o módulo 11, mas cada caractere passa a valer
+                        <code>código ASCII − 48</code>. Para os números nada muda (<code>'0'</code> vale 0,
+                        <code>'9'</code> vale 9). As letras valem de 17 a 42:</li>
+                </ul>
+                <div class="doc-table-wrap">
+                    <table class="doc-table doc-table-num">
+                        <tbody>
+                            <tr><th>Letra</th><td *ngFor="let l of letras.slice(0, 13)">{{ l.letra }}</td></tr>
+                            <tr><th>Valor</th><td *ngFor="let l of letras.slice(0, 13)">{{ l.valor }}</td></tr>
+                            <tr><th>Letra</th><td *ngFor="let l of letras.slice(13)">{{ l.letra }}</td></tr>
+                            <tr><th>Valor</th><td *ngFor="let l of letras.slice(13)">{{ l.valor }}</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p>Na prática, todo sistema que guarda o CNPJ como número (<code>BIGINT</code>, <code>long</code>,
+                    <code>Number</code>), valida com <code>\d</code> ou usa campo numérico na tela
+                    <strong>precisa ser ajustado</strong>. Use o gerador acima, com a opção "Alfanumérico" marcada,
+                    para testar essas mudanças.</p>
 
-                <p>Ao
-                    pedir o CPF na nota fiscal, voc&ecirc; est&aacute; contribuindo para o combate
-                    &agrave; pirataria e, principalmente, a sonega&ccedil;&atilde;o de impostos por
-                    parte da empresa em que est&aacute; realizando uma compra. (Exemplo: um
-                    supermercado, loja de roupas, etc)</p>
+                <h2 id="calculo" class="box-subtitle">Cálculo dos dígitos verificadores, passo a passo</h2>
+                <p>Vamos calcular os verificadores do exemplo oficial <code>12.ABC.345/01DE</code>. O mesmo
+                    procedimento vale para CNPJs só com números.</p>
 
-                <p>Essa
-                    iniciativa por parte do governo estadual tem ajudado a combater esses males,
-                    al&eacute;m de ajudar a controlar o Imposto sobre Circula&ccedil;&atilde;o de
-                    Mercadorias e Servi&ccedil;os - conhecido como ICMS.</p>
-
-                <p>Al&eacute;m desse lado mais jur&iacute;dico, o CPF na nota
-                    fiscal pode trazer diversos benef&iacute;cios para o consumidor. Por exemplo,
-                    &eacute; poss&iacute;vel oferecer descontos, concorrer a pr&ecirc;mios, resgate
-                    de cr&eacute;dito, e muito mais. Essas op&ccedil;&otilde;es variam de acordo com
-                    o com&eacute;rcio, sendo algo de escolha deles.</p>
-
-                <h2 class="box-subtitle">CNPJ regularizado é sinal de comprometimento</h2>
-
-                <p>Ter a sua empresa em dia com o CNPJ significa que você se importa com todas as transações feitas e de
-                    forma
-                    legal. Além disso, é uma forma de evitar ser penalizado em possíveis fiscalizações.
+                <h3 class="doc-h3">1º dígito verificador</h3>
+                <p>Converta cada caractere no seu valor e multiplique pelos pesos <code>5 4 3 2 9 8 7 6 5 4 3 2</code>:
                 </p>
-                <p> E para manter tudo em dia, de forma correta, não basta apenas ter o CNPJ. Também é necessário que
-                    haja
-                    alguém responsável para fazer o levantamento de todas as transações financeiras que existirem em
-                    nome de
-                    sua
-                    empresa.
-                </p>
-                <p> O melhor é ter uma equipe capacitada para a realização dessas tarefas, garantindo que tudo esteja em
-                    ordem
-                    com o que é definido pela Lei.</p>
+                <app-tabela-dv [passo]="passo1" rotulo="Caractere" [mostrarValor]="true"></app-tabela-dv>
+                <p>Soma = <strong>{{ passo1.soma }}</strong>, e <code>{{ passo1.soma }} % 11 = {{ passo1.resto }}</code>.
+                    Se o resto for menor que 2, o dígito é 0; senão, é <code>11 − resto</code>. O
+                    <strong>1º verificador é {{ dv1 }}</strong>.</p>
 
-                <p>E para contratar pessoas, é preciso ter o CNPJ registrado. Ou seja, sua empresa só poderá crescer se
-                    ela
-                    tiver um registro oficial de que se trata de um negócio real e com o objetivo de crescer no mercado.
-                </p>
+                <h3 class="doc-h3">2º dígito verificador</h3>
+                <p>Repita com as 12 posições <em>mais</em> o 1º verificador, usando os pesos
+                    <code>6 5 4 3 2 9 8 7 6 5 4 3 2</code>:</p>
+                <app-tabela-dv [passo]="passo2" rotulo="Caractere" [mostrarValor]="true"></app-tabela-dv>
+                <p>Soma = <strong>{{ passo2.soma }}</strong>, e <code>{{ passo2.soma }} % 11 = {{ passo2.resto }}</code>.
+                    O <strong>2º verificador é {{ dv2 }}</strong>.</p>
+                <p>Resultado: <code>12.ABC.345/01DE-{{ dv1 }}{{ dv2 }}</code>. Para conferir com um CNPJ numérico,
+                    o mesmo cálculo aplicado a <code>11.222.333/0001</code> resulta em <code>11.222.333/0001-81</code>.</p>
 
-                <p>Além de tudo isso, é uma forma de se assegurar de que as empresas que você está lidando são
-                    confiáveis,
-                    assim como os demais farão consultando a sua empresa.</p>
+                <h2 id="codigo" class="box-subtitle">Validação de CNPJ em código</h2>
+                <p>As funções abaixo aceitam os dois formatos, com ou sem máscara, e em letras minúsculas ou
+                    maiúsculas. Elas rejeitam sequências repetidas e conferem os dois verificadores.</p>
+                <app-code-tabs [snippets]="snippets"></app-code-tabs>
+                <p class="text-muted">Casos para os seus testes unitários: <code>11.222.333/0001-81</code> e
+                    <code>12.ABC.345/01DE-35</code> são válidos; <code>12.ABC.345/01DE-36</code> (verificador
+                    errado) e <code>00.000.000/0000-00</code> (repetido) são inválidos.</p>
 
+                <h2 id="regex" class="box-subtitle">Regex e máscara de CNPJ</h2>
+                <p>A regex confere só o <strong>formato</strong>; depois dela, chame a função de validação.</p>
+                <ul>
+                    <li>Só numérico (formato antigo): <code>{{ regexNumerico }}</code></li>
+                    <li>Numérico e alfanumérico: <code>{{ regexAlfanumerico }}</code></li>
+                </ul>
+                <p>Guarde o CNPJ sem máscara, em maiúsculas, numa coluna <code>CHAR(14)</code> ou
+                    <code>VARCHAR(14)</code>. Aplique a máscara só na exibição. Em formulários, troque
+                    <code>type="number"</code> e <code>inputmode="numeric"</code> por um campo de texto que aceite
+                    letras e converta para maiúsculas.</p>
 
-                <h2 class="box-subtitle">Conclus&atilde;o</h2>
+                <h2 id="erros" class="box-subtitle">Erros comuns ao trabalhar com CNPJ</h2>
+                <ul>
+                    <li><strong>Guardar como número:</strong> além de perder zeros à esquerda (ex.:
+                        <code>01.234.567/0001-89</code>), a coluna numérica não aceita o CNPJ alfanumérico.</li>
+                    <li><strong>Validar com <code>\d</code>:</strong> regex e máscaras que só aceitam dígitos vão
+                        rejeitar CNPJs novos e válidos.</li>
+                    <li><strong>Diferenciar maiúsculas e minúsculas:</strong> normalize para maiúsculas antes de
+                        validar, comparar ou buscar no banco.</li>
+                    <li><strong>Aceitar caracteres repetidos:</strong> <code>00.000.000/0000-00</code> e
+                        <code>11.111.111/1111-11</code> passam no cálculo, mas não são CNPJs reais.</li>
+                    <li><strong>Confundir "válido" com "ativo":</strong> o cálculo só prova que o número é bem
+                        formado. Situação cadastral (ativa, baixada, inapta) só se consulta na Receita Federal ou em
+                        serviços autorizados.</li>
+                </ul>
 
-                <p>O CNPJ é indispensável caso você queira ter um negócio real e duradouro. Além dos diversos benefícios
-                    que
-                    você recebe tendo feito esse cadastro, você estará garantindo a legalidade de seu negócio e
-                    mostrando ao
-                    consumidor que o seu negócio é algo sério e dentro da Lei.</p>
+                <h2 id="testes" class="box-subtitle">Usando CNPJ fictício em testes</h2>
+                <ul>
+                    <li><strong>Testes de migração para o alfanumérico:</strong> gere lotes com letras para testar
+                        banco, APIs, relatórios, exportações e integrações com parceiros.</li>
+                    <li><strong>Seeds e massas de dados</strong> para homologação, com matriz e filiais (mesma raiz,
+                        ordens diferentes).</li>
+                    <li><strong>Testes de formulário</strong> manuais ou automatizados (Cypress, Playwright,
+                        Selenium), incluindo colar o CNPJ com e sem máscara.</li>
+                </ul>
+                <p>No Python, a biblioteca <strong>Faker</strong> com o locale <code>pt_BR</code> tem
+                    <code>fake.cnpj()</code>, que gera o formato numérico. Para o alfanumérico, sorteie 12 caracteres
+                    entre <code>0-9</code> e <code>A-Z</code> e calcule os verificadores com a lógica das funções
+                    acima.</p>
 
-                <p> Passar essa segurança é essencial para o crescimento do negócio e demais demandas que vierem a
-                    surgir a
-                    partir disso.</p>
+                <h2 id="lgpd" class="box-subtitle">CNPJ e LGPD</h2>
+                <p>Na maioria dos casos o CNPJ identifica uma pessoa jurídica, e a LGPD protege dados de pessoas
+                    naturais (art. 1º e art. 5º, I). Há uma exceção importante: o CNPJ de um
+                    <strong>MEI</strong> ou de um <strong>empresário individual</strong> está ligado diretamente a
+                    uma pessoa física e, junto com nome e endereço, pode identificá-la. Nesses casos ele deve ser
+                    tratado como dado pessoal.</p>
+                <p>Além disso, bases de clientes e fornecedores reunidas com CNPJ costumam ter dados de contato de
+                    pessoas (sócios, responsáveis, e-mails). Por isso, valem as mesmas boas práticas do
+                    <a href="/gerar-cpf#lgpd">CPF</a>: use dados gerados em homologação, anonimize cópias da
+                    produção e não registre dados de contato em logs.</p>
+                <p class="text-muted">Este conteúdo é informativo e não substitui a orientação do encarregado de
+                    dados (DPO) ou do jurídico da sua empresa.</p>
+
+                <h2 id="faq" class="box-subtitle">Perguntas frequentes</h2>
+                <div class="doc-faq">
+                    <details>
+                        <summary>O CNPJ gerado existe de verdade?</summary>
+                        <p>O gerador não consulta nenhuma base, então não sabe se o número pertence a uma empresa.
+                            Um CNPJ gerado pode coincidir com um real. Use-o só em testes.</p>
+                    </details>
+                    <details>
+                        <summary>O CNPJ da minha empresa vai mudar para o formato com letras?</summary>
+                        <p>Não. O formato alfanumérico vale para novas inscrições. Os CNPJs já emitidos continuam
+                            iguais.</p>
+                    </details>
+                    <details>
+                        <summary>O que preciso mudar no meu sistema por causa do CNPJ alfanumérico?</summary>
+                        <p>Em geral: o tipo da coluna no banco (texto em vez de número), as regex e máscaras, os
+                            campos de formulário, a função de validação (que deve usar <code>ASCII − 48</code>) e
+                            qualquer código que converta o CNPJ para número. Também vale revisar integrações e
+                            arquivos trocados com parceiros.</p>
+                    </details>
+                    <details>
+                        <summary>Os dígitos verificadores podem ter letras?</summary>
+                        <p>Não. Só as 12 primeiras posições aceitam letras. Os dois verificadores continuam sendo
+                            números de 0 a 9.</p>
+                    </details>
+                    <details>
+                        <summary>É legal usar um gerador de CNPJ?</summary>
+                        <p>Sim, para testar software. Ilegal é usar o número para emitir documentos, fechar
+                            negócios ou se passar por outra empresa.</p>
+                    </details>
+                </div>
+
+                <h2 class="box-subtitle">Veja também</h2>
+                <p>O <a href="/gerar-cpf">Gerador de CPF</a> faz o mesmo para pessoas físicas, e o
+                    <a href="/gerar-pessoa">Gerador de Pessoa</a> cria cadastros completos. O artigo
+                    <a href="/blog/cnpj">CNPJ: o que é e como funciona</a> explica o documento do ponto de vista de
+                    quem abre uma empresa.</p>
             </div>
         </div>
     </div>
 </div>
-
 <app-leiatambem></app-leiatambem>

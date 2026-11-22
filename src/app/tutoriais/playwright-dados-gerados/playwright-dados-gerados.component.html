@@ -1,0 +1,60 @@
+<div class="row">
+    <div class="col-lg-12">
+        <article class="card doc doc-artigo">
+            <div class="card-body">
+                <h1 class="box-title">Testes de formulário com Playwright e dados gerados</h1>
+                <p class="doc-lead">Automatize o teste de um cadastro com Playwright, gerando um CPF válido a cada execução e
+                    cobrindo os casos de erro com uma tabela de exemplos.</p>
+                <p class="doc-meta">Por <a href="/sobre">Fernando Parmezani</a> · Publicado em 22 de novembro de 2026</p>
+
+                <h2 class="box-subtitle">Por que gerar os dados no teste</h2>
+                <p>Copiar um CPF de um site e fixá-lo no teste funciona na primeira vez. Na segunda, o cadastro recusa porque o
+                    CPF já existe, e o teste falha sem que nada esteja errado no sistema. Gerar um número novo a cada execução evita
+                    esse problema e ainda testa a validação com valores diferentes a cada rodada.</p>
+
+                <h2 class="box-subtitle">1. Configuração</h2>
+                <p>Com o Playwright instalado (<code>npm init playwright&#64;latest</code>), aponte o <code>baseURL</code> para o
+                    seu ambiente de testes. O bloco <code>webServer</code> sobe a aplicação antes dos testes, se ela ainda não
+                    estiver rodando:</p>
+                <app-code-tabs [snippets]="t.playwrightConfig"></app-code-tabs>
+
+                <h2 class="box-subtitle">2. Gerador de dados</h2>
+                <p>Uma função pequena gera CPFs válidos com o mesmo cálculo explicado no <a href="/gerar-cpf#calculo">Gerador de
+                    CPF</a>. Ela evita sequências repetidas, que nenhum sistema aceita:</p>
+                <app-code-tabs [snippets]="t.playwrightDados"></app-code-tabs>
+
+                <h2 class="box-subtitle">3. Os testes</h2>
+                <app-code-tabs [snippets]="t.playwrightTeste"></app-code-tabs>
+                <p>O que vale observar:</p>
+                <ul>
+                    <li><strong>Localizadores por rótulo e papel</strong> (<code>getByLabel</code>, <code>getByRole</code>) em vez
+                        de seletores CSS. O teste fica mais resistente a mudanças de layout e ainda confirma que os campos têm
+                        rótulos acessíveis.</li>
+                    <li><strong>Casos de erro numa tabela:</strong> cada linha vira um teste com nome próprio no relatório, e
+                        incluir um caso novo é só acrescentar uma linha.</li>
+                    <li><strong><code>expect(...).toBeVisible()</code></strong> espera a mensagem aparecer, sem pausas fixas.</li>
+                </ul>
+                <p>Os nomes dos campos, botões e mensagens (<code>Nome</code>, <code>CPF</code>, <code>Salvar</code>,
+                    <code>CPF inválido</code>) são exemplos; troque pelos textos do seu sistema.</p>
+
+                <h2 class="box-subtitle">Casos que valem a pena testar</h2>
+                <ul>
+                    <li>CPF válido sem máscara e com máscara.</li>
+                    <li>CPF com dígito verificador errado e com todos os dígitos iguais.</li>
+                    <li>CPF que começa com zero (o sistema pode estar perdendo o zero em algum ponto).</li>
+                    <li>CPF já cadastrado, para conferir a mensagem de duplicidade.</li>
+                    <li>Colar o CPF com espaços ou pontuação diferente.</li>
+                </ul>
+                <p>O mesmo padrão serve para CNPJ, inclusive o alfanumérico: troque a função de geração pela lógica do
+                    <a href="/gerar-cnpj#codigo">Gerador de CNPJ</a>. Para preparar o banco antes dos testes, veja
+                    <a href="/tutoriais/massa-de-dados-faker-python">Massa de dados com Python e Faker</a>.</p>
+
+                <h2 class="box-subtitle">Rodando</h2>
+                <app-code-tabs [snippets]="t.playwrightRodar"></app-code-tabs>
+
+                <h2 class="box-subtitle">Outros tutoriais</h2>
+                <app-tutoriais-lista atual="playwright-dados-gerados"></app-tutoriais-lista>
+            </div>
+        </article>
+    </div>
+</div>

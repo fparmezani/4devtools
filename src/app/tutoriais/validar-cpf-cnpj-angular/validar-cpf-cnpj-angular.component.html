@@ -1,0 +1,68 @@
+<div class="row">
+    <div class="col-lg-12">
+        <article class="card doc doc-artigo">
+            <div class="card-body">
+                <h1 class="box-title">Como validar CPF e CNPJ no Angular com Reactive Forms</h1>
+                <p class="doc-lead">Crie validadores reutilizáveis de CPF e CNPJ (inclusive o alfanumérico) para Reactive Forms,
+                    mostre mensagens de erro claras e cubra tudo com testes unitários.</p>
+                <p class="doc-meta">Por <a href="/sobre">Fernando Parmezani</a> · Publicado em 22 de novembro de 2026</p>
+
+                <h2 class="box-subtitle">O que vamos montar</h2>
+                <ul>
+                    <li>Um arquivo <code>documentos.ts</code> com as funções puras de validação.</li>
+                    <li>Dois validadores do Angular, <code>cpfValidator()</code> e <code>cnpjValidator()</code>.</li>
+                    <li>Um formulário de cadastro que usa os validadores e mostra os erros.</li>
+                    <li>Testes unitários com Jasmine.</li>
+                </ul>
+                <p>O código foi testado com Angular 13 e funciona nas versões mais novas. Separar a regra de validação (função
+                    pura) do validador do Angular deixa a regra fácil de testar e de reaproveitar no back-end.</p>
+
+                <h2 class="box-subtitle">1. As funções de validação</h2>
+                <p>Crie <code>documentos.ts</code> exportando <code>validarCpf</code> e <code>validarCnpj</code>. Use as versões
+                    TypeScript publicadas no <a href="/gerar-cpf#codigo">Gerador de CPF</a> e no
+                    <a href="/gerar-cnpj#codigo">Gerador de CNPJ</a>. A de CNPJ já aceita o formato alfanumérico. As duas aceitam o
+                    valor com ou sem máscara.</p>
+
+                <h2 class="box-subtitle">2. Os validadores</h2>
+                <p>Um validador do Angular é uma função que recebe o controle e devolve <code>null</code> quando está tudo certo,
+                    ou um objeto com o nome do erro:</p>
+                <app-code-tabs [snippets]="t.angularValidators"></app-code-tabs>
+                <p>Repare que o validador <strong>ignora o campo vazio</strong>. Quem decide se o campo é obrigatório é o
+                    <code>Validators.required</code>. Assim, o mesmo validador serve para campos obrigatórios e opcionais, e o
+                    usuário vê a mensagem certa para cada situação.</p>
+
+                <h2 class="box-subtitle">3. O formulário</h2>
+                <p>No componente, combine os validadores com os nativos do Angular. Lembre de importar o
+                    <code>ReactiveFormsModule</code> no módulo do componente.</p>
+                <app-code-tabs [snippets]="t.angularComponent"></app-code-tabs>
+                <p>Algumas escolhas do template:</p>
+                <ul>
+                    <li>As mensagens aparecem só depois que o campo foi <code>touched</code>, para não mostrar erro enquanto a
+                        pessoa ainda está digitando.</li>
+                    <li>"Informe o CPF" e "CPF inválido" são mensagens diferentes: uma diz que falta, a outra que está errado.</li>
+                    <li>O CPF usa <code>inputmode="numeric"</code>, que abre o teclado numérico no celular; o CNPJ não, porque pode
+                        ter letras.</li>
+                    <li>Ao clicar em Salvar com erros, <code>markAllAsTouched()</code> revela todas as mensagens de uma vez.</li>
+                </ul>
+                <p>Se quiser máscara enquanto a pessoa digita, veja o tutorial
+                    <a href="/tutoriais/mascaras-javascript">Máscaras de CPF, CNPJ, telefone e CEP</a>. Os validadores continuam
+                    funcionando, porque aceitam o valor formatado.</p>
+
+                <h2 class="box-subtitle">4. Testes unitários</h2>
+                <p>Como o validador é só uma função, dá para testar sem montar o componente:</p>
+                <app-code-tabs [snippets]="t.angularSpec"></app-code-tabs>
+                <p>Para testar com mais números, gere CPFs e CNPJs no <a href="/gerar-cpf">Gerador de CPF</a> e no
+                    <a href="/gerar-cnpj">Gerador de CNPJ</a>. Use também números com zero à esquerda e CNPJs alfanuméricos em
+                    minúsculas.</p>
+
+                <h2 class="box-subtitle">Valide também no servidor</h2>
+                <p>A validação no Angular melhora a experiência, mas pode ser contornada por quem chama a API diretamente.
+                    Repita a validação no back-end: as versões em Python, C# e Java das mesmas funções estão nas páginas dos
+                    geradores.</p>
+
+                <h2 class="box-subtitle">Outros tutoriais</h2>
+                <app-tutoriais-lista atual="validar-cpf-cnpj-angular"></app-tutoriais-lista>
+            </div>
+        </article>
+    </div>
+</div>

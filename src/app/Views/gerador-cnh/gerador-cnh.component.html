@@ -1,85 +1,161 @@
-<div class="card">
-    <div class="card-body">
-        <h1 class="box-title">CNH: o que é e como funciona a Carteira Nacional de Habilitação</h1>
-        <p class="text-muted m-t-10">A CNH (Carteira Nacional de Habilitação) é o documento que autoriza um
-            cidadão a dirigir no Brasil, emitido pelo DETRAN.</p>
-    </div>
-    <div class="card-body" style="padding-top: 0;">
-        <div style="border: 1px solid #e0e0e0; border-radius: 6px; padding: 20px;">
-            <h2 class="box-title f-s-20 m-b-10">Gere sua CNH</h2>
-            <app-gerar-cnh></app-gerar-cnh>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-lg-12">
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card doc">
             <div class="card-body">
-                <p>A Carteira Nacional de Habilitação (CNH) é emitida pelo Departamento Estadual de Trânsito (DETRAN)
-                    e regulamentada pelo Código de Trânsito Brasileiro (CTB), instituído pela Lei nº 9.503/1997. Ela
-                    substituiu a antiga Carteira de Motorista e é hoje o único documento que habilita legalmente um
-                    cidadão a conduzir veículos automotores no território nacional.
+                <h1 class="box-title">Gerador de CNH válida para testes</h1>
+                <p class="doc-lead">Gere números de registro de CNH (Carteira Nacional de Habilitação) com dígitos
+                    verificadores corretos para testar cadastros de motoristas, seguradoras, locadoras e apps de
+                    transporte. Abaixo você encontra a estrutura do número, o cálculo passo a passo e funções de
+                    validação prontas em TypeScript, Python, C# e Java.</p>
+            </div>
+
+            <div class="card-body pt-0">
+                <div class="doc-tool">
+                    <h2 class="box-title f-s-20 m-b-10">Gere uma CNH</h2>
+                    <app-gerar-cnh></app-gerar-cnh>
+                </div>
+                <p class="doc-alert">
+                    <strong>Só para testes.</strong> Os números são calculados aleatoriamente e não são consultados
+                    em nenhuma base. Um número gerado pode coincidir com o de um motorista real. Usar dados de CNH de
+                    terceiros ou apresentar documento falso é crime.
                 </p>
+            </div>
 
-                <h2 class="box-subtitle">Categorias da CNH</h2>
+            <div class="card-body pt-0">
+                <nav class="doc-toc" aria-label="Nesta página">
+                    <strong>Nesta página</strong>
+                    <a href="/gerar-cnh#estrutura">Números da CNH</a>
+                    <a href="/gerar-cnh#calculo">Cálculo dos dígitos verificadores</a>
+                    <a href="/gerar-cnh#codigo">Validação em código</a>
+                    <a href="/gerar-cnh#erros">Erros comuns</a>
+                    <a href="/gerar-cnh#testes">Dados de CNH para testes</a>
+                    <a href="/gerar-cnh#lgpd">LGPD</a>
+                    <a href="/gerar-cnh#faq">Perguntas frequentes</a>
+                </nav>
 
-                <p>A habilitação é dividida em categorias conforme o tipo de veículo que o condutor está autorizado a
-                    operar:</p>
+                <h2 id="estrutura" class="box-subtitle">Os números da CNH</h2>
+                <p>A CNH traz mais de um número, e é comum os sistemas confundirem. Este gerador produz o
+                    <strong>número de registro</strong>, que identifica o condutor e é o mais pedido em
+                    cadastros:</p>
                 <ul>
-                    <li><strong>Categoria A</strong> — motocicletas, motonetas e veículos de duas ou três rodas</li>
-                    <li><strong>Categoria B</strong> — automóveis de passeio com peso bruto total de até 3,5 toneladas
-                    </li>
-                    <li><strong>Categoria AB</strong> — autoriza conduzir tanto veículos da categoria A quanto da B
-                    </li>
-                    <li><strong>Categoria C</strong> — veículos de transporte de carga com mais de 3,5 toneladas</li>
-                    <li><strong>Categoria D</strong> — veículos de passageiros com mais de 8 assentos</li>
-                    <li><strong>Categoria E</strong> — combinações de veículos com reboque acima de 6 toneladas</li>
+                    <li><strong>Número de registro:</strong> 11 dígitos, sendo 9 de base e 2 verificadores. É o
+                        mesmo durante toda a vida do condutor, mesmo quando a carteira é renovada.</li>
+                    <li><strong>Número do espelho (formulário):</strong> identifica o papel impresso. Muda a cada
+                        nova emissão.</li>
+                    <li><strong>RENACH:</strong> sigla do estado seguida de 9 dígitos (ex.: <code>SP123456789</code>).
+                        Identifica o processo de habilitação no DETRAN.</li>
+                </ul>
+                <p>Se o seu formulário pede "número da CNH", deixe claro na tela qual deles você espera. Isso evita
+                    que o usuário digite o espelho e a validação falhe.</p>
+
+                <h2 id="calculo" class="box-subtitle">Cálculo dos dígitos verificadores, passo a passo</h2>
+                <p>Os verificadores da CNH também usam o módulo 11, mas com uma diferença importante em relação ao
+                    CPF e ao CNPJ: <strong>o dígito é o próprio resto</strong>, e não <code>11 − resto</code>. Vamos
+                    calcular os verificadores da base <code>456789123</code>.</p>
+
+                <h3 class="doc-h3">1º dígito verificador</h3>
+                <p>Multiplique os 9 dígitos pelos pesos de 9 a 1:</p>
+                <app-tabela-dv [passo]="passo1"></app-tabela-dv>
+                <p>Soma = <strong>{{ passo1.soma }}</strong>, e <code>{{ passo1.soma }} % 11 = {{ passo1.resto }}</code>.
+                    Se o resto for 10, o dígito vira 0. Aqui, o <strong>1º verificador é {{ dv1 }}</strong>.</p>
+
+                <h3 class="doc-h3">2º dígito verificador</h3>
+                <p>Agora multiplique os mesmos 9 dígitos pelos pesos de 1 a 9:</p>
+                <app-tabela-dv [passo]="passo2"></app-tabela-dv>
+                <p>Soma = <strong>{{ passo2.soma }}</strong>, e <code>{{ passo2.soma }} % 11 = {{ passo2.resto }}</code>.
+                    O <strong>2º verificador é {{ dv2 }}</strong>. Resultado: <code>456789123{{ dv1 }}{{ dv2 }}</code>.</p>
+
+                <h3 class="doc-h3">O caso especial: quando o 1º resto é 10</h3>
+                <p>Quando o resto do 1º cálculo é 10, o 1º verificador vira 0 e a maioria das implementações
+                    subtrai 2 do resto do 2º cálculo (somando 11 se ficar negativo). Nem todos os sistemas tratam
+                    esse caso da mesma forma. Por isso, <strong>este gerador não produz números nessa situação</strong>:
+                    assim, todo número gerado passa em qualquer validador comum. As funções abaixo seguem a regra da
+                    maioria.</p>
+
+                <h2 id="codigo" class="box-subtitle">Validação de CNH em código</h2>
+                <p>As funções abaixo removem espaços e pontuação, rejeitam sequências repetidas e conferem os dois
+                    verificadores, incluindo o caso especial descrito acima.</p>
+                <app-code-tabs [snippets]="snippets"></app-code-tabs>
+                <p class="text-muted">Casos para os seus testes unitários: <code>45678912346</code> é válido;
+                    <code>45678912347</code> (verificador errado) e <code>11111111111</code> (repetido) são
+                    inválidos. Formato aceito: <code>{{ regex }}</code> depois de remover a pontuação.</p>
+
+                <h2 id="erros" class="box-subtitle">Erros comuns ao trabalhar com CNH</h2>
+                <ul>
+                    <li><strong>Usar o algoritmo do CPF:</strong> os pesos e a regra do dígito são diferentes. Um
+                        validador de CPF adaptado vai rejeitar CNHs válidas.</li>
+                    <li><strong>Guardar como número:</strong> registros podem começar com zero. Use
+                        <code>CHAR(11)</code>.</li>
+                    <li><strong>Confundir registro com espelho ou RENACH:</strong> são números diferentes, com
+                        formatos diferentes.</li>
+                    <li><strong>Confundir "válido" com "regular":</strong> o cálculo não diz se a CNH está vencida,
+                        suspensa ou cassada. Isso só se consulta nos sistemas oficiais.</li>
                 </ul>
 
-                <h2 class="box-subtitle">Como tirar a CNH pela primeira vez</h2>
+                <h2 id="testes" class="box-subtitle">Dados de CNH para testes</h2>
+                <p>Além do número, cadastros de motoristas costumam pedir categoria e validade. Use estas regras para
+                    montar massas de teste realistas:</p>
+                <div class="doc-table-wrap">
+                    <table class="doc-table">
+                        <thead>
+                            <tr><th>Categoria</th><th>Veículos</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>A</td><td>Motocicletas, motonetas e triciclos</td></tr>
+                            <tr><td>B</td><td>Automóveis de até 3.500 kg e até 8 lugares além do motorista</td></tr>
+                            <tr><td>C</td><td>Veículos de carga acima de 3.500 kg</td></tr>
+                            <tr><td>D</td><td>Veículos de passageiros com mais de 8 lugares além do motorista</td></tr>
+                            <tr><td>E</td><td>Combinações de veículos (ex.: caminhão com reboque pesado)</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p>Desde a Lei 14.071/2020, a validade do exame médico, que define o vencimento da CNH, depende da
+                    idade: <strong>10 anos</strong> para menores de 50, <strong>5 anos</strong> de 50 a 69 e
+                    <strong>3 anos</strong> a partir de 70. Bons casos de teste: CNH vencida há poucos dias, CNH que
+                    vence hoje e categoria incompatível com o veículo (ex.: categoria A alugando um carro).</p>
 
-                <p>O processo para obter a primeira habilitação envolve as seguintes etapas no DETRAN:</p>
-                <p>O candidato deve abrir o processo e realizar os exames médico e psicotécnico que avaliam
-                    capacidade física e aptidão para dirigir. Em seguida, é obrigatório concluir o curso teórico de
-                    legislação de trânsito e ser aprovado na prova aplicada pelo DETRAN.</p>
-                <p>Após a aprovação teórica, o candidato realiza as aulas práticas em um Centro de Formação de
-                    Condutores (CFC) credenciado e passa pelo exame prático de direção veicular. Todo o processo tem
-                    prazo de 12 meses para ser concluído.</p>
-                <p>Ao ser aprovado em todas as etapas, o novo motorista recebe a Permissão para Dirigir (PPD), válida
-                    por 1 ano. Ao término desse período, desde que não tenha cometido infrações graves ou
-                    gravíssimas, a PPD é convertida automaticamente na CNH definitiva.</p>
-
-                <h2 class="box-subtitle">CNH Digital</h2>
-
-                <p>Desde 2018, o motorista brasileiro pode utilizar a CNH Digital pelo aplicativo Carteira Digital de
-                    Trânsito (CDT). O documento digital tem a mesma validade jurídica que a versão física e é aceito
-                    em abordagens de trânsito, como comprovante de identidade e para viagens dentro do Brasil.
-                </p>
-                <p>A renovação da CNH deve ser feita a cada 5 anos para condutores com até 50 anos de idade, a cada
-                    3 anos para quem tem entre 50 e 70 anos, e anualmente para maiores de 70 anos. O processo de
-                    renovação também pode ser iniciado pelo aplicativo CDT.
-                </p>
-
-                <h2 class="box-subtitle">Gerador de CNH para testes de software</h2>
-
-                <p>O gerador de CNH do 4DevTools cria números com estrutura válida para uso em ambientes de
-                    desenvolvimento e homologação. Os números seguem as regras de formação do documento brasileiro,
-                    sendo ideais para:</p>
+                <h2 id="lgpd" class="box-subtitle">CNH e LGPD</h2>
+                <p>O número da CNH é um <strong>dado pessoal</strong> (art. 5º, I, da LGPD). A imagem do documento é
+                    ainda mais sensível: traz foto, filiação e assinatura, e a foto pode ser usada para biometria
+                    facial, que é dado pessoal sensível (art. 5º, II).</p>
                 <ul>
-                    <li>Testar campos de entrada e validações em sistemas de gestão de frotas ou seguradoras</li>
-                    <li>Validar máscaras de formulários e regras de negócio</li>
-                    <li>Popular bancos de dados de desenvolvimento sem usar dados reais de cidadãos</li>
+                    <li>Em homologação, use números gerados e imagens fictícias. Nunca reaproveite fotos de CNHs de
+                        clientes em testes de OCR ou de reconhecimento facial.</li>
+                    <li>Se o sistema recebe foto da CNH, defina por quanto tempo ela fica guardada e quem pode
+                        acessá-la (art. 6º, III, e art. 46).</li>
+                    <li>Não registre número de CNH, nome e data de nascimento juntos em logs.</li>
                 </ul>
-                <p>Os números gerados não correspondem a habilitações reais cadastradas no DETRAN e não devem ser
-                    utilizados para fins ilegais ou fraudulentos. O uso indevido é de responsabilidade exclusiva do
-                    usuário.
-                </p>
+                <p>Veja mais boas práticas na seção de LGPD do <a href="/gerar-cpf#lgpd">Gerador de CPF</a>.</p>
+                <p class="text-muted">Este conteúdo é informativo e não substitui a orientação do encarregado de
+                    dados (DPO) ou do jurídico da sua empresa.</p>
 
-                <h2 class="box-subtitle">Conclusão</h2>
+                <h2 id="faq" class="box-subtitle">Perguntas frequentes</h2>
+                <div class="doc-faq">
+                    <details>
+                        <summary>A CNH gerada existe de verdade?</summary>
+                        <p>O gerador não consulta nenhuma base. O número tem verificadores corretos, mas pode
+                            coincidir com o de um motorista real. Use-o só em testes.</p>
+                    </details>
+                    <details>
+                        <summary>Por que meu validador rejeita algumas CNHs geradas em outros sites?</summary>
+                        <p>Provavelmente por causa do caso em que o 1º resto é 10, que cada implementação trata de um
+                            jeito. Os números deste gerador evitam esse caso de propósito.</p>
+                    </details>
+                    <details>
+                        <summary>O número de registro muda quando renovo a CNH?</summary>
+                        <p>Não. O registro acompanha o condutor. O que muda a cada emissão é o número do espelho.</p>
+                    </details>
+                    <details>
+                        <summary>Dá para saber a categoria ou o estado pelo número?</summary>
+                        <p>Não. O número de registro não traz categoria, estado nem validade. Esses dados vêm de
+                            outros campos do documento.</p>
+                    </details>
+                </div>
 
-                <p>A CNH é um dos documentos mais importantes para os brasileiros e seu número segue uma estrutura
-                    específica que pode ser facilmente testada com o nosso gerador. Seja para validar formulários,
-                    testar integrações ou popular massa de dados, utilize a ferramenta com responsabilidade e
-                    exclusivamente para fins de desenvolvimento de software.
-                </p>
+                <h2 class="box-subtitle">Veja também</h2>
+                <p>Para cadastros completos de motoristas, use também o <a href="/gerar-cpf">Gerador de CPF</a> e o
+                    <a href="/gerar-renavam">Gerador de RENAVAM</a> para o veículo. O
+                    <a href="/gerar-pessoa">Gerador de Pessoa</a> monta tudo de uma vez.</p>
             </div>
         </div>
     </div>

@@ -1,0 +1,81 @@
+<div class="row">
+    <div class="col-lg-12">
+        <article class="card doc doc-artigo">
+            <div class="card-body">
+                <h1 class="box-title">CNPJ alfanumérico: como adaptar o seu sistema</h1>
+                <p class="doc-lead">Desde julho de 2026, novos CNPJs podem ter letras. Veja um roteiro prático para adaptar banco
+                    de dados, validação, máscaras, formulários e integrações, e como testar tudo antes que um cliente novo trave o
+                    seu cadastro.</p>
+                <p class="doc-meta">Por <a href="/sobre">Fernando Parmezani</a> · Publicado em 22 de novembro de 2026</p>
+
+                <h2 class="box-subtitle">O que mudou</h2>
+                <p>A Instrução Normativa RFB nº 2.229/2024 permitiu letras maiúsculas (A a Z) nas <strong>12 primeiras
+                    posições</strong> do CNPJ. As 2 últimas, os dígitos verificadores, continuam numéricas. O tamanho e a máscara
+                    não mudam, e os CNPJs antigos continuam valendo. Exemplo oficial: <code>12.ABC.345/01DE-35</code>.</p>
+                <p>O problema é que muitos sistemas assumem, em vários pontos, que CNPJ é número. Este roteiro passa por cada um
+                    deles.</p>
+
+                <h2 class="box-subtitle">1. Banco de dados</h2>
+                <p>Se a coluna é numérica (<code>BIGINT</code>, <code>NUMERIC</code>), ela precisa virar texto. Aproveite para
+                    recolocar os zeros à esquerda que a coluna numérica descartou:</p>
+                <app-code-tabs [snippets]="t.cnpjSql"></app-code-tabs>
+                <p>Revise também chaves estrangeiras, índices e views que usam a coluna, e qualquer tabela que guarde o CNPJ
+                    "solto" (logs de auditoria, tabelas de integração, data warehouse).</p>
+
+                <h2 class="box-subtitle">2. Validação</h2>
+                <p>A regra de cálculo dos verificadores continua sendo o módulo 11. A diferença é que cada caractere vale o seu
+                    código ASCII menos 48: os números continuam valendo de 0 a 9, e as letras passam a valer de 17 (A) a 42 (Z).
+                    Funções prontas e testadas, que aceitam os dois formatos, estão no
+                    <a href="/gerar-cnpj#codigo">Gerador de CNPJ</a>, em TypeScript, Python, C# e Java.</p>
+                <p>Procure no código por validações "escondidas": regex com <code>\d&#123;14&#125;</code>, conversões como
+                    <code>Number(cnpj)</code>, <code>parseInt</code> ou <code>long.Parse</code>, e anotações de validação em
+                    entidades e DTOs.</p>
+
+                <h2 class="box-subtitle">3. Máscara e formulários</h2>
+                <p>Campos com <code>type="number"</code> ou máscaras que aceitam só dígitos vão impedir o usuário de digitar o CNPJ
+                    novo. Troque por um campo de texto:</p>
+                <app-code-tabs [snippets]="t.cnpjInput"></app-code-tabs>
+                <p>E use uma máscara que aceite letras e converta para maiúsculas:</p>
+                <app-code-tabs [snippets]="t.cnpjMascara"></app-code-tabs>
+                <p>Normalize antes de salvar e de buscar: sem pontuação e em maiúsculas. Assim, <code>12.abc.345/01de-35</code> e
+                    <code>12ABC34501DE35</code> encontram o mesmo registro.</p>
+
+                <h2 class="box-subtitle">4. APIs, arquivos e integrações</h2>
+                <ul>
+                    <li><strong>JSON:</strong> o CNPJ deve trafegar como <em>string</em>. Um campo numérico no contrato da API quebra
+                        com letras e perde zeros à esquerda.</li>
+                    <li><strong>Arquivos posicionais e CSV:</strong> confira se os leiautes trocados com bancos, contabilidade e
+                        parceiros aceitam letras. Planilhas abertas no Excel podem converter o CNPJ numérico em notação
+                        científica; exporte como texto.</li>
+                    <li><strong>Ordenação:</strong> em texto, a ordem muda (letras vêm depois dos números). Relatórios que ordenam
+                        por CNPJ podem mudar de aparência.</li>
+                    <li><strong>Sistemas de terceiros:</strong> pergunte aos fornecedores de ERP, emissor de nota e gateways se já
+                        estão preparados.</li>
+                </ul>
+
+                <h2 class="box-subtitle">5. Como testar</h2>
+                <p>Monte casos com os dois formatos e rode o fluxo completo, do cadastro ao relatório:</p>
+                <ul>
+                    <li>CNPJ numérico antigo, inclusive começando com zero (ex.: <code>01.234.567/0001-…</code>).</li>
+                    <li>CNPJ alfanumérico em maiúsculas, em minúsculas e sem pontuação.</li>
+                    <li>CNPJ alfanumérico com verificador errado, que deve ser recusado.</li>
+                    <li>Busca, edição, exportação e integração com cada formato.</li>
+                </ul>
+                <p>Para gerar os números, use o <a href="/gerar-cnpj">Gerador de CNPJ</a> com a opção "Alfanumérico" marcada.
+                    Para automatizar, veja o tutorial de <a href="/tutoriais/playwright-dados-gerados">testes com Playwright</a>.</p>
+
+                <h2 class="box-subtitle">Resumo</h2>
+                <ul>
+                    <li>Coluna de texto (<code>CHAR(14)</code>), em maiúsculas, sem máscara.</li>
+                    <li>Validação com <code>ASCII − 48</code> nas 12 primeiras posições.</li>
+                    <li>Campos de formulário e máscaras aceitando letras.</li>
+                    <li>CNPJ como string em APIs e arquivos.</li>
+                    <li>Testes com os dois formatos em todo o fluxo.</li>
+                </ul>
+
+                <h2 class="box-subtitle">Outros tutoriais</h2>
+                <app-tutoriais-lista atual="cnpj-alfanumerico"></app-tutoriais-lista>
+            </div>
+        </article>
+    </div>
+</div>

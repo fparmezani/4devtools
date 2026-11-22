@@ -1,12 +1,18 @@
-<div class="card">
-    <div class="card-body">
-        <h1 class="box-title">RG: o documento de identidade do cidadão brasileiro</h1>
-        <p class="text-muted m-t-10">O RG (Registro Geral) é o principal documento de identificação civil no
-            Brasil, emitido pelas Secretarias de Segurança Pública.</p>
-    </div>
-    <div class="card-body" style="padding-top: 0;">
-        <div style="border: 1px solid #e0e0e0; border-radius: 6px; padding: 20px;">
-            <h2 class="box-title f-s-20 m-b-10">Gere seu RG</h2>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card doc">
+            <div class="card-body">
+                <h1 class="box-title">Gerador de RG para testes</h1>
+                <p class="doc-lead">Gere números de RG no formato de São Paulo, com dígito verificador correto (de 0
+                    a 9 ou X), para testar cadastros e formulários. Abaixo você entende por que o RG muda de estado
+                    para estado, vê o cálculo passo a passo e encontra funções de validação em TypeScript, Python, C#
+                    e Java.</p>
+            </div>
+
+            <div class="card-body pt-0">
+                <div class="doc-tool">
+                    <h2 class="box-title f-s-20 m-b-10">Gere um RG</h2>
+            
                 <div class="textarea-copy-container">
                     <textarea id="numero" class="form-control input-lg field-copy m-b-20" type="text"
                         [(ngModel)]="numero" readonly="readonly">Gerando...</textarea>
@@ -20,52 +26,124 @@
                     <button type="submit" class="btn btn-primary btn-md m-b-10 m-l-5" (click)="gerarCopiar()">Gerar e
                         Copiar RG</button>
                 </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="card-body">
-                <p>O Registro Geral, popularmente conhecido como RG ou Carteira de Identidade, é emitido pelas
-                    Secretarias de Segurança Pública (SSP) de cada estado e contém dados pessoais do cidadão como
-                    nome completo, data de nascimento, nome dos pais, naturalidade e número de CPF. Por ser emitido
-                    por órgãos estaduais, o formato do número varia de estado para estado, mas segue em geral uma
-                    sequência de 7 a 9 dígitos com um dígito verificador ao final.
+        
+                </div>
+                <p class="doc-alert">
+                    <strong>Só para testes.</strong> Os números são calculados aleatoriamente e não são consultados
+                    em nenhuma base. Um número gerado pode coincidir com o RG de uma pessoa real. Não use para
+                    cadastros reais nem para se passar por outra pessoa.
                 </p>
+            </div>
 
-                <h2 class="box-subtitle">RG e a nova Carteira de Identidade Nacional (CIN)</h2>
+            <div class="card-body pt-0">
+                <nav class="doc-toc" aria-label="Nesta página">
+                    <strong>Nesta página</strong>
+                    <a href="/gerar-rg#estados">Um RG por estado</a>
+                    <a href="/gerar-rg#calculo">Cálculo do dígito (SP)</a>
+                    <a href="/gerar-rg#codigo">Validação em código</a>
+                    <a href="/gerar-rg#cin">RG e a nova CIN</a>
+                    <a href="/gerar-rg#erros">Erros comuns</a>
+                    <a href="/gerar-rg#lgpd">LGPD</a>
+                    <a href="/gerar-rg#faq">Perguntas frequentes</a>
+                </nav>
 
-                <p>Em 2023, o governo federal lançou a Carteira de Identidade Nacional (CIN), que substituirá
-                    gradualmente os RGs estaduais. A CIN utiliza o número do CPF como identificador único nacional,
-                    eliminando a fragmentação entre estados. O documento tem validade de 10 anos para maiores de 60
-                    anos e de 5 anos para crianças e adolescentes.
-                </p>
-                <p>A CIN também conta com versão digital acessível pelo aplicativo Gov.br e possui chip com
-                    certificado digital, tornando-a mais segura contra fraudes e falsificações. Mesmo com a
-                    implantação da CIN, os RGs emitidos anteriormente continuam válidos por tempo indeterminado.
-                </p>
+                <h2 id="estados" class="box-subtitle">Por que não existe um "RG nacional"</h2>
+                <p>Diferente do CPF, o RG sempre foi emitido pelos órgãos de identificação de cada estado (como as
+                    Secretarias de Segurança Pública). Cada um definiu seu próprio formato:</p>
+                <ul>
+                    <li>A quantidade de dígitos varia entre estados.</li>
+                    <li>Alguns estados usam dígito verificador; outros não.</li>
+                    <li>A mesma pessoa pode ter RGs diferentes em estados diferentes.</li>
+                </ul>
+                <p>Por isso, <strong>não existe uma validação de RG que sirva para o Brasil todo</strong>. O formato
+                    mais usado em sistemas, e o que este gerador produz, é o de <strong>São Paulo</strong>: 8 dígitos
+                    mais 1 verificador, que pode ser um número ou a letra X (ex.: <code>24.678.131-2</code>). Se o
+                    seu sistema atende vários estados, valide o RG só como texto obrigatório, com tamanho razoável, e
+                    guarde também o órgão emissor e a UF.</p>
 
-                <h2 class="box-subtitle">RG como documento de identificação</h2>
+                <h2 id="calculo" class="box-subtitle">Cálculo do dígito verificador (RG de SP), passo a passo</h2>
+                <p>Vamos calcular o verificador da base <code>24.678.131</code>. Multiplique os 8 dígitos pelos pesos
+                    de 2 a 9:</p>
+                <app-tabela-dv [passo]="passo"></app-tabela-dv>
+                <p>Soma = <strong>{{ passo.soma }}</strong>, e <code>{{ passo.soma }} % 11 = {{ passo.resto }}</code>.
+                    O dígito é <code>11 − resto</code>: se der 10, vira <strong>X</strong>; se der 11, vira 0. Aqui,
+                    <code>11 − {{ passo.resto }} = {{ dvNumero }}</code>, então o
+                    <strong>verificador é {{ dv }}</strong>.</p>
+                <p>Resultado: <code>24.678.131-{{ dv }}</code>.</p>
 
-                <p>O RG é aceito como documento de identificação em praticamente todos os órgãos públicos e
-                    privados do Brasil. Ele é exigido para abertura de contas bancárias, contratação de serviços,
-                    votação, matrícula em instituições de ensino, viagens internas e diversos outros procedimentos
-                    do dia a dia. Em viagens ao Mercosul, o RG brasileiro é aceito como documento de viagem
-                    válido, dispensando o passaporte.
-                </p>
+                <h2 id="codigo" class="box-subtitle">Validação de RG (SP) em código</h2>
+                <p>As funções abaixo seguem a regra de São Paulo. Elas aceitam o número com ou sem pontuação e o X
+                    em maiúscula ou minúscula.</p>
+                <app-code-tabs [snippets]="snippets"></app-code-tabs>
+                <p class="text-muted">Casos para os seus testes unitários: <code>24.678.131-2</code> e
+                    <code>12.345.678-2</code> são válidos; <code>24.678.131-3</code> (verificador errado) e
+                    <code>12.345.678-A</code> (caractere inválido) são inválidos. Não use essa validação para RGs de
+                    outros estados.</p>
 
-                <h2 class="box-subtitle">Gerador de RG para testes de software</h2>
+                <h2 id="cin" class="box-subtitle">RG e a nova Carteira de Identidade Nacional (CIN)</h2>
+                <p>Desde 2023, os estados emitem a <strong>Carteira de Identidade Nacional (CIN)</strong>, prevista
+                    no Decreto nº 10.977/2022. A principal mudança para quem desenvolve: na CIN, <strong>o número de
+                        identificação é o próprio CPF</strong>. Os RGs antigos continuam aceitos durante o período
+                    de transição, que vai até 2032.</p>
+                <p>Na prática, por alguns anos o seu sistema vai receber os dois documentos. Uma boa estratégia é
+                    usar o CPF como identificador principal e tratar o número do RG apenas como informação
+                    complementar.</p>
 
-                <p>O gerador de RG do 4DevTools cria números com estrutura válida para uso em ambientes de
-                    desenvolvimento e homologação. É útil para testar campos de entrada em sistemas que exigem
-                    número de identidade, validar máscaras de formulários e popular bases de dados de teste sem
-                    utilizar documentos reais de cidadãos. Os números gerados são fictícios e seu uso indevido
-                    é de responsabilidade exclusiva do usuário.
-                </p>
+                <h2 id="erros" class="box-subtitle">Erros comuns ao trabalhar com RG</h2>
+                <ul>
+                    <li><strong>Aplicar a regra de SP a todos:</strong> vai rejeitar RGs válidos de outros estados.
+                    </li>
+                    <li><strong>Guardar como número:</strong> o verificador pode ser X, e há RGs que começam com
+                        zero. Use texto.</li>
+                    <li><strong>Esquecer órgão emissor e UF:</strong> sem eles, o número do RG é ambíguo.</li>
+                    <li><strong>Usar o RG como chave única:</strong> a mesma pessoa pode ter mais de um. Use o CPF.
+                    </li>
+                </ul>
+                <p>No Python, a biblioteca <strong>Faker</strong> com o locale <code>pt_BR</code> tem
+                    <code>fake.rg()</code>, que devolve 9 caracteres sem pontuação. Para combinar o RG com um cadastro
+                    completo, use o <a href="/gerar-pessoa">Gerador de Pessoa</a>.</p>
 
-                <p>O RG sempre aparece junto ao <a href="/gerar-cpf">CPF</a> em cadastros de pessoa física — gere
-                    os dois em sequência ou use o <a href="/gerar-pessoa">Gerador de Pessoa</a>, que já combina
-                    RG, CPF, nome, endereço, telefone e outros dados em um único perfil fictício completo.
-                </p>
+                <h2 id="lgpd" class="box-subtitle">RG e LGPD</h2>
+                <p>O número do RG é um <strong>dado pessoal</strong> (art. 5º, I, da LGPD), e a imagem do documento
+                    traz ainda foto, filiação, naturalidade e assinatura. Cópias digitalizadas de RG estão entre os
+                    arquivos mais usados em fraudes de abertura de conta.</p>
+                <ul>
+                    <li>Em homologação, use números gerados e imagens de documentos fictícias, nunca digitalizações
+                        de clientes.</li>
+                    <li>Se o sistema guarda a imagem do RG, defina prazo de retenção e restrinja quem pode vê-la
+                        (art. 6º, III, e art. 46).</li>
+                </ul>
+                <p>Veja mais boas práticas na seção de LGPD do <a href="/gerar-cpf#lgpd">Gerador de CPF</a>.</p>
+                <p class="text-muted">Este conteúdo é informativo e não substitui a orientação do encarregado de
+                    dados (DPO) ou do jurídico da sua empresa.</p>
+
+                <h2 id="faq" class="box-subtitle">Perguntas frequentes</h2>
+                <div class="doc-faq">
+                    <details>
+                        <summary>O RG gerado existe de verdade?</summary>
+                        <p>O gerador não consulta nenhuma base. O número segue a regra de SP, mas pode coincidir com
+                            o de uma pessoa real. Use-o só em testes.</p>
+                    </details>
+                    <details>
+                        <summary>Por que o RG termina com X?</summary>
+                        <p>Na regra de SP, quando o cálculo do verificador resulta em 10, o dígito é representado
+                            pela letra X.</p>
+                    </details>
+                    <details>
+                        <summary>Dá para validar RG de qualquer estado?</summary>
+                        <p>Não com uma única regra. Cada estado tem o seu formato. Para cadastros nacionais, valide
+                            só o preenchimento e use o CPF como identificador.</p>
+                    </details>
+                    <details>
+                        <summary>Com a CIN, o RG deixa de existir?</summary>
+                        <p>Os RGs antigos continuam aceitos durante a transição, até 2032. A CIN usa o CPF como
+                            número de identificação.</p>
+                    </details>
+                </div>
+
+                <h2 class="box-subtitle">Veja também</h2>
+                <p>O <a href="/gerar-cpf">Gerador de CPF</a> gera o número que a CIN usa como identificação. O
+                    <a href="/gerar-pessoa">Gerador de Pessoa</a> cria cadastros completos.</p>
             </div>
         </div>
     </div>

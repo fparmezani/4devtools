@@ -873,3 +873,71 @@ input[type=number] {
 @media (min-width: 992px) and (max-width: 1199.98px) {  }
 
 @media (min-width: 1200px) {  } */
+
+/* ===== Páginas de referência (geradores) ===== */
+.doc { line-height: 1.7; color: #333; }
+.doc .card-body.pt-0 { padding-top: 0; }
+.doc .doc-lead { font-size: 1.05rem; color: #555; margin-top: 8px; }
+.doc .box-subtitle { color: #2c2c3a; margin-top: 36px; scroll-margin-top: 80px; }
+.doc .doc-h3 { font-size: 1.05rem; font-weight: 600; margin: 20px 0 8px; color: #2c2c3a; }
+.doc code { background: #f3f0ff; color: #5b2bd6; padding: 1px 6px; border-radius: 4px; font-size: .9em; overflow-wrap: anywhere; }
+.doc-tool { border: 1px solid #e0e0e0; border-radius: 6px; padding: 20px; }
+.doc-tool .btn { white-space: normal; max-width: 100%; }
+.doc-alert { margin-top: 16px; padding: 12px 16px; border-left: 4px solid #f0ad4e; background: #fff8ec; border-radius: 4px; font-size: .95rem; }
+.doc-toc { display: flex; flex-wrap: wrap; gap: 6px 18px; padding: 14px 16px; background: #f8f9fb; border-radius: 6px; font-size: .92rem; }
+.doc-toc strong { width: 100%; color: #2c2c3a; }
+.doc-toc a { color: #1976d2; }
+.doc-table-wrap { overflow-x: auto; margin: 12px 0 16px; }
+.doc-table { border-collapse: collapse; font-size: .95rem; min-width: 280px; }
+.doc-table th, .doc-table td { border: 1px solid #e3e3e8; padding: 6px 12px; text-align: left; }
+.doc-table thead th, .doc-table tbody th { background: #f8f9fb; font-weight: 600; }
+.doc-table-num td { text-align: center; min-width: 38px; font-variant-numeric: tabular-nums; }
+.doc-tabs { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 12px; }
+.doc-tab { border: 1px solid #d8d8e0; background: #fff; color: #444; padding: 6px 12px; border-radius: 6px 6px 0 0; font-size: .9rem; cursor: pointer; }
+.doc-tab.active { background: #1e1e2e; border-color: #1e1e2e; color: #fff; }
+.doc-code { background: #1e1e2e; color: #e6e6f0; padding: 16px; border-radius: 0 6px 6px 6px; overflow-x: auto; font-size: .85rem; line-height: 1.55; margin: 0 0 12px; }
+.doc .doc-code code { background: none; color: inherit; padding: 0; font-size: inherit; white-space: pre; }
+.doc-faq details { border: 1px solid #e3e3e8; border-radius: 6px; padding: 10px 14px; margin-bottom: 8px; }
+.doc-faq summary { cursor: pointer; font-weight: 600; color: #2c2c3a; }
+.doc-faq details p { margin: 10px 0 0; }
+/* body usa display:table: sem isto, blocos largos (código/tabelas) esticam o layout no celular */
+.doc-table-wrap, .doc-code { width: 0; min-width: 100%; }
+/* o tema zera o recuo de listas (ul { padding-left: 0 }); nas páginas doc os marcadores precisam de recuo */
+.doc ul, .doc ol { padding-left: 1.6rem; margin: 8px 0 16px; }
+.doc li { margin-bottom: 6px; padding-left: 4px; }
+.doc li::marker { color: #8c52ff; }
+
+/* ===== Destaque de sintaxe (Prism) — paleta inspirada no One Dark ===== */
+.doc-code { background: #282c34; color: #abb2bf; }
+.doc-tab.active { background: #282c34; border-color: #282c34; }
+.doc-code .token.comment { color: #7f848e; font-style: italic; }
+.doc-code .token.keyword { color: #c678dd; }
+.doc-code .token.function, .doc-code .token.method { color: #61afef; }
+.doc-code .token.variable, .doc-code .token.parameter { color: #e06c75; }
+.doc-code .token.string, .doc-code .token.char { color: #98c379; }
+.doc-code .token.regex { color: #56b6c2; }
+.doc-code .token.number, .doc-code .token.boolean, .doc-code .token.constant { color: #d19a66; }
+.doc-code .token.class-name, .doc-code .token.builtin, .doc-code .token.namespace, .doc-code .token.return-type { color: #e5c07b; }
+.doc-code .token.operator { color: #56b6c2; }
+.doc-code .token.punctuation { color: #abb2bf; }
+.doc-code .token.namespace { opacity: .9; }
+
+/* ===== Artigos do blog ===== */
+.doc-artigo .doc-hero { max-height: 320px; object-fit: cover; }
+.doc .doc-meta { font-size: .9rem; color: #777; margin: -4px 0 8px; }
+.doc ol { padding-left: 1.6rem; }
+.doc-code.doc-code-solo { border-radius: 6px; margin-top: 12px; }
+.doc-code .token.tag, .doc-code .token.selector { color: #e06c75; }
+.doc-code .token.attr-name { color: #d19a66; }
+.doc-code .token.attr-value { color: #98c379; }
+
+/* ===== Cards de tutoriais / home ===== */
+.doc-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; margin: 16px 0 8px; }
+.doc-card { display: flex; flex-direction: column; gap: 6px; padding: 16px 18px; border: 1px solid #e3e3e8; border-radius: 8px; background: #fff; color: #444 !important; transition: border-color .15s ease, box-shadow .15s ease, transform .15s ease; }
+.doc-card:hover { border-color: #8c52ff; box-shadow: 0 4px 14px rgba(140, 82, 255, .12); transform: translateY(-1px); }
+.doc-card { overflow: hidden; }
+.doc-card .doc-card-img { display: block; width: calc(100% + 36px); max-width: none; height: auto; aspect-ratio: 16 / 9; object-fit: cover; margin: -16px -18px 8px; background: #eef0f6; }
+.doc-card strong { color: #2c2c3a; font-size: 1rem; line-height: 1.35; }
+.doc-card span { font-size: .9rem; line-height: 1.5; }
+.doc-card .doc-card-tema { align-self: flex-start; font-size: .75rem; font-weight: 600; text-transform: uppercase; letter-spacing: .04em; color: #8c52ff; background: #f3f0ff; padding: 2px 8px; border-radius: 999px; }
+@media (prefers-reduced-motion: reduce) { .doc-card { transition: none; } .doc-card:hover { transform: none; } }

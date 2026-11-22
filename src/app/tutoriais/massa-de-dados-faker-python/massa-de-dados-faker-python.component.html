@@ -1,0 +1,66 @@
+<div class="row">
+    <div class="col-lg-12">
+        <article class="card doc doc-artigo">
+            <div class="card-body">
+                <h1 class="box-title">Massa de dados de teste com Python e Faker (pt_BR)</h1>
+                <p class="doc-lead">Gere milhares de clientes e empresas fictícios, com CPF e CNPJ válidos, em CSV ou direto no
+                    banco, com resultados reproduzíveis entre execuções.</p>
+                <p class="doc-meta">Por <a href="/sobre">Fernando Parmezani</a> · Publicado em 22 de novembro de 2026</p>
+
+                <h2 class="box-subtitle">Por que usar o Faker</h2>
+                <p>O <strong>Faker</strong> é uma biblioteca Python que gera dados falsos realistas. Com o locale
+                    <code>pt_BR</code>, ele cria nomes, CPFs, CNPJs, endereços, CEPs e telefones no padrão brasileiro. É a forma
+                    mais rápida de popular um banco de homologação sem usar dados de pessoas reais, o que também resolve boa parte
+                    das preocupações com a LGPD (veja <a href="/tutoriais/dados-de-teste-lgpd">Dados de teste e LGPD</a>).</p>
+
+                <h2 class="box-subtitle">Instalação</h2>
+                <app-code-tabs [snippets]="t.fakerInstalar"></app-code-tabs>
+
+                <h2 class="box-subtitle">Gerando clientes em CSV</h2>
+                <app-code-tabs [snippets]="t.fakerCsv"></app-code-tabs>
+                <p>Pontos importantes do script:</p>
+                <ul>
+                    <li><strong><code>Faker.seed(42)</code></strong> torna o resultado reproduzível: a mesma semente gera os mesmos
+                        dados em toda execução. Isso ajuda a reproduzir um bug encontrado com um dado específico.</li>
+                    <li><strong><code>fake.unique</code></strong> garante que CPF e e-mail não se repetem, essencial quando a
+                        coluna tem restrição de unicidade.</li>
+                    <li><strong><code>fake.cpf()</code></strong> gera CPFs com dígitos verificadores corretos e com máscara
+                        (<code>000.000.000-00</code>).</li>
+                    <li>Os e-mails usam domínios reservados para exemplos (como <code>example.org</code>), que não entregam
+                        mensagens a ninguém. Assim, um teste que dispara e-mails não incomoda pessoas reais.</li>
+                </ul>
+                <p>Rodando o script, cada linha sai assim:</p>
+                <pre class="doc-code doc-code-solo"><code>Brenda Alves,721.175.500-88,mirellapereira&#64;example.org,+55 82 98637-9402,54235-116,Fogaça,MS,1986-12-22</code></pre>
+
+                <h2 class="box-subtitle">Gerando empresas direto no banco</h2>
+                <p>Este exemplo usa SQLite, que já vem com o Python, mas a ideia é a mesma para PostgreSQL ou MySQL. O CNPJ é
+                    gravado sem máscara, numa coluna de texto:</p>
+                <app-code-tabs [snippets]="t.fakerEmpresas"></app-code-tabs>
+
+                <h2 class="box-subtitle">Limitações que você precisa conhecer</h2>
+                <ul>
+                    <li><strong>Cidades e bairros são inventados.</strong> O Faker combina pedaços de nomes e pode gerar algo como
+                        "Fogaça". Se o sistema valida cidade contra uma tabela do IBGE, sorteie a cidade dessa tabela.</li>
+                    <li><strong>CEP, cidade e UF não combinam entre si.</strong> Cada campo é sorteado separadamente. Para testes de
+                        frete ou de busca por CEP, use uma lista de endereços reais de exemplo.</li>
+                    <li><strong>CNPJ só no formato numérico.</strong> Para o alfanumérico, use o
+                        <a href="/gerar-cnpj">Gerador de CNPJ</a> ou implemente o cálculo com as funções da página.</li>
+                    <li><strong>Não há CNH, PIS, Título de Eleitor nem RENAVAM</strong> no Faker. Use os geradores do 4DevTools ou
+                        as funções de cálculo publicadas em cada um.</li>
+                </ul>
+
+                <h2 class="box-subtitle">Boas práticas</h2>
+                <ul>
+                    <li>Versione o script de seed junto com o projeto, para que qualquer pessoa do time recrie o banco de
+                        homologação.</li>
+                    <li>Gere também casos extremos: nomes com acentos e apóstrofos (D'Ávila), sobrenomes longos e CPFs que começam
+                        com zero.</li>
+                    <li>Mantenha a semente fixa nos testes automatizados e varie a semente em testes exploratórios.</li>
+                </ul>
+
+                <h2 class="box-subtitle">Outros tutoriais</h2>
+                <app-tutoriais-lista atual="massa-de-dados-faker-python"></app-tutoriais-lista>
+            </div>
+        </article>
+    </div>
+</div>

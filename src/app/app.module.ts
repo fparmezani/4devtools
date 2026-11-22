@@ -53,13 +53,22 @@ import { RenavamComponent } from './blog/renavam/renavam.component';
 import { TituloeleitorComponent } from './blog/tituloeleitor/tituloeleitor.component';
 import { CnsComponent } from './blog/cns/cns.component';
 import { PispasepComponent } from './blog/pispasep/pispasep.component';
-import { EthereumComponent } from './blog/ethereum/ethereum.component';
 import { AihComponent } from './blog/aih/aih.component';
 import { LeiatambemComponent } from './shared/leiatambem/leiatambem.component';
-import { OqueeBitcoinComponent } from './blog/oqueebitcoin/oqueebitcoin.component';
 import { WhatsappComponent } from './components/whatsapp/whatsapp.component';
 import { TelegramComponent } from './components/telegram/telegram.component';
 import { GerarRgComponent } from './components/gerar-rg/gerar-rg.component';
+import { TutoriaisListaComponent } from './tutoriais/lista/tutoriais-lista.component';
+import { TutoriaisIndiceComponent } from './tutoriais/indice/tutoriais-indice.component';
+import { TutorialLgpdComponent } from './tutoriais/dados-de-teste-lgpd/dados-de-teste-lgpd.component';
+import { TutorialCnpjAlfanumericoComponent } from './tutoriais/cnpj-alfanumerico/cnpj-alfanumerico.component';
+import { TutorialAngularComponent } from './tutoriais/validar-cpf-cnpj-angular/validar-cpf-cnpj-angular.component';
+import { TutorialFakerComponent } from './tutoriais/massa-de-dados-faker-python/massa-de-dados-faker-python.component';
+import { TutorialMascarasComponent } from './tutoriais/mascaras-javascript/mascaras-javascript.component';
+import { TutorialPlaywrightComponent } from './tutoriais/playwright-dados-gerados/playwright-dados-gerados.component';
+import { HomeComponent } from './shared/home/home.component';
+import { TabelaDvComponent } from './shared/tabela-dv/tabela-dv.component';
+import { CodeTabsComponent } from './shared/code-tabs/code-tabs.component';
 import { JwtDecoderComponent } from './components/jwt-decoder/jwt-decoder.component';
 
 registerLocaleData(localePt);
@@ -102,14 +111,23 @@ registerLocaleData(localePt);
         TituloeleitorComponent,
         CnsComponent,
         PispasepComponent,
-        EthereumComponent,
         AihComponent,
         LeiatambemComponent,
-        OqueeBitcoinComponent,
         WhatsappComponent,
         TelegramComponent,
         GerarRgComponent,
         JwtDecoderComponent,
+        CodeTabsComponent,
+        TabelaDvComponent,
+        HomeComponent,
+        TutoriaisListaComponent,
+        TutoriaisIndiceComponent,
+        TutorialLgpdComponent,
+        TutorialCnpjAlfanumericoComponent,
+        TutorialAngularComponent,
+        TutorialFakerComponent,
+        TutorialMascarasComponent,
+        TutorialPlaywrightComponent,
     ],
     imports: [
         BrowserModule.withServerTransition({ appId: 'serverApp' }),

@@ -64,40 +64,37 @@ export class GeradorService {
     }
 
     gerarCpf(stateCpf: string, formataCPF: boolean) {
-        const n1 = Math.round(Math.random() * 9);
-        const n2 = Math.round(Math.random() * 9);
-        const n3 = Math.round(Math.random() * 9);
-        const n4 = Math.round(Math.random() * 9);
-        const n5 = Math.round(Math.random() * 9);
-        const n6 = Math.round(Math.random() * 9);
-        const n7 = Math.round(Math.random() * 9);
-        const n8 = Math.round(Math.random() * 9);
-        const n9 = this.gerarEstadosCpf(stateCpf);
-        let d1 = n9 * 2 + n8 * 3 + n7 * 4 + n6 * 5 + n5 * 6 + n4 * 7 + n3 * 8 + n2 * 9 + n1 * 10;
-        d1 = 11 - d1 % 11;
-        if (d1 >= 10) d1 = 0;
-        let d2 = d1 * 2 + n9 * 3 + n8 * 4 + n7 * 5 + n6 * 6 + n5 * 7 + n4 * 8 + n3 * 9 + n2 * 10 + n1 * 11;
-        d2 = 11 - d2 % 11;
-        if (d2 >= 10) d2 = 0;
+        const digito = () => Math.floor(Math.random() * 10);
+        let base: number[];
+        do {
+            base = [ digito(), digito(), digito(), digito(), digito(), digito(), digito(), digito(), this.gerarEstadosCpf(stateCpf) ];
+        } while (base.every((n) => n === base[0]));
 
-        const cpf = formataCPF
+        const calcularDv = (digitos: number[]) => {
+            const soma = digitos.reduce((acc, n, i) => acc + n * (digitos.length + 1 - i), 0);
+            const resto = soma % 11;
+            return resto < 2 ? 0 : 11 - resto;
+        };
+        const d1 = calcularDv(base);
+        const d2 = calcularDv([ ...base, d1 ]);
+        const [ n1, n2, n3, n4, n5, n6, n7, n8, n9 ] = base;
+
+        return formataCPF
             ? `${n1}${n2}${n3}.${n4}${n5}${n6}.${n7}${n8}${n9}-${d1}${d2}`
             : `${n1}${n2}${n3}${n4}${n5}${n6}${n7}${n8}${n9}${d1}${d2}`;
-
-        return cpf;
     }
 
     gerarRenavan() {
-        const n1 = Math.round(Math.random() * 9);
-        const n2 = Math.round(Math.random() * 9);
-        const n3 = Math.round(Math.random() * 9);
-        const n4 = Math.round(Math.random() * 9);
-        const n5 = Math.round(Math.random() * 9);
-        const n6 = Math.round(Math.random() * 9);
-        const n7 = Math.round(Math.random() * 9);
-        const n8 = Math.round(Math.random() * 9);
-        const n9 = Math.round(Math.random() * 9);
-        const n10 = Math.round(Math.random() * 9);
+        const n1 = Math.floor(Math.random() * 10);
+        const n2 = Math.floor(Math.random() * 10);
+        const n3 = Math.floor(Math.random() * 10);
+        const n4 = Math.floor(Math.random() * 10);
+        const n5 = Math.floor(Math.random() * 10);
+        const n6 = Math.floor(Math.random() * 10);
+        const n7 = Math.floor(Math.random() * 10);
+        const n8 = Math.floor(Math.random() * 10);
+        const n9 = Math.floor(Math.random() * 10);
+        const n10 = Math.floor(Math.random() * 10);
 
         const sum = n10 * 2 + n9 * 3 + n8 * 4 + n7 * 5 + n6 * 6 + n5 * 7 + n4 * 8 + n3 * 9 + n2 * 2 + n1 * 3;
         let dv = 11 - sum % 11;
@@ -164,7 +161,7 @@ export class GeradorService {
                 number = 9;
                 break;
             case 'XX':
-                number = Math.round(Math.random() * 9);
+                number = Math.floor(Math.random() * 10);
                 break;
         }
 
@@ -172,14 +169,14 @@ export class GeradorService {
     }
 
     gerarCNPJ(formataCNPJ: boolean) {
-        const n1 = Math.round(Math.random() * 9);
-        const n2 = Math.round(Math.random() * 9);
-        const n3 = Math.round(Math.random() * 9);
-        const n4 = Math.round(Math.random() * 9);
-        const n5 = Math.round(Math.random() * 9);
-        const n6 = Math.round(Math.random() * 9);
-        const n7 = Math.round(Math.random() * 9);
-        const n8 = Math.round(Math.random() * 9);
+        const n1 = Math.floor(Math.random() * 10);
+        const n2 = Math.floor(Math.random() * 10);
+        const n3 = Math.floor(Math.random() * 10);
+        const n4 = Math.floor(Math.random() * 10);
+        const n5 = Math.floor(Math.random() * 10);
+        const n6 = Math.floor(Math.random() * 10);
+        const n7 = Math.floor(Math.random() * 10);
+        const n8 = Math.floor(Math.random() * 10);
         const n9 = 0;
         const n10 = 0;
         const n11 = 0;
@@ -241,6 +238,31 @@ export class GeradorService {
     //     return `${day}/${month}/${year}`;
     // }
 
+    /** CNPJ alfanumérico (IN RFB nº 2.229/2024): 12 caracteres [0-9A-Z] + 2 DVs numéricos. */
+    gerarCNPJAlfanumerico(formataCNPJ: boolean) {
+        const caracteres = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        const sortear = () => caracteres[Math.floor(Math.random() * caracteres.length)];
+        let raiz: string[];
+        do {
+            raiz = Array.from({ length: 8 }, sortear);
+        } while (!raiz.some((c) => /[A-Z]/.test(c)));
+        const base = [ ...raiz, '0', '0', '0', '1' ];
+
+        const calcularDv = (chars: string[]) => {
+            const pesos = chars.length === 12 ? [ 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2 ] : [ 6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2 ];
+            const soma = chars.reduce((acc, c, i) => acc + (c.charCodeAt(0) - 48) * pesos[i], 0);
+            const resto = soma % 11;
+            return resto < 2 ? 0 : 11 - resto;
+        };
+        const d1 = calcularDv(base);
+        const d2 = calcularDv([ ...base, String(d1) ]);
+        const c = [ ...base, String(d1), String(d2) ].join('');
+
+        return formataCNPJ
+            ? `${c.slice(0, 2)}.${c.slice(2, 5)}.${c.slice(5, 8)}/${c.slice(8, 12)}-${c.slice(12)}`
+            : c;
+    }
+
     gerarCns() {
         let cns = '0';
 
@@ -301,16 +323,16 @@ export class GeradorService {
     }
 
     gerarPisPasep() {
-        const n1 = Math.round(Math.random() * 9);
-        const n2 = Math.round(Math.random() * 9);
-        const n3 = Math.round(Math.random() * 9);
-        const n4 = Math.round(Math.random() * 9);
-        const n5 = Math.round(Math.random() * 9);
-        const n6 = Math.round(Math.random() * 9);
-        const n7 = Math.round(Math.random() * 9);
-        const n8 = Math.round(Math.random() * 9);
-        const n9 = Math.round(Math.random() * 9);
-        const n10 = Math.round(Math.random() * 9);
+        const n1 = Math.floor(Math.random() * 10);
+        const n2 = Math.floor(Math.random() * 10);
+        const n3 = Math.floor(Math.random() * 10);
+        const n4 = Math.floor(Math.random() * 10);
+        const n5 = Math.floor(Math.random() * 10);
+        const n6 = Math.floor(Math.random() * 10);
+        const n7 = Math.floor(Math.random() * 10);
+        const n8 = Math.floor(Math.random() * 10);
+        const n9 = Math.floor(Math.random() * 10);
+        const n10 = Math.floor(Math.random() * 10);
 
         const sum = n1 * 3 + n2 * 2 + n3 * 9 + n4 * 8 + n5 * 7 + n6 * 6 + n7 * 5 + n8 * 4 + n9 * 3 + n10 * 2;
 
@@ -326,33 +348,30 @@ export class GeradorService {
         let cnh = '';
 
         while (true) {
-            const n1 = Math.round(Math.random() * 9);
-            const n2 = Math.round(Math.random() * 9);
-            const n3 = Math.round(Math.random() * 9);
-            const n4 = Math.round(Math.random() * 9);
-            const n5 = Math.round(Math.random() * 9);
-            const n6 = Math.round(Math.random() * 9);
-            const n7 = Math.round(Math.random() * 9);
-            const n8 = Math.round(Math.random() * 9);
-            const n9 = Math.round(Math.random() * 9);
-
-            let aux = 0;
+            const n1 = Math.floor(Math.random() * 10);
+            const n2 = Math.floor(Math.random() * 10);
+            const n3 = Math.floor(Math.random() * 10);
+            const n4 = Math.floor(Math.random() * 10);
+            const n5 = Math.floor(Math.random() * 10);
+            const n6 = Math.floor(Math.random() * 10);
+            const n7 = Math.floor(Math.random() * 10);
+            const n8 = Math.floor(Math.random() * 10);
+            const n9 = Math.floor(Math.random() * 10);
 
             const sumDv1 = n1 * 9 + n2 * 8 + n3 * 7 + n4 * 6 + n5 * 5 + n6 * 4 + n7 * 3 + n8 * 2 + n9 * 1;
-            let dv1 = sumDv1 % 11;
+            const dv1 = sumDv1 % 11;
             if (dv1 >= 10) {
-                dv1 = 0;
-                aux = 2;
+                // Quando o 1º DV estoura, as implementações divergem no 2º DV.
+                // Descartamos o caso para o número passar em qualquer validador.
+                continue;
+            }
+            if ([ n1, n2, n3, n4, n5, n6, n7, n8, n9 ].every((n) => n === n1)) {
+                continue;
             }
 
             const sumDv2 = n1 * 1 + n2 * 2 + n3 * 3 + n4 * 4 + n5 * 5 + n6 * 6 + n7 * 7 + n8 * 8 + n9 * 9;
-            let dv2 = sumDv2 % 11;
-            dv2 = dv2 >= 10 ? 0 : dv2 - aux;
-
-            // gambi because life is like this... ¯\_(ツ)_/¯
-            if (dv2 < 0) {
-                continue;
-            }
+            const resto2 = sumDv2 % 11;
+            const dv2 = resto2 >= 10 ? 0 : resto2;
 
             cnh = `${n1}${n2}${n3}${n4}${n5}${n6}${n7}${n8}${n9}${dv1}${dv2}`;
 
@@ -363,16 +382,16 @@ export class GeradorService {
     }
 
     getRenavam() {
-        const n1 = Math.round(Math.random() * 9);
-        const n2 = Math.round(Math.random() * 9);
-        const n3 = Math.round(Math.random() * 9);
-        const n4 = Math.round(Math.random() * 9);
-        const n5 = Math.round(Math.random() * 9);
-        const n6 = Math.round(Math.random() * 9);
-        const n7 = Math.round(Math.random() * 9);
-        const n8 = Math.round(Math.random() * 9);
-        const n9 = Math.round(Math.random() * 9);
-        const n10 = Math.round(Math.random() * 9);
+        const n1 = Math.floor(Math.random() * 10);
+        const n2 = Math.floor(Math.random() * 10);
+        const n3 = Math.floor(Math.random() * 10);
+        const n4 = Math.floor(Math.random() * 10);
+        const n5 = Math.floor(Math.random() * 10);
+        const n6 = Math.floor(Math.random() * 10);
+        const n7 = Math.floor(Math.random() * 10);
+        const n8 = Math.floor(Math.random() * 10);
+        const n9 = Math.floor(Math.random() * 10);
+        const n10 = Math.floor(Math.random() * 10);
 
         const sum = n10 * 2 + n9 * 3 + n8 * 4 + n7 * 5 + n6 * 6 + n5 * 7 + n4 * 8 + n3 * 9 + n2 * 2 + n1 * 3;
         let dv = 11 - sum % 11;
@@ -406,7 +425,7 @@ export class GeradorService {
         const length = 16 - arr.length;
 
         for (var i = 1; i < length; i++) {
-            arr.push(Math.round(Math.random() * 9));
+            arr.push(Math.floor(Math.random() * 10));
         }
 
         let sum = 0;
@@ -428,17 +447,11 @@ export class GeradorService {
 
         return creditcard;
     }
+    /** Validade no formato impresso nos cartões: MM/AA, entre 1 e 8 anos à frente. */
     gerarDataValidade() {
-        let month = '0' + (Math.floor(Math.random() * 12) + 1).toString();
-        month = month.substr(month.length - 2);
-
-        const arrMonth31Days = [ '01', '03', '05', '07', '08', '10', '12' ];
-        const arrMonth30Days = [ '04', '06', '09', '11' ];
-        const randomDay = arrMonth31Days.includes(month) ? 31 : arrMonth30Days.includes(month) ? 30 : 28;
-        let day = '0' + (Math.floor(Math.random() * randomDay) + 1).toString();
-        day = day.substr(day.length - 2);
-        const year = new Date().getFullYear() + Math.floor(Math.random() * 10) + 1;
-        return `${day}/${month}/${year}`;
+        const mes = String(Math.floor(Math.random() * 12) + 1).padStart(2, '0');
+        const ano = String((new Date().getFullYear() + Math.floor(Math.random() * 8) + 1) % 100).padStart(2, '0');
+        return `${mes}/${ano}`;
     }
     gerarCvv() {
         let random = Math.floor(Math.random() * 999) + 1;
@@ -485,12 +498,12 @@ export class GeradorService {
         const ddd = this.gerarDDD(estado);
         const operator = this.gerarOperatoraCelular();
 
-        const n3 = Math.round(Math.random() * 9);
-        const n4 = Math.round(Math.random() * 9);
-        const n5 = Math.round(Math.random() * 9);
-        const n6 = Math.round(Math.random() * 9);
-        const n7 = Math.round(Math.random() * 9);
-        const n8 = Math.round(Math.random() * 9);
+        const n3 = Math.floor(Math.random() * 10);
+        const n4 = Math.floor(Math.random() * 10);
+        const n5 = Math.floor(Math.random() * 10);
+        const n6 = Math.floor(Math.random() * 10);
+        const n7 = Math.floor(Math.random() * 10);
+        const n8 = Math.floor(Math.random() * 10);
 
         return `(${ddd}) ${operator}${n3}${n4}-${n5}${n6}${n7}${n8}`;
     }
@@ -510,30 +523,30 @@ export class GeradorService {
         const ddd = this.gerarDDD(estado);
 
         const n1 = Math.floor(Math.random() * (3 - 2 + 1)) + 2;
-        const n2 = Math.round(Math.random() * 9);
-        const n3 = Math.round(Math.random() * 9);
-        const n4 = Math.round(Math.random() * 9);
-        const n5 = Math.round(Math.random() * 9);
-        const n6 = Math.round(Math.random() * 9);
-        const n7 = Math.round(Math.random() * 9);
-        const n8 = Math.round(Math.random() * 9);
+        const n2 = Math.floor(Math.random() * 10);
+        const n3 = Math.floor(Math.random() * 10);
+        const n4 = Math.floor(Math.random() * 10);
+        const n5 = Math.floor(Math.random() * 10);
+        const n6 = Math.floor(Math.random() * 10);
+        const n7 = Math.floor(Math.random() * 10);
+        const n8 = Math.floor(Math.random() * 10);
 
         return `(${ddd}) ${n1}${n2}${n3}${n4}-${n5}${n6}${n7}${n8}`;
     }
 
-    gerarTituloEleitor(state: string) {
+    gerarTituloEleitor(state: string): string {
         if (state === '') {
             state = '01';
         }
 
-        const n1 = Math.round(Math.random() * 9);
-        const n2 = Math.round(Math.random() * 9);
-        const n3 = Math.round(Math.random() * 9);
-        const n4 = Math.round(Math.random() * 9);
-        const n5 = Math.round(Math.random() * 9);
-        const n6 = Math.round(Math.random() * 9);
-        const n7 = Math.round(Math.random() * 9);
-        const n8 = Math.round(Math.random() * 9);
+        const n1 = Math.floor(Math.random() * 10);
+        const n2 = Math.floor(Math.random() * 10);
+        const n3 = Math.floor(Math.random() * 10);
+        const n4 = Math.floor(Math.random() * 10);
+        const n5 = Math.floor(Math.random() * 10);
+        const n6 = Math.floor(Math.random() * 10);
+        const n7 = Math.floor(Math.random() * 10);
+        const n8 = Math.floor(Math.random() * 10);
 
         const states = state.split('');
         const n9 = parseInt(states[0]);
@@ -541,6 +554,12 @@ export class GeradorService {
 
         let d1 = n1 * 2 + n2 * 3 + n3 * 4 + n4 * 5 + n5 * 6 + n6 * 7 + n7 * 8 + n8 * 9;
         d1 = d1 % 11;
+        const restoD2 = (n9 * 7 + n10 * 8 + (d1 === 10 ? 0 : d1) * 9) % 11;
+        if ((state === '01' || state === '02') && (d1 === 0 || restoD2 === 0)) {
+            // Em SP e MG há validadores que trocam o resto 0 por 1 e outros que não.
+            // Geramos outro número para evitar o caso ambíguo.
+            return this.gerarTituloEleitor(state);
+        }
         d1 = this.validateRestOfDivision(d1, state);
 
         let d2 = n9 * 7 + n10 * 8 + d1 * 9;
@@ -568,13 +587,13 @@ export class GeradorService {
 
     gerarRg() {
         const n1 = Math.floor(Math.random() * 4 + 1);
-        const n2 = Math.round(Math.random() * 9);
-        const n3 = Math.round(Math.random() * 9);
-        const n4 = Math.round(Math.random() * 9);
-        const n5 = Math.round(Math.random() * 9);
-        const n6 = Math.round(Math.random() * 9);
-        const n7 = Math.round(Math.random() * 9);
-        const n8 = Math.round(Math.random() * 9);
+        const n2 = Math.floor(Math.random() * 10);
+        const n3 = Math.floor(Math.random() * 10);
+        const n4 = Math.floor(Math.random() * 10);
+        const n5 = Math.floor(Math.random() * 10);
+        const n6 = Math.floor(Math.random() * 10);
+        const n7 = Math.floor(Math.random() * 10);
+        const n8 = Math.floor(Math.random() * 10);
 
         const sum = n1 * 2 + n2 * 3 + n3 * 4 + n4 * 5 + n5 * 6 + n6 * 7 + n7 * 8 + n8 * 9;
 

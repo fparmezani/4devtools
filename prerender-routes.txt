@@ -13,6 +13,13 @@
 /gerar-telefone
 /gerar-senha
 /jwt-decoder
+/tutoriais
+/tutoriais/dados-de-teste-lgpd
+/tutoriais/cnpj-alfanumerico
+/tutoriais/validar-cpf-cnpj-angular
+/tutoriais/massa-de-dados-faker-python
+/tutoriais/mascaras-javascript
+/tutoriais/playwright-dados-gerados
 /whatsapp
 /telegram
 /blog/cpf
@@ -23,8 +30,6 @@
 /blog/pispasep
 /blog/cartaocredito
 /blog/aih
-/blog/oqueebitcoin
-/blog/ethereum
 /sobre
 /contato
 /politica-de-privacidade

@@ -1,0 +1,73 @@
+<div class="row">
+    <div class="col-lg-12">
+        <article class="card doc doc-artigo">
+            <div class="card-body">
+                <h1 class="box-title">Máscaras de CPF, CNPJ, telefone e CEP em JavaScript, sem bibliotecas</h1>
+                <p class="doc-lead">Funções pequenas e testadas que formatam os campos enquanto a pessoa digita, mais as
+                    configurações de HTML que melhoram a digitação no celular.</p>
+                <p class="doc-meta">Por <a href="/sobre">Fernando Parmezani</a> · Publicado em 22 de novembro de 2026</p>
+
+                <h2 class="box-subtitle">A ideia</h2>
+                <p>Toda máscara segue o mesmo caminho: <strong>remover tudo que não é dígito</strong>, cortar no tamanho máximo e
+                    reinserir a pontuação com expressões regulares. Como a pontuação é recalculada a cada tecla, a função funciona
+                    para valores parciais (enquanto a pessoa digita), valores completos e valores colados de outro lugar, com ou
+                    sem formatação.</p>
+
+                <h2 class="box-subtitle">As funções</h2>
+                <app-code-tabs [snippets]="t.mascaras"></app-code-tabs>
+                <p>Comportamento enquanto a pessoa digita:</p>
+                <div class="doc-table-wrap">
+                    <table class="doc-table">
+                        <thead>
+                            <tr><th>Entrada</th><th>Função</th><th>Saída</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><code>1234</code></td><td>mascaraCpf</td><td><code>123.4</code></td></tr>
+                            <tr><td><code>12345678909</code></td><td>mascaraCpf</td><td><code>123.456.789-09</code></td></tr>
+                            <tr><td><code>112223330001</code></td><td>mascaraCnpj</td><td><code>11.222.333/0001</code></td></tr>
+                            <tr><td><code>119</code></td><td>mascaraTelefone</td><td><code>(11) 9</code></td></tr>
+                            <tr><td><code>1133334444</code></td><td>mascaraTelefone</td><td><code>(11) 3333-4444</code></td></tr>
+                            <tr><td><code>11987654321</code></td><td>mascaraTelefone</td><td><code>(11) 98765-4321</code></td></tr>
+                            <tr><td><code>01310100</code></td><td>mascaraCep</td><td><code>01310-100</code></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p>O telefone decide o formato pelo tamanho: com 11 dígitos é celular (<code>(00) 00000-0000</code>), com 10 é fixo
+                    (<code>(00) 0000-0000</code>). Enquanto a pessoa ainda digita, a máscara de fixo é aplicada e muda sozinha quando
+                    entra o 11º dígito.</p>
+                <p>A função <code>mascaraCnpj</code> é para o formato numérico. Se o seu sistema precisa aceitar o CNPJ
+                    alfanumérico, use a versão do tutorial <a href="/tutoriais/cnpj-alfanumerico">CNPJ alfanumérico</a>, que aceita
+                    letras.</p>
+
+                <h2 class="box-subtitle">Ligando a máscara ao campo</h2>
+                <app-code-tabs [snippets]="t.mascarasUso"></app-code-tabs>
+                <p>Detalhes que fazem diferença:</p>
+                <ul>
+                    <li><strong><code>type="text"</code> com <code>inputmode="numeric"</code></strong>: abre o teclado numérico no
+                        celular sem os problemas do <code>type="number"</code>, que remove zeros à esquerda, mostra setas e não
+                        aceita pontuação.</li>
+                    <li><strong><code>maxlength</code></strong> do tamanho já formatado (14 para CPF, 18 para CNPJ, 15 para celular,
+                        9 para CEP).</li>
+                    <li><strong>Envie só os números</strong> para o servidor, e guarde só os números no banco. A máscara é coisa de
+                        tela.</li>
+                    <li>Use <code>autocomplete="postal-code"</code> no CEP e <code>autocomplete="tel"</code> no telefone, para o
+                        navegador sugerir os dados da pessoa.</li>
+                </ul>
+
+                <h2 class="box-subtitle">Um cuidado: a posição do cursor</h2>
+                <p>Ao reescrever o valor do campo, o navegador move o cursor para o fim. Para quem digita do começo ao fim, não faz
+                    diferença. Se for importante permitir edição no meio do número, guarde a posição antes de aplicar a máscara e
+                    recalcule depois, contando quantos dígitos havia antes do cursor.</p>
+
+                <h2 class="box-subtitle">Máscara não é validação</h2>
+                <p>A máscara só organiza a digitação. Um CPF bem formatado ainda pode ter dígitos verificadores errados. Combine a
+                    máscara com as funções de validação dos geradores de <a href="/gerar-cpf#codigo">CPF</a> e
+                    <a href="/gerar-cnpj#codigo">CNPJ</a>, ou com os validadores do tutorial
+                    <a href="/tutoriais/validar-cpf-cnpj-angular">Angular com Reactive Forms</a>.</p>
+
+                <h2 class="box-subtitle">Outros tutoriais</h2>
+                <app-tutoriais-lista atual="mascaras-javascript"></app-tutoriais-lista>
+            </div>
+        </article>
+    </div>
+</div>

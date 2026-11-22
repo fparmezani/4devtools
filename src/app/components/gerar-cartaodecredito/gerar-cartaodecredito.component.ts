@@ -1,3 +1,4 @@
+import { SNIPPETS } from 'src/app/shared/snippets';
 import { Component, OnInit } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 import * as copy from 'copy-to-clipboard';
@@ -9,6 +10,16 @@ import { GeradorService } from 'src/app/services/gerador.service';
     templateUrl: './gerar-cartaodecredito.component.html',
 })
 export class GerarCartaodecreditoComponent implements OnInit {
+    readonly snippets = SNIPPETS['cartao'];
+    readonly exemploLuhn = '453914880343646'.split('').map(Number);
+    readonly linhasLuhn = this.exemploLuhn
+        .map((n, i, arr) => {
+            const dobra = (arr.length - i) % 2 === 1;
+            const dobrado = dobra ? n * 2 : n;
+            return { n, dobra, resultado: dobrado > 9 ? dobrado - 9 : dobrado };
+        });
+    readonly somaLuhn = this.linhasLuhn.reduce((a, l) => a + l.resultado, 0);
+    readonly dvLuhn = (10 - (this.somaLuhn % 10)) % 10;
     numero = '';
     cvv: string = '';
     dataValidade: string = '';
