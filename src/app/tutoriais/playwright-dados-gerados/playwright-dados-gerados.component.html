@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="col-lg-12">
+    <div class="col-xl-9">
         <article class="card doc doc-artigo">
             <div class="card-body">
                 <h1 class="box-title">Testes de formulário com Playwright e dados gerados</h1>
@@ -17,6 +17,8 @@
                     seu ambiente de testes. O bloco <code>webServer</code> sobe a aplicação antes dos testes, se ela ainda não
                     estiver rodando:</p>
                 <app-code-tabs [snippets]="t.playwrightConfig"></app-code-tabs>
+
+                <app-oferta-ebook variante="inline" campanha="tutorial-playwright-dados-gerados"></app-oferta-ebook>
 
                 <h2 class="box-subtitle">2. Gerador de dados</h2>
                 <p>Uma função pequena gera CPFs válidos com o mesmo cálculo explicado no <a href="/gerar-cpf#calculo">Gerador de
@@ -56,5 +58,8 @@
                 <app-tutoriais-lista atual="playwright-dados-gerados"></app-tutoriais-lista>
             </div>
         </article>
+    </div>
+    <div class="col-xl-3 d-none d-xl-block">
+        <app-oferta-ebook variante="lateral" campanha="tutorial-playwright-dados-gerados"></app-oferta-ebook>
     </div>
 </div>

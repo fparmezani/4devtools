@@ -55,6 +55,7 @@ import { CnsComponent } from './blog/cns/cns.component';
 import { PispasepComponent } from './blog/pispasep/pispasep.component';
 import { AihComponent } from './blog/aih/aih.component';
 import { LeiatambemComponent } from './shared/leiatambem/leiatambem.component';
+import { OfertaEbookComponent } from './shared/oferta-ebook/oferta-ebook.component';
 import { WhatsappComponent } from './components/whatsapp/whatsapp.component';
 import { TelegramComponent } from './components/telegram/telegram.component';
 import { GerarRgComponent } from './components/gerar-rg/gerar-rg.component';
@@ -114,6 +115,7 @@ registerLocaleData(localePt);
         PispasepComponent,
         AihComponent,
         LeiatambemComponent,
+        OfertaEbookComponent,
         WhatsappComponent,
         TelegramComponent,
         GerarRgComponent,

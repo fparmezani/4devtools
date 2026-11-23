@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="col-lg-12">
+    <div class="col-xl-9">
         <article class="card doc doc-artigo">
             <div class="card-body">
                 <h1 class="box-title">Dados de teste e LGPD: guia prático para desenvolvedores</h1>
@@ -51,6 +51,8 @@
                 <p>Se não houver alternativa, trate o ambiente como produção: mesmo controle de acesso, mesma criptografia, logs
                     de quem acessou, prazo para apagar a cópia e registro do motivo. Na prática, sai mais caro do que anonimizar.</p>
 
+                <app-oferta-ebook variante="inline" campanha="tutorial-dados-de-teste-lgpd"></app-oferta-ebook>
+
                 <h2 class="box-subtitle">Logs: o vazamento silencioso</h2>
                 <p>Logs costumam ser enviados para ferramentas de terceiros e guardados por meses, e é comum alguém registrar o
                     objeto inteiro de uma requisição, com CPF, e-mail e telefone. Mascare os campos antes de registrar:</p>
@@ -74,5 +76,8 @@
                 <app-tutoriais-lista atual="dados-de-teste-lgpd"></app-tutoriais-lista>
             </div>
         </article>
+    </div>
+    <div class="col-xl-3 d-none d-xl-block">
+        <app-oferta-ebook variante="lateral" campanha="tutorial-dados-de-teste-lgpd"></app-oferta-ebook>
     </div>
 </div>

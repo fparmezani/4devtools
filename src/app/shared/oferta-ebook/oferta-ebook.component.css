@@ -1,0 +1,763 @@
+/* Filme curto da oferta do ebook. Loop de 16s, só CSS.
+   Linha do tempo (segundos):
+     0.0 a 3.6   cena 1  gancho (texto digitado)
+     3.6 a 7.6   cena 2  vantagens (a capa entra)
+     7.6 a 11.0  cena 3  8 blocos
+    11.0 a 15.2  cena 4  preço riscado e preço novo
+   Cada cena some sozinha no fim; os itens de dentro só precisam entrar.
+   Alturas fixas: nenhum salto de layout (CLS). */
+
+:host {
+    display: block;
+}
+
+:host(.oe-host-lateral) {
+    position: sticky;
+    top: 84px;
+}
+
+.oe {
+    --oe-cycle: 16s;
+    --oe-pad: 116px;
+    margin: 28px 0;
+}
+
+.oe--lateral {
+    margin: 0;
+}
+
+.oe-card,
+.oe-card:hover,
+.oe-card:focus {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    padding: 16px 22px 20px;
+    border-radius: 12px;
+    border: 1px solid rgba(110, 168, 255, 0.4);
+    background: linear-gradient(135deg, #061029 0%, #0c2a66 100%);
+    color: #ffffff;
+    text-decoration: none;
+    box-shadow: 0 8px 24px rgba(6, 16, 41, 0.22);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.oe-card:hover,
+.oe-card:focus {
+    border-color: rgba(110, 168, 255, 0.85);
+    box-shadow: 0 10px 28px rgba(29, 125, 252, 0.35);
+}
+
+.oe-card:focus-visible {
+    outline: 3px solid #ffffff;
+    outline-offset: 2px;
+}
+
+/* Mouse ou foco em cima: o filme pausa (dá tempo de ler). */
+.oe-card:hover *,
+.oe-card:hover *::after,
+.oe-card:focus-visible *,
+.oe-card:focus-visible *::after,
+.oe-card:hover .oe-progress,
+.oe-card:focus-visible .oe-progress {
+    animation-play-state: paused;
+}
+
+.oe-tag {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 999px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #cfe0ff;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* Tela do filme */
+.oe-film {
+    position: relative;
+    display: block;
+    height: 170px;
+    margin: 10px 0 12px;
+}
+
+.oe-cover-wrap {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    line-height: 0;
+}
+
+.oe-cover {
+    width: 92px;
+    height: auto;
+    border-radius: 3px;
+    box-shadow: 0 10px 22px rgba(0, 0, 0, 0.55);
+    opacity: 0;
+    animation: oe-cover var(--oe-cycle) infinite both;
+    animation-delay: 3.6s;
+}
+
+.oe-scene {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 9px;
+    opacity: 0;
+}
+
+.oe-s1 {
+    animation: oe-scene-1 var(--oe-cycle) infinite both;
+}
+
+.oe-s2 {
+    padding-left: var(--oe-pad);
+    animation: oe-scene-2 var(--oe-cycle) infinite both;
+    animation-delay: 3.6s;
+}
+
+.oe-s3 {
+    padding-left: var(--oe-pad);
+    animation: oe-scene-3 var(--oe-cycle) infinite both;
+    animation-delay: 7.6s;
+}
+
+.oe-s4 {
+    padding-left: var(--oe-pad);
+    animation: oe-scene-4 var(--oe-cycle) infinite both;
+    animation-delay: 11s;
+}
+
+/* Tipografia das cenas */
+.oe-type,
+.oe-line {
+    display: block;
+    font-size: 1.7rem;
+    font-weight: 800;
+    line-height: 1.2;
+    color: #ffffff;
+}
+
+.oe-type {
+    align-self: flex-start;
+    opacity: 1;
+    animation: oe-type var(--oe-cycle) infinite both;
+    animation-delay: 0.3s;
+}
+
+.oe-hl {
+    color: #5fd8ff;
+}
+
+.oe-line,
+.oe-sub,
+.oe-kicker,
+.oe-item,
+.oe-chip,
+.oe-old {
+    opacity: 0;
+}
+
+.oe-s1 .oe-line {
+    animation: oe-in var(--oe-cycle) infinite both;
+    animation-delay: 1.9s;
+}
+
+.oe-sub {
+    display: block;
+    font-size: 1.02rem;
+    line-height: 1.4;
+    color: #e6eeff;
+}
+
+.oe-s1 .oe-sub {
+    animation: oe-in var(--oe-cycle) infinite both;
+    animation-delay: 2.6s;
+}
+
+.oe-kicker {
+    display: block;
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #5fd8ff;
+}
+
+.oe-s2 .oe-kicker {
+    animation: oe-in var(--oe-cycle) infinite both;
+    animation-delay: 3.8s;
+}
+
+.oe-s3 .oe-kicker {
+    animation: oe-in var(--oe-cycle) infinite both;
+    animation-delay: 7.8s;
+}
+
+.oe-s4 .oe-kicker {
+    animation: oe-in var(--oe-cycle) infinite both;
+    animation-delay: 11.2s;
+}
+
+/* Cena 2: vantagens, uma a uma */
+.oe-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px 22px;
+}
+
+.oe-item {
+    position: relative;
+    display: block;
+    padding-left: 26px;
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.35;
+    color: #ffffff;
+    animation: oe-in var(--oe-cycle) infinite both;
+    animation-delay: calc(4.3s + var(--i, 0) * 0.45s);
+}
+
+.oe-item::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-weight: 800;
+    color: #5fd8ff;
+}
+
+/* Cena 3: blocos pipocando em cascata */
+.oe-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.oe-chip {
+    padding: 5px 12px;
+    border-radius: 999px;
+    border: 1px solid rgba(95, 216, 255, 0.55);
+    background: rgba(95, 216, 255, 0.14);
+    font-size: 0.9rem;
+    font-weight: 600;
+    line-height: 1.25;
+    color: #ffffff;
+    animation: oe-pop var(--oe-cycle) infinite both;
+    animation-delay: calc(8.2s + var(--i, 0) * 0.2s);
+}
+
+/* Cena 4: preço antigo riscado, preço novo estoura */
+.oe-priceline {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    flex-wrap: wrap;
+}
+
+.oe-old {
+    position: relative;
+    display: inline-block;
+    font-size: 1.1rem;
+    color: #cfe0ff;
+    animation: oe-in var(--oe-cycle) infinite both;
+    animation-delay: 11.5s;
+}
+
+.oe-old::after {
+    content: '';
+    position: absolute;
+    left: -2px;
+    right: -2px;
+    top: 52%;
+    height: 2px;
+    background: #ff6b6b;
+    transform-origin: left center;
+    transform: scaleX(0);
+    animation: oe-strike var(--oe-cycle) infinite both;
+    animation-delay: 12.2s;
+}
+
+.oe-price {
+    display: inline-block;
+    font-size: 2.7rem;
+    font-weight: 800;
+    line-height: 1;
+    color: #ffffff;
+    opacity: 0;
+    animation: oe-slam var(--oe-cycle) infinite both;
+    animation-delay: 12.6s;
+}
+
+.oe-s4 .oe-sub {
+    animation: oe-in var(--oe-cycle) infinite both;
+    animation-delay: 13.4s;
+}
+
+/* Rodapé: nota à esquerda e botão amarelo à direita */
+.oe-foot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    flex-wrap: wrap;
+}
+
+.oe-note {
+    font-size: 0.9rem;
+    color: #cfe0ff;
+}
+
+.oe-cta {
+    position: relative;
+    display: inline-block;
+    overflow: hidden;
+    padding: 11px 24px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 800;
+    text-align: center;
+    color: #061029;
+    background: #ffc83d;
+    box-shadow: 0 4px 14px rgba(255, 200, 61, 0.35);
+    animation: oe-pulse 2.8s ease-in-out infinite;
+}
+
+.oe-cta::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 40%;
+    background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.75), transparent);
+    transform: translateX(-160%) skewX(-18deg);
+    animation: oe-shine 3.6s ease-in-out infinite;
+}
+
+.oe-card:hover .oe-cta {
+    background: #ffd666;
+}
+
+/* Barra de progresso do "filme" */
+.oe-progress {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #5fd8ff, #ffc83d);
+    transform-origin: left center;
+    transform: scaleX(0);
+    animation: oe-progress var(--oe-cycle) linear infinite;
+}
+
+/* Lateral: coluna estreita, capa em cima e texto embaixo */
+.oe--lateral .oe-card {
+    padding: 14px 14px 18px;
+}
+
+.oe--lateral .oe-film {
+    height: 352px;
+}
+
+.oe--lateral .oe-cover-wrap {
+    bottom: auto;
+    right: 0;
+    height: 100px;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.oe--lateral .oe-cover {
+    width: 66px;
+}
+
+.oe--lateral .oe-scene {
+    align-items: center;
+    text-align: center;
+}
+
+.oe--lateral .oe-s2,
+.oe--lateral .oe-s3,
+.oe--lateral .oe-s4 {
+    padding-left: 0;
+    padding-top: 110px;
+    justify-content: flex-start;
+}
+
+.oe--lateral .oe-type,
+.oe--lateral .oe-line {
+    align-self: center;
+    font-size: 1.3rem;
+}
+
+.oe--lateral .oe-sub {
+    font-size: 0.92rem;
+}
+
+.oe--lateral .oe-list {
+    grid-template-columns: 1fr;
+    gap: 9px;
+    width: 100%;
+    text-align: left;
+}
+
+.oe--lateral .oe-item {
+    font-size: 0.9rem;
+}
+
+.oe--lateral .oe-chips {
+    justify-content: center;
+    gap: 6px;
+}
+
+.oe--lateral .oe-chip {
+    padding: 3px 8px;
+    font-size: 0.76rem;
+}
+
+.oe--lateral .oe-priceline {
+    justify-content: center;
+}
+
+.oe--lateral .oe-price {
+    font-size: 2.3rem;
+}
+
+.oe--lateral .oe-foot {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+    text-align: center;
+}
+
+.oe--lateral .oe-note {
+    font-size: 0.82rem;
+}
+
+.oe--lateral .oe-cta {
+    padding: 11px 8px;
+    font-size: 0.95rem;
+    white-space: nowrap;
+}
+
+/* Inline em tela grande: o gancho ocupa a largura toda. */
+@media (min-width: 768px) {
+    .oe--inline .oe-type,
+    .oe--inline .oe-line {
+        font-size: 2.2rem;
+    }
+
+    .oe--inline .oe-s1 .oe-sub {
+        font-size: 1.2rem;
+    }
+}
+
+/* Inline em tela média e pequena */
+@media (max-width: 767.98px) {
+    .oe {
+        --oe-pad: 76px;
+    }
+
+    .oe-card {
+        padding: 14px 16px 18px;
+    }
+
+    .oe--inline .oe-film {
+        height: 210px;
+    }
+
+    .oe--inline .oe-cover {
+        width: 60px;
+    }
+
+    .oe--inline .oe-type,
+    .oe--inline .oe-line {
+        font-size: 1.35rem;
+    }
+
+    .oe--inline .oe-list {
+        grid-template-columns: 1fr;
+        gap: 8px;
+    }
+
+    .oe--inline .oe-chip {
+        padding: 4px 10px;
+        font-size: 0.82rem;
+    }
+
+    .oe--inline .oe-price {
+        font-size: 2.3rem;
+    }
+
+    .oe--inline .oe-foot {
+        flex-direction: column;
+        align-items: stretch;
+        text-align: center;
+    }
+}
+
+/* Celular: sem a capa, o texto usa a largura toda. */
+@media (max-width: 575.98px) {
+    .oe--inline .oe-cover-wrap {
+        display: none;
+    }
+
+    .oe--inline .oe-s2,
+    .oe--inline .oe-s3,
+    .oe--inline .oe-s4 {
+        padding-left: 0;
+    }
+
+    .oe--inline .oe-film {
+        height: 232px;
+    }
+}
+
+/* ===== Linha do tempo ===== */
+@keyframes oe-scene-1 {
+    0% {
+        opacity: 0;
+    }
+    2%,
+    20.3% {
+        opacity: 1;
+    }
+    22.5%,
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes oe-scene-2 {
+    0% {
+        opacity: 0;
+    }
+    2.2%,
+    22.8% {
+        opacity: 1;
+    }
+    25%,
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes oe-scene-3 {
+    0% {
+        opacity: 0;
+    }
+    2.2%,
+    19% {
+        opacity: 1;
+    }
+    21.25%,
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes oe-scene-4 {
+    0% {
+        opacity: 0;
+    }
+    2.2%,
+    24% {
+        opacity: 1;
+    }
+    26.25%,
+    100% {
+        opacity: 0;
+    }
+}
+
+/* Capa: entra girando da direita e sai no fim da cena 4. */
+@keyframes oe-cover {
+    0% {
+        opacity: 0;
+        transform: translateX(60px) rotate(-10deg) scale(0.9);
+    }
+    4%,
+    70% {
+        opacity: 1;
+        transform: none;
+    }
+    74%,
+    100% {
+        opacity: 0;
+        transform: translateX(-12px);
+    }
+}
+
+/* Texto digitado: revela da esquerda para a direita, letra por letra. */
+@keyframes oe-type {
+    0% {
+        clip-path: inset(0 100% 0 0);
+        animation-timing-function: steps(23, end);
+    }
+    9%,
+    20% {
+        clip-path: inset(0 0 0 0);
+    }
+    21%,
+    100% {
+        clip-path: inset(0 100% 0 0);
+    }
+}
+
+@keyframes oe-in {
+    0% {
+        opacity: 0;
+        transform: translateX(-16px);
+    }
+    3.5%,
+    21% {
+        opacity: 1;
+        transform: none;
+    }
+    22%,
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes oe-pop {
+    0% {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+    2.5% {
+        opacity: 1;
+        transform: scale(1.08);
+    }
+    4%,
+    21% {
+        opacity: 1;
+        transform: none;
+    }
+    22%,
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes oe-strike {
+    0% {
+        transform: scaleX(0);
+    }
+    3%,
+    21% {
+        transform: scaleX(1);
+    }
+    22%,
+    100% {
+        transform: scaleX(0);
+    }
+}
+
+@keyframes oe-slam {
+    0% {
+        opacity: 0;
+        transform: scale(2);
+    }
+    3% {
+        opacity: 1;
+        transform: scale(0.94);
+    }
+    4.5%,
+    21% {
+        opacity: 1;
+        transform: none;
+    }
+    22%,
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes oe-progress {
+    from {
+        transform: scaleX(0);
+    }
+    to {
+        transform: scaleX(1);
+    }
+}
+
+@keyframes oe-pulse {
+    0%,
+    100% {
+        box-shadow: 0 4px 14px rgba(255, 200, 61, 0.35), 0 0 0 0 rgba(255, 200, 61, 0);
+    }
+    50% {
+        box-shadow: 0 4px 14px rgba(255, 200, 61, 0.35), 0 0 0 7px rgba(255, 200, 61, 0.22);
+    }
+}
+
+@keyframes oe-shine {
+    0%,
+    60% {
+        transform: translateX(-160%) skewX(-18deg);
+    }
+    100% {
+        transform: translateX(380%) skewX(-18deg);
+    }
+}
+
+/* Movimento reduzido: o filme continua, mas só com fades (sem deslocar, girar, ampliar, pulsar). */
+@keyframes oe-fade {
+    0% {
+        opacity: 0;
+    }
+    3.5%,
+    21% {
+        opacity: 1;
+    }
+    22%,
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes oe-cover-fade {
+    0% {
+        opacity: 0;
+    }
+    4%,
+    70% {
+        opacity: 1;
+    }
+    74%,
+    100% {
+        opacity: 0;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .oe-cover {
+        animation-name: oe-cover-fade;
+    }
+
+    .oe-scene .oe-line,
+    .oe-scene .oe-sub,
+    .oe-scene .oe-kicker,
+    .oe-scene .oe-item,
+    .oe-scene .oe-chip,
+    .oe-scene .oe-old,
+    .oe-scene .oe-price {
+        animation-name: oe-fade;
+    }
+
+    .oe-cta,
+    .oe-cta::after {
+        animation: none;
+    }
+}

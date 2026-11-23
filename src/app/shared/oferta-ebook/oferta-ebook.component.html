@@ -1,0 +1,54 @@
+<div class="oe" [class.oe--lateral]="variante === 'lateral'" [class.oe--inline]="variante === 'inline'">
+    <a class="oe-card" [href]="url" target="_blank" rel="sponsored noopener" [attr.aria-label]="rotulo"
+        (click)="registrarClique()">
+        <span class="oe-tag">Do autor · Ebook</span>
+
+        <!-- O filme: loop de 16s, só CSS. Fica fora da leitura de tela porque o aria-label do link já resume a oferta. -->
+        <span class="oe-film" aria-hidden="true">
+            <span class="oe-cover-wrap">
+                <img class="oe-cover" src="/assets/images/ebook-csharp-sem-medo.png" width="170" height="249" alt=""
+                    loading="lazy" decoding="async">
+            </span>
+
+            <!-- Cena 1: gancho, com texto digitado -->
+            <span class="oe-scene oe-s1">
+                <span class="oe-type">Entrevista .NET amanhã?</span>
+                <span class="oe-line oe-hl">E se travar na pergunta?</span>
+                <span class="oe-sub">Existe um jeito de treinar.</span>
+            </span>
+
+            <!-- Cena 2: o que você leva -->
+            <span class="oe-scene oe-s2">
+                <span class="oe-kicker">C# Moderno Sem Medo</span>
+                <span class="oe-list">
+                    <span class="oe-item" *ngFor="let v of vantagens; let i = index" [style.--i]="i">{{ v }}</span>
+                </span>
+            </span>
+
+            <!-- Cena 3: os blocos -->
+            <span class="oe-scene oe-s3">
+                <span class="oe-kicker">8 blocos que decidem a vaga</span>
+                <span class="oe-chips">
+                    <span class="oe-chip" *ngFor="let b of blocos; let i = index" [style.--i]="i">{{ b }}</span>
+                </span>
+            </span>
+
+            <!-- Cena 4: oferta -->
+            <span class="oe-scene oe-s4">
+                <span class="oe-kicker">Oferta do autor</span>
+                <span class="oe-priceline">
+                    <span class="oe-old">de {{ precoDe }}</span>
+                    <span class="oe-price">{{ preco }}</span>
+                </span>
+                <span class="oe-sub">PDF com acesso imediato e 7 dias de garantia.</span>
+            </span>
+        </span>
+
+        <span class="oe-foot">
+            <span class="oe-note">PDF · acesso imediato · garantia de 7 dias</span>
+            <span class="oe-cta">Quero o guia · {{ preco }}</span>
+        </span>
+
+        <span class="oe-progress" aria-hidden="true"></span>
+    </a>
+</div>
