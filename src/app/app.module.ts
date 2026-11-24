@@ -69,6 +69,7 @@ import { TutorialMascarasComponent } from './tutoriais/mascaras-javascript/masca
 import { TutorialPlaywrightComponent } from './tutoriais/playwright-dados-gerados/playwright-dados-gerados.component';
 import { HomeComponent } from './shared/home/home.component';
 import { BreadcrumbComponent } from './shared/breadcrumb/breadcrumb.component';
+import { FaqSchemaDirective } from './shared/faq-schema.directive';
 import { TabelaDvComponent } from './shared/tabela-dv/tabela-dv.component';
 import { CodeTabsComponent } from './shared/code-tabs/code-tabs.component';
 import { JwtDecoderComponent } from './components/jwt-decoder/jwt-decoder.component';
@@ -122,6 +123,7 @@ registerLocaleData(localePt);
         JwtDecoderComponent,
         CodeTabsComponent,
         TabelaDvComponent,
+        FaqSchemaDirective,
         HomeComponent,
         BreadcrumbComponent,
         TutoriaisListaComponent,

@@ -1,0 +1,43 @@
+# 4DevTools
+
+> Ferramentas gratuitas, em português, que geram documentos brasileiros e dados fictícios para testes de software (CPF, CNPJ numérico e alfanumérico, CNH, PIS/PASEP, Título de Eleitor, RENAVAM, RG, cartão de crédito). Cada gerador explica como o número é formado, mostra o cálculo dos dígitos verificadores passo a passo e traz funções de validação testadas em TypeScript, Python, C# e Java, além de cuidados de LGPD para ambientes de teste.
+
+Os números são calculados no navegador e não são consultados em nenhuma base: são válidos no formato, mas fictícios, e servem apenas para desenvolvimento e testes. Conteúdo mantido por Fernando Parmezani (https://www.4devtools.com/sobre).
+
+## Geradores e referência técnica por documento
+
+- [Gerador de CPF](https://www.4devtools.com/gerar-cpf): estrutura do CPF, região fiscal do 9º dígito, cálculo dos verificadores por módulo 11, validação em 4 linguagens, regex, erros comuns e LGPD.
+- [Gerador de CNPJ](https://www.4devtools.com/gerar-cnpj): CNPJ numérico e alfanumérico (IN RFB nº 2.229/2024, em vigor desde julho de 2026), valor dos caracteres (ASCII − 48), cálculo passo a passo e validação em 4 linguagens.
+- [Gerador de CNH](https://www.4devtools.com/gerar-cnh): número de registro da CNH, cálculo dos verificadores (o dígito é o próprio resto), caso especial do resto 10, categorias e validade.
+- [Gerador de PIS/PASEP](https://www.4devtools.com/gerar-pispasep): PIS, PASEP, NIS e NIT, pesos 3 2 9 8 7 6 5 4 3 2 e validação.
+- [Gerador de Título de Eleitor](https://www.4devtools.com/gerar-titulo-eleitor): estrutura da inscrição, tabela de códigos de UF, cálculo dos verificadores e a exceção de SP e MG.
+- [Gerador de RENAVAM](https://www.4devtools.com/gerar-renavam): RENAVAM de 9 e 11 dígitos, cálculo do verificador e validação.
+- [Gerador de RG](https://www.4devtools.com/gerar-rg): por que o RG varia por estado, regra de SP (dígito 0 a 9 ou X) e a Carteira de Identidade Nacional (CIN).
+- [Gerador de Cartão de Crédito](https://www.4devtools.com/gerar-cartaodecredito): estrutura do número (BIN, bandeiras), algoritmo de Luhn passo a passo, cartões de teste de gateways e PCI DSS.
+- [Gerador de Pessoa](https://www.4devtools.com/gerar-pessoa): cadastro fictício completo com nome, CPF, RG, CNS, endereço, telefone e cartão.
+
+## Tutoriais
+
+- [Dados de teste e LGPD](https://www.4devtools.com/tutoriais/dados-de-teste-lgpd): o que a LGPD diz sobre dados reais em homologação, dados sintéticos, anonimização e mascaramento de logs.
+- [CNPJ alfanumérico: como adaptar o seu sistema](https://www.4devtools.com/tutoriais/cnpj-alfanumerico): banco de dados, validação, máscaras, formulários, APIs e testes.
+- [Validar CPF e CNPJ no Angular](https://www.4devtools.com/tutoriais/validar-cpf-cnpj-angular): validadores de Reactive Forms e testes unitários.
+- [Massa de dados com Python e Faker](https://www.4devtools.com/tutoriais/massa-de-dados-faker-python): gerar clientes e empresas fictícios em CSV ou no banco.
+- [Máscaras de CPF, CNPJ, telefone e CEP em JavaScript](https://www.4devtools.com/tutoriais/mascaras-javascript): funções sem bibliotecas e HTML para celular.
+- [Testes de formulário com Playwright](https://www.4devtools.com/tutoriais/playwright-dados-gerados): dados gerados a cada execução e casos de erro.
+
+## Artigos sobre os documentos
+
+- [CPF: o que é, para que serve e como consultar](https://www.4devtools.com/blog/cpf)
+- [CNPJ: o que é, quem precisa e como funciona](https://www.4devtools.com/blog/cnpj)
+- [Número do cartão de crédito: o que significa cada parte](https://www.4devtools.com/blog/cartaocredito)
+- [RENAVAM: o que é, onde encontrar e para que serve](https://www.4devtools.com/blog/renavam)
+- [Título de Eleitor: o que é, quem precisa e como funciona](https://www.4devtools.com/blog/tituloeleitor)
+- [Cartão Nacional de Saúde (CNS)](https://www.4devtools.com/blog/cns)
+- [PIS/PASEP: o que é e quem recebe o abono](https://www.4devtools.com/blog/pispasep)
+- [AIH: Autorização de Internação Hospitalar](https://www.4devtools.com/blog/aih)
+
+## Optional
+
+- [Outros geradores e utilitários](https://www.4devtools.com/): nomes, endereços, telefones, senhas, decodificador de JWT e links para WhatsApp e Telegram.
+- [Sobre o autor](https://www.4devtools.com/sobre)
+- [Política de Privacidade](https://www.4devtools.com/politica-de-privacidade)

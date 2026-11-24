@@ -73,3 +73,6 @@ src/app/
 - Every route's `<title>`, description, canonical (`https://www.4devtools.com`) and robots come from `data: seo(...)` in `app-routing.module.ts`, applied by `services/seo.service.ts`. Don't set titles/meta in components.
 - When adding a route: add `data: seo(...)`, add it to `prerender-routes.txt` (otherwise the server returns 404) and to `src/sitemap.xml`.
 - Code that touches `window`/`document`/`localStorage` must be guarded with `isPlatformBrowser`, since pages are rendered in Node at build time.
+- Structured data (JSON-LD) is built automatically: `SeoService` writes `WebSite` + `Person` (author) + `WebPage`/`Article` (`/blog/*`)/`TechArticle` (`/tutoriais/*`); `BreadcrumbComponent` writes `BreadcrumbList`; the `appFaqSchema` directive on `<div class="doc-faq">` builds `FAQPage` from the visible `<details>`. Each script has a fixed `id`, so the browser reuses the prerendered one instead of duplicating it.
+- Share images: `og:image` comes from the `IMAGENS` map in `seo.service.ts` (files in `src/assets/images/og/`, 1200x630 JPG; default `4devtools.jpg`). New page with a thumbnail → add a JPG there and an entry in the map.
+- `src/llms.txt` is a Markdown map of the site for AI assistants (GEO). Update it when adding generators, tutorials or articles.
